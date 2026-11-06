@@ -5,6 +5,16 @@ use super::view::DRAFT_WIDTH;
 use super::{Arc, DocLayout, Document, LayoutCache, LayoutOptions, Session, StoryRef, Value, ViewMode};
 
 impl Session {
+    /// Temporarily limit startup layout to the first independent page. The full layout cache is
+    /// discarded at either transition so the following frame computes complete pagination.
+    pub fn use_first_page_layout(&mut self, enabled: bool) {
+        if self.first_page_only == enabled {
+            return;
+        }
+        self.first_page_only = enabled;
+        self.layout = [None, None];
+    }
+
     /// The current layout (recomputed when the document or view changed).
     pub fn layout(&mut self) -> Arc<DocLayout> {
         let typing = self.typing_word();
@@ -75,7 +85,12 @@ impl Session {
             filename: filename.clone(),
             filepath: filepath.clone(),
         };
-        let l = Arc::new(wordcraft_layout::layout(&self.doc, &mut self.cache, &opts));
+        let laid_out = if self.first_page_only {
+            wordcraft_layout::layout_first_page(&self.doc, &mut self.cache, &opts)
+        } else {
+            wordcraft_layout::layout(&self.doc, &mut self.cache, &opts)
+        };
+        let l = Arc::new(laid_out);
         let [newest, _] = std::mem::take(&mut self.layout);
         self.layout =
             [Some((rev, width, height, mode, spacing, l.clone(), self.view.proofing, outline, deleted, self.view.numeral, typing, shown)), newest];

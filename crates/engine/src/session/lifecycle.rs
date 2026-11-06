@@ -133,6 +133,7 @@ impl Session {
             ime_origin: false,
             cache,
             layout,
+            first_page_only: false,
             typing,
             originals,
             picture_looks,

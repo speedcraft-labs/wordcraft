@@ -5,6 +5,7 @@ use super::{Document, Session, StoryRef, next_document_id};
 impl Session {
     /// Replace the document (open/new).
     pub fn set_document(&mut self, doc: Document) {
+        self.first_page_only = false;
         self.autocap = None;
         let replaced = self.document_id;
         self.document_id = next_document_id();
@@ -105,6 +106,7 @@ impl Session {
             protect_facts: _,
             cache: _,
             layout: _,
+            first_page_only: _,
             // The word being typed, like `column`: valid only while `sel` is where typing left it.
             typing: _,
             originals: _,

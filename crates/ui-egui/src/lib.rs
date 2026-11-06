@@ -553,6 +553,8 @@ pub struct WordApp {
     /// The Find query and result count [`WordApp::ensure_find_fonts`] last looked at.
     find_fonts_for: Option<(String, usize, u64)>,
     fonts_frames: u32,
+    /// Document id whose first full canvas frame has used its startup layout budget.
+    first_page_layout_document: Option<u64>,
     /// The effective interface theme last installed in egui ([`theme::apply`]).
     applied_theme: Option<theme::Appearance>,
     /// The display scale (native pixels per point) seen in the last frame, 1.0 before the first;

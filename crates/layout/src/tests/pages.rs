@@ -10,6 +10,42 @@ fn lay(doc: &Document) -> DocLayout {
     layout(doc, &mut c, &LayoutOptions::default())
 }
 
+#[test]
+fn first_page_layout_matches_full_layout_and_marks_the_suffix_incomplete() {
+    let mut doc = Document::from_text("First page\nSecond page\nThird page");
+    for block in [1, 2] {
+        if let Some(Block::Para(p)) = doc.body.get_mut(block).map(Arc::make_mut) {
+            p.props.page_break_before = Some(true);
+        }
+    }
+    let full = lay(&doc);
+    let mut cache = LayoutCache::new();
+    let first = layout_first_page(&doc, &mut cache, &LayoutOptions::default());
+
+    assert_eq!(full.pages.len(), 3);
+    assert_eq!(first.pages.len(), 1);
+    assert!(!first.pages_complete);
+    assert_eq!(first.pages[0].body, full.pages[0].body);
+    assert_eq!(first.pages[0].items.len(), full.pages[0].items.len());
+    let first_lines = |page: &Page| {
+        page.items
+            .iter()
+            .filter_map(|item| match item {
+                Placed::Lines { story, path, l0, l1, x, y, .. } => Some((*story, path.clone(), *l0, *l1, *x, *y)),
+                _ => None,
+            })
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(first_lines(&first.pages[0]), first_lines(&full.pages[0]));
+
+    // Multiple columns can change where text belongs on page one, so that shape falls back to
+    // ordinary complete pagination.
+    doc.last_section.columns.count = 2;
+    let complete = layout_first_page(&doc, &mut LayoutCache::new(), &LayoutOptions::default());
+    assert!(complete.pages_complete);
+    assert_eq!(complete.pages.len(), lay(&doc).pages.len());
+}
+
 fn paras(text: &str, n: usize) -> Vec<Arc<Block>> {
     (1..=n).map(|i| para_block(Paragraph::with_text(&format!("{text} {i}"), Default::default()))).collect()
 }

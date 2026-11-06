@@ -222,6 +222,7 @@ impl Session {
             ime_body_epoch: _,
             cache: _,
             layout: _,
+            first_page_only,
             typing: _,
             originals: _,
             picture_looks: _,
@@ -358,6 +359,7 @@ impl Session {
         swap(&mut self.ime_body_epoch, ime_body_epoch);
         swap(&mut self.cache, cache);
         swap(&mut self.layout, layout);
+        *first_page_only = false;
         swap(&mut self.typing, typing);
         swap(&mut self.originals, originals);
         swap(&mut self.picture_looks, picture_looks);

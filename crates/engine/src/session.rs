@@ -157,6 +157,8 @@ pub struct Session {
     ime_origin: bool,
     cache: LayoutCache,
     layout: LayoutSlots,
+    /// Temporary first-page pagination budget used for an eligible window's first painted frame.
+    first_page_only: bool,
     /// The word being typed, left without a spelling squiggle ([`TypedWord`]).
     typing: Option<TypedWord>,
     /// Picture edits: edited media key → original media key (Reset Picture).

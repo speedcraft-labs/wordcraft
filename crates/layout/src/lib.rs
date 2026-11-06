@@ -76,8 +76,8 @@ use notes::{MAX_NOTE_PASSES, footnote_pages};
 #[cfg(test)]
 use notes::{NOTE_SEP, note_numbers};
 use page::item_bottom;
-use pass::layout_pass;
 pub use pass::now_ms;
+use pass::{PassOptions, layout_pass};
 pub use placed::{HfSlot, Placed, turn_point, turn_rect, unturn_point};
 pub use substituted::MAX_SUBSTITUTED;
 
@@ -302,6 +302,8 @@ pub struct Page {
 #[derive(Clone, Debug, Default)]
 pub struct DocLayout {
     pub pages: Vec<Page>,
+    /// Whether pagination reached the end of the document.
+    pub pages_complete: bool,
     /// Index: (story, paragraph path) → (page, item index) of each placed piece, in order.
     pub index: HashMap<(StoryRef, Path), Vec<(usize, usize)>>,
     /// Layout time, milliseconds.
@@ -324,7 +326,15 @@ pub fn layout(doc: &Document, cache: &mut LayoutCache, opts: &LayoutOptions) -> 
     let mut passes = 0;
     let (mut early, mut rewraps) = (EarlyFloats::new(), 0);
     let mut l = loop {
-        match layout_pass(doc, cache, opts, &note_pages, &totals, passes < MAX_TOTAL_PASSES, (&early, rewraps < MAX_REWRAP_PASSES)) {
+        match layout_pass(
+            doc,
+            cache,
+            opts,
+            &note_pages,
+            &totals,
+            passes < MAX_TOTAL_PASSES,
+            PassOptions { early: &early, may_rewrap: rewraps < MAX_REWRAP_PASSES, first_page_only: false },
+        ) {
             Pass::Again(t) => {
                 totals = t;
                 passes += 1;
@@ -345,10 +355,75 @@ pub fn layout(doc: &Document, cache: &mut LayoutCache, opts: &LayoutOptions) -> 
                 }
                 break l;
             }
+            Pass::FirstPage(_) => return layout(doc, cache, opts),
         }
     };
     l.ms = now_ms() - t0;
     l
+}
+
+/// Lay out only the first page when later document content cannot affect its geometry. Complex
+/// documents use [`layout`] so page totals, sections, notes, fields, tables and floating objects
+/// retain the normal whole-document pagination rules.
+pub fn layout_first_page(doc: &Document, cache: &mut LayoutCache, opts: &LayoutOptions) -> DocLayout {
+    if !first_page_is_independent(doc, opts) {
+        return layout(doc, cache, opts);
+    }
+    let t0 = now_ms();
+    let totals = Totals::first_guess(doc.sections().len());
+    match layout_pass(
+        doc,
+        cache,
+        opts,
+        &HashMap::new(),
+        &totals,
+        false,
+        PassOptions { early: &EarlyFloats::new(), may_rewrap: false, first_page_only: true },
+    ) {
+        Pass::FirstPage(mut first) => {
+            first.ms = now_ms() - t0;
+            first
+        }
+        Pass::Done(mut complete) => {
+            complete.ms = now_ms() - t0;
+            complete
+        }
+        Pass::Again(_) | Pass::Rewrap(_) => layout(doc, cache, opts),
+    }
+}
+
+/// The startup fast path is deliberately narrow: this plain, single-section flow has no
+/// document-wide dependencies that could change what belongs on page one.
+fn first_page_is_independent(doc: &Document, opts: &LayoutOptions) -> bool {
+    use wordcraft_doc::section::{HeaderSet, PageVAlign};
+
+    opts.view == ViewMode::Print
+        && !opts.comment_balloons
+        && opts.outline.is_none()
+        && doc.parts.is_empty()
+        && doc.comments.is_empty()
+        && doc.revisions.is_empty()
+        && !doc.settings.mirror_margins
+        && doc.sections().len() == 1
+        && doc.last_section.headers == HeaderSet::default()
+        && doc.last_section.footers == HeaderSet::default()
+        && !doc.last_section.title_page
+        && doc.last_section.page_num_start.is_none()
+        && doc.last_section.columns.count == 1
+        && doc.last_section.line_numbers.is_none()
+        && doc.last_section.text_direction == TextDirection::Horizontal
+        && doc.last_section.valign == PageVAlign::Top
+        && !doc.styles.resolve_para(&Default::default()).keep_next
+        && doc.body.iter().all(|block| match &**block {
+            Block::Para(p) => {
+                p.objects.is_empty()
+                    && p.section.is_none()
+                    && p.props.style.is_none()
+                    && p.props.numbering.is_none()
+                    && p.props.keep_next != Some(true)
+            }
+            Block::Table(_) => false,
+        })
 }
 
 #[cfg(test)]

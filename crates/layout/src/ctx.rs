@@ -11,6 +11,8 @@ use super::{
 /// floats placed above their anchors it found ([`EarlyFloats`]).
 pub(crate) enum Pass {
     Done(DocLayout),
+    /// Page one is complete; later pages were deliberately not visited.
+    FirstPage(DocLayout),
     Again(Totals),
     Rewrap(EarlyFloats),
 }

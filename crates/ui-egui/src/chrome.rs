@@ -595,6 +595,7 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                     } else {
                         l.caret_on(&app.session.sel.focus, app.session.page_hint).map(|c| c.page + 1).unwrap_or(1)
                     };
+                    let page_total = if l.pages_complete { l.pages.len().to_string() } else { "…".to_owned() };
                     // A status item: its text, after an icon when it has one (one click target).
                     let st_icon = |ui: &mut Ui, icon: Option<&str>, s: &str| {
                         let font = TypeRung::Caption.regular();
@@ -621,7 +622,7 @@ pub fn status_bar(app: &mut WordApp, ui: &mut Ui) {
                         resp
                     };
                     let st = |ui: &mut Ui, s: &str| st_icon(ui, None, s);
-                    if st(ui, &crate::i18n::fmt(tl!("Page {page} of {pages}"), &[("page", &page.to_string()), ("pages", &l.pages.len().to_string())]))
+                    if st(ui, &crate::i18n::fmt(tl!("Page {page} of {pages}"), &[("page", &page.to_string()), ("pages", &page_total)]))
                         .on_hover_text(tl!("Go To (⌘⌥G)"))
                         .clicked()
                     {

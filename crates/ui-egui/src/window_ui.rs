@@ -234,6 +234,7 @@ impl WordApp {
             nav_search_focus,
             comment_fonts_for,
             find_fonts_for,
+            first_page_layout_document: _,
             sent_title,
             sent_full_screen,
             seen_full_screen,
