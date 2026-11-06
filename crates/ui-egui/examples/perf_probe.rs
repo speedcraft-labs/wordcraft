@@ -58,11 +58,21 @@ fn main() {
             app,
         );
     READY.store(true, std::sync::atomic::Ordering::Relaxed);
-    let first: Vec<f64> = (0..6).map(|_| step(&mut h)).collect();
+    let mut first = Vec::with_capacity(6);
+    let mut open_to_first_page_ms = None;
+    for frame in 0..6 {
+        first.push(step(&mut h));
+        if frame == 2 {
+            // The first two frames install UI fonts; frame 2 is the first to paint a page. Start
+            // the timer before opening the file so the journey includes parsing and layout.
+            open_to_first_page_ms = Some(t_open.elapsed().as_secs_f64() * 1000.0);
+        }
+    }
     let mut out =
         json!({"open_ms": (open_ms * 10.0).round() / 10.0, "first_frames_ms": first.iter().map(|x| (x * 10.0).round() / 10.0).collect::<Vec<_>>()});
 
     if std::env::args().nth(2).as_deref() == Some("--first-page-only") {
+        out["open_to_first_page_ms"] = json!(open_to_first_page_ms.unwrap_or_default());
         out["page_count"] = json!(h.state_mut().session.layout().pages.len());
         out["body_paragraphs"] = json!(h.state().session.doc.paragraph_count());
         println!("{out}");
