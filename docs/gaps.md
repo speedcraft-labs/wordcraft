@@ -149,7 +149,7 @@ Table rows and cells inside `mc:AlternateContent` use the same selected-branch p
 
 ## Revision history
 
-> 2026-11-06 · First-page startup on the pinned 1,096-page DOCX improved to 139.9 ms median from 549.8 ms (#246). A conservative fast path paints page 1 for plain, single-section documents; complete pagination follows on the next frame. Pagination parity gap #4 remains open.
+> 2026-11-06 · First-page startup on the pinned 1,096-page DOCX improved to 152.0 ms median from 585.2 ms (#246; ratio 0.260, 95% CI 0.252–0.287). A conservative fast path paints page 1 for plain, single-section documents; complete pagination follows on the next frame. Pagination parity gap #4 remains open.
 
 > 2026-11-03 · Gap 11: the Arabic dialogs, tables and galleries read right to left (rtl::Table); readiness unchanged.
 >

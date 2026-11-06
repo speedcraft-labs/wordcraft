@@ -191,7 +191,7 @@ No overall parity estimate changes from these probes.
 
 | Measure | WordCraft | Word | Kind |
 |---|---|---|---|
-| Open to first painted page on the pinned 1,096-page DOCX (#246) | 549.8 → 139.9 ms median (0.255 ratio; 95% CI 0.247–0.260) | not measured | Release, 10 paired samples; timer starts before file open and ends at first paint. Eligible plain, single-section documents paint page 1 before full pagination, which follows on the next frame. |
+| Open to first painted page on the pinned 1,096-page DOCX (#246) | 585.2 → 152.0 ms median (0.260 ratio; 95% CI 0.252–0.287) | not measured | Release, 10 paired samples; timer starts before file open and ends at first paint. Eligible plain, single-section documents paint page 1 before full pagination, which follows on the next frame. |
 | Print Markup balloon anchor discovery with many unrelated inline markers (#3614) | Single forward object walk; document order, first-root filtering, UTF-8 byte positions and the 5,000-anchor cap unchanged | not measured | `balloons::anchor_tests` semantic, cap and thread-CPU scaling regressions |
 | Cold layout, 188-page document | 61 ms | not measured | measured 2026-10-06 (not re-run this pass) |
 | Relayout after an edit | 1.4 ms | not measured | measured 2026-10-06 |
@@ -266,7 +266,7 @@ layout suite are pending; this is not a new Word/native-IME acceptance claim.
 
 ## Revision history
 
-> 2026-11-06 · The first page of the pinned 1,096-page DOCX paints in 139.9 ms median after a 549.8 ms measured baseline (#246). A conservative fast path applies to plain, single-section documents; complete pagination follows on the next frame. This is a startup measurement, not a new Word pagination comparison.
+> 2026-11-06 · The first page of the pinned 1,096-page DOCX paints in 152.0 ms median after a 585.2 ms measured baseline (#246; ratio 0.260, 95% CI 0.252–0.287). A conservative fast path applies to plain, single-section documents; complete pagination follows on the next frame. This is a startup measurement, not a new Word pagination comparison.
 
 > 2026-11-01 · Text in a turned text box is drawn turned with it, about its centre, on screen and in PNG and PDF export; flipped across, upside down; flipped side to side, still readable (as Word draws it). Clicks and the caret inside a turned box still go by its upright text (`layout::tests::a_turned_text_box_turns_its_text_with_it`).
 
