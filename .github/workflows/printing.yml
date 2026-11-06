@@ -85,11 +85,11 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Native app and UI Clippy
-        run: cargo clippy -p wordcraft -p wordcraft-ui-egui --all-targets --locked -- -D warnings
+        run: cargo clippy -p wordcraft -p wordcraft-ui-egui --all-targets -- -D warnings
 
       - name: Native app and UI tests
-        run: cargo test -p wordcraft -p wordcraft-ui-egui --locked
+        run: cargo test -p wordcraft -p wordcraft-ui-egui
 
       - name: Browser compatibility
         if: runner.os == 'Linux'
-        run: cargo check -p wordcraft-web --target wasm32-unknown-unknown --locked
+        run: cargo check -p wordcraft-web --target wasm32-unknown-unknown
