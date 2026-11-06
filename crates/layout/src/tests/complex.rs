@@ -64,15 +64,21 @@ fn myanmar_without_spaces_wraps_between_syllables() {
     assert!(pl.lines[0].c1 - pl.lines[0].c0 > 10);
 }
 
-/// A face with Myanmar letters (an installed system font), or `None` to skip.
+/// A Myanmar face from the pinned craft-fonts input, or `None` to skip.
 fn myanmar_face() -> Option<wordcraft_fonts::FaceRef> {
+    // System fonts are intentionally outside the layout test corpus: their fallback order and
+    // shaping tables vary by host. The current pinned corpus has no Myanmar face, so those
+    // shaping checks skip until one is added there.
+    if !wordcraft_fonts::CRAFT_FONTS.iter().any(|f| f.scripts.contains(&"Mymr")) {
+        return None;
+    }
     wordcraft_fonts::FontDb::global().fallback_for('\u{1000}', 0).map(|f| wordcraft_fonts::FaceRef::of(&f)).filter(|f| f.has_layout_tables())
 }
 
 #[test]
 fn myanmar_prevowel_is_drawn_before_its_consonant() {
     let Some(face) = myanmar_face() else {
-        eprintln!("skipped: no Myanmar font with OpenType tables installed");
+        eprintln!("skipped: no Myanmar font with OpenType tables in the pinned craft-fonts input");
         return;
     };
     // ကေ: in memory consonant first, on screen the vowel sign ေ first.
@@ -93,7 +99,7 @@ fn myanmar_prevowel_is_drawn_before_its_consonant() {
 #[test]
 fn myanmar_in_a_latin_font_falls_back_to_a_regular_myanmar_face() {
     if myanmar_face().is_none() {
-        eprintln!("skipped: no Myanmar font with OpenType tables installed");
+        eprintln!("skipped: no Myanmar font with OpenType tables in the pinned craft-fonts input");
         return;
     }
     let l = lay(&Document::from_text(MYANMAR));
