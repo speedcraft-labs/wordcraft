@@ -2,7 +2,7 @@
 //! focus), opens a document, and times the frames that handle typing, scrolling, zooming,
 //! ribbon tabs and window resizes. Prints numbers only (JSON), never document text.
 //!
-//! `cargo run --release -p wordcraft-ui-egui --example perf_probe -- doc.docx [block]`
+//! `cargo run --release -p wordcraft-ui-egui --example perf_probe -- doc.docx [block|--first-page-only]`
 //!
 //! A frame's time is the CPU time of `WordApp::logic` + `ui` for that frame (layout, page
 //! rasterisation, widgets). What the user sees adds the wait for the next frame and the
@@ -61,6 +61,13 @@ fn main() {
     let first: Vec<f64> = (0..6).map(|_| step(&mut h)).collect();
     let mut out =
         json!({"open_ms": (open_ms * 10.0).round() / 10.0, "first_frames_ms": first.iter().map(|x| (x * 10.0).round() / 10.0).collect::<Vec<_>>()});
+
+    if std::env::args().nth(2).as_deref() == Some("--first-page-only") {
+        out["page_count"] = json!(h.state_mut().session.layout().pages.len());
+        out["body_paragraphs"] = json!(h.state().session.doc.paragraph_count());
+        println!("{out}");
+        return;
+    }
 
     // Typing: the caret in the middle of `block` (default: the longest paragraph), 40 characters.
     let doc_block = block.unwrap_or_else(|| {
