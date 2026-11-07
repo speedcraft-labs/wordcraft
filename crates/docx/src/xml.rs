@@ -80,6 +80,8 @@ const STRICT: &[(&str, &str)] = &[
     ("wp", "http://purl.oclc.org/ooxml/drawingml/wordprocessingDrawing"),
     ("a", "http://purl.oclc.org/ooxml/drawingml/main"),
     ("pic", "http://purl.oclc.org/ooxml/drawingml/picture"),
+    ("c", "http://purl.oclc.org/ooxml/drawingml/chart"),
+    ("dgm", "http://purl.oclc.org/ooxml/drawingml/diagram"),
     ("m", "http://purl.oclc.org/ooxml/officeDocument/math"),
 ];
 
@@ -644,6 +646,17 @@ mod tests {
         let t = p.child("w:t").unwrap();
         assert_eq!(t.text(), " hi A< ");
         assert_eq!(t.attr("xml:space"), Some("preserve"));
+    }
+
+    #[test]
+    fn strict_chart_and_diagram_namespaces_use_reader_prefixes() {
+        let chart = parse(br#"<c:chartSpace xmlns:c="http://purl.oclc.org/ooxml/drawingml/chart"><c:chart/></c:chartSpace>"#).unwrap();
+        assert_eq!(chart.name, "c:chartSpace");
+        assert!(chart.child("c:chart").is_some());
+
+        let diagram = parse(br#"<dgm:dataModel xmlns:dgm="http://purl.oclc.org/ooxml/drawingml/diagram"><dgm:ptLst/></dgm:dataModel>"#).unwrap();
+        assert_eq!(diagram.name, "dgm:dataModel");
+        assert!(diagram.child("dgm:ptLst").is_some());
     }
 
     #[test]
