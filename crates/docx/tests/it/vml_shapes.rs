@@ -78,6 +78,10 @@ fn wordart_vml_shadow_is_applied_to_the_letters() {
     assert_eq!(shadow.transparency, 50.0);
     assert!((shadow.offset().0 - 6.0).abs() < 0.01);
     assert!((shadow.offset().1 - 6.0).abs() < 0.01);
+    let effects = p.runs[0].props.text_effects.as_deref().unwrap();
+    assert!(matches!(effects.fill.as_ref(), Some(wordcraft_doc::wordart::TextFill::None)), "VML WordArt without a fill is hollow");
+    assert_eq!(effects.outline.and_then(|o| o.color), Some(wordcraft_doc::Rgb::BLACK));
+    assert_eq!(p.runs[0].props.pdf_searchable, Some(false), "PDF text is represented by the glyph paths");
 }
 
 #[test]

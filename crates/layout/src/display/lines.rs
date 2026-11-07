@@ -287,7 +287,7 @@ fn draw_glyph_runs(ctx: &LineContext<'_, '_, '_>, out: &mut Vec<Draw>) {
             let path = crate::wordart::glyph_path(&st.face, st.size, &glyphs, synth_italic);
             out.push(Draw::Art { path, fx: Box::new(fx), color, alpha, text_bg });
         }
-        if !glyphs.is_empty() {
+        if !glyphs.is_empty() && !(has_art && rc.pdf_searchable == Some(false)) {
             out.push(Draw::Glyphs {
                 face: st.face,
                 size: st.size,

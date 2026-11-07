@@ -199,6 +199,7 @@ impl Reader<'_> {
                 font,
                 size: Some((h * 0.75).clamp(8.0, 200.0)),
                 color: attr("fillcolor").and_then(vml_color).map(TextColor::Rgb),
+                pdf_searchable: text_effects.as_ref().map(|_| false),
                 text_effects,
                 ..CharProps::default()
             };
@@ -410,10 +411,18 @@ impl Reader<'_> {
 /// offset shadow. A perspective transform cannot be represented by the text-effects model, so use
 /// a thin outline in the shadow colour as a visible approximation when VML supplies a matrix.
 fn vml_wordart_effects(shape: &El) -> Option<Box<wordcraft_doc::wordart::TextEffects>> {
-    let e = shape.child("v:shadow")?;
-    if e.attr("on").is_some_and(|v| matches!(v.trim(), "f" | "false" | "0")) {
-        return None;
-    }
+    let e = shape.child("v:shadow").filter(|e| !e.attr("on").is_some_and(|v| matches!(v.trim(), "f" | "false" | "0")));
+    let hollow = shape.attr("fillcolor").is_none() && shape.child("v:fill").is_none();
+    let default_outline = hollow.then_some(wordcraft_doc::wordart::TextOutline { color: Some(Rgb::BLACK), width: 0.75, transparency: 0.0 });
+    let Some(e) = e else {
+        return default_outline.map(|outline| {
+            Box::new(wordcraft_doc::wordart::TextEffects {
+                fill: Some(wordcraft_doc::wordart::TextFill::None),
+                outline: Some(outline),
+                ..Default::default()
+            })
+        });
+    };
     let pair = |s: &str| {
         let (x, y) = s.split_once(',')?;
         Some((measure(x.trim(), 1.0)?, measure(y.trim(), 1.0)?))
@@ -440,8 +449,11 @@ fn vml_wordart_effects(shape: &El) -> Option<Box<wordcraft_doc::wordart::TextEff
         "emboss" | "double" => e.attr("color2").and_then(vml_color),
         _ => None,
     };
-    let outline = outline_color.map(|color| wordcraft_doc::wordart::TextOutline { color: Some(color), width: 0.75, transparency });
-    (shadow.is_some() || outline.is_some()).then(|| Box::new(wordcraft_doc::wordart::TextEffects { shadow, outline, ..Default::default() }))
+    let outline =
+        outline_color.map(|color| wordcraft_doc::wordart::TextOutline { color: Some(color), width: 0.75, transparency }).or(default_outline);
+    let fill = hollow.then_some(wordcraft_doc::wordart::TextFill::None);
+    (shadow.is_some() || outline.is_some() || fill.is_some())
+        .then(|| Box::new(wordcraft_doc::wordart::TextEffects { fill, shadow, outline, ..Default::default() }))
 }
 
 /// The DrawingML text warps of VML's WordArt shapes, `o:spt` 136 (plain text) to 175 (can down), in
