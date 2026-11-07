@@ -343,7 +343,15 @@ impl Reader<'_> {
         let mut rows = Vec::new();
         collect(t, "w:tr", &mut rows, &mut Vec::new(), 0);
         for (tr, row_controls) in rows.into_iter().take(MAX_ROWS) {
-            let mut row = Row { props: tr.child("w:trPr").map(trpr).unwrap_or_default(), cells: Vec::new(), controls: row_controls };
+            let trpr_el = tr.child("w:trPr");
+            let mut row = Row { props: trpr_el.map(trpr).unwrap_or_default(), cells: Vec::new(), controls: row_controls };
+            let omitted_height_rule = trpr_el.and_then(|p| p.child("w:trHeight")).is_some_and(|h| h.attr("w:hRule").is_none());
+            // Word keeps the legacy at-least interpretation in compatibility modes before 15.
+            // LibreOffice also uses the supplied extent for positioned table wrapping, even when
+            // modern floating rows omit hRule. In modern inline tables, the OOXML default is auto.
+            if omitted_height_rule && (self.doc.settings.compat_mode < 15 || table.props.float.is_some()) {
+                row.props.height_rule = wordcraft_doc::props::HeightRule::AtLeast;
+            }
             row.props.exceptions = tr.child("w:tblPrEx").map(|e| Box::new(self.pc.tblpr(e)));
             if let Some(ch) = tr.child("w:trPr").and_then(|p| p.child("w:trPrChange")) {
                 let old = ch.child("w:trPr").map(trpr).unwrap_or_default();

@@ -603,9 +603,13 @@ pub fn trpr(e: &El) -> RowProps {
             "w:trHeight" => {
                 r.height = tw(k, "w:val").map(|v| v.abs());
                 r.height_rule = match k.attr("w:hRule").map(str::to_ascii_lowercase).as_deref() {
+                    // ECMA-376's default is `auto`; without this attribute the row may shrink
+                    // below the stated height to fit its contents. Treating it as `atLeast`
+                    // made tables with omitted hRule grow far beyond LibreOffice and Word.
+                    None | Some("auto") => HeightRule::Auto,
                     Some("exact") => HeightRule::Exact,
-                    Some("auto") => HeightRule::Auto,
-                    _ => HeightRule::AtLeast,
+                    Some("atleast") => HeightRule::AtLeast,
+                    _ => HeightRule::Auto,
                 };
             }
             "w:tblHeader" => r.header = on_off(k),

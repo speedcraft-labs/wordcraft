@@ -671,7 +671,7 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
         // of the text area (a 35pt row with 4pt margins steps 39pt).
         let rh = match (row.props.height, row.props.height_rule) {
             (Some(h), HeightRule::Exact) if h > 0.0 => h + row_bottom,
-            (Some(h), _) if h > 0.0 => rh.max(h + row_insets),
+            (Some(h), HeightRule::AtLeast) if h > 0.0 => rh.max(h + row_insets),
             _ => rh,
         };
         bottoms.push(row_below);

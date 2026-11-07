@@ -4545,6 +4545,23 @@ fn row_height(l: &DocLayout, row: usize) -> f32 {
     l.pages[0].items.iter().find_map(|i| if let Placed::Cell { rect, row: r, .. } = i { (*r == row).then_some(rect.h) } else { None }).unwrap()
 }
 
+#[test]
+fn automatic_row_height_uses_contents_instead_of_the_suggested_minimum() {
+    let height = |rule| {
+        let mut t = Table::new(1, 1, 200.0);
+        t.rows[0].props.height = Some(120.0);
+        t.rows[0].props.height_rule = rule;
+        t.rows[0].cells[0].blocks = vec![wordcraft_doc::para_block(wordcraft_doc::Paragraph::with_text("one line", Default::default()))];
+        let mut d = Document::from_text("");
+        d.body = vec![Arc::new(Block::Table(t))];
+        row_height(&lay(&d), 0)
+    };
+    let automatic = height(wordcraft_doc::props::HeightRule::Auto);
+    let minimum = height(wordcraft_doc::props::HeightRule::AtLeast);
+    assert!(automatic < 30.0, "auto fits its contents: {automatic}");
+    assert!(minimum >= 120.0, "atLeast keeps its minimum: {minimum}");
+}
+
 /// The laid-out paragraph in cell (row, col) of the table at body index 1.
 fn cell_para(l: &DocLayout, row: u32, col: u32) -> Arc<ParaLayout> {
     l.pages[0]
