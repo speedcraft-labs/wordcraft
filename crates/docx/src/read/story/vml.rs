@@ -194,10 +194,12 @@ impl Reader<'_> {
                 .copied()
                 .and_then(TextWarp::new);
             // The letters fill the box (`fitshape`): sized to its height.
+            let text_effects = vml_wordart_effects(shape);
             let props = CharProps {
                 font,
                 size: Some((h * 0.75).clamp(8.0, 200.0)),
                 color: attr("fillcolor").and_then(vml_color).map(TextColor::Rgb),
+                text_effects,
                 ..CharProps::default()
             };
             let id = self.doc.add_part(PartKind::TextBox, vec![para_block(Paragraph::with_text(&text, props))]);
@@ -402,6 +404,44 @@ impl Reader<'_> {
         }
         Some(o)
     }
+}
+
+/// VML WordArt shadows belong to the letters, not the empty text-box frame. Keep their common
+/// offset shadow. A perspective transform cannot be represented by the text-effects model, so use
+/// a thin outline in the shadow colour as a visible approximation when VML supplies a matrix.
+fn vml_wordart_effects(shape: &El) -> Option<Box<wordcraft_doc::wordart::TextEffects>> {
+    let e = shape.child("v:shadow")?;
+    if e.attr("on").is_some_and(|v| matches!(v.trim(), "f" | "false" | "0")) {
+        return None;
+    }
+    let pair = |s: &str| {
+        let (x, y) = s.split_once(',')?;
+        Some((measure(x.trim(), 1.0)?, measure(y.trim(), 1.0)?))
+    };
+    let (x, y) = e.attr("offset").and_then(pair).unwrap_or((0.0, 0.0));
+    let distance = x.hypot(y);
+    let opacity = e.attr("opacity").and_then(vml_fraction).unwrap_or(0.5).clamp(0.0, 1.0);
+    let color = e.attr("color").and_then(vml_color).unwrap_or(Rgb(0x86, 0x86, 0x86));
+    let transparency = (1.0 - opacity) * 100.0;
+    let kind = e.attr("type").unwrap_or("single");
+    let shadow = (distance > 0.0 || !matches!(kind, "perspective" | "emboss" | "double")).then(|| {
+        wordcraft_doc::effects::Shadow {
+            color,
+            transparency,
+            blur: 0.0,
+            distance,
+            angle: y.atan2(x).to_degrees().rem_euclid(360.0),
+            rot_with_shape: false,
+        }
+        .sanitized()
+    });
+    let outline_color = match kind {
+        "perspective" if e.attr("matrix").is_some() => Some(color),
+        "emboss" | "double" => e.attr("color2").and_then(vml_color),
+        _ => None,
+    };
+    let outline = outline_color.map(|color| wordcraft_doc::wordart::TextOutline { color: Some(color), width: 0.75, transparency });
+    (shadow.is_some() || outline.is_some()).then(|| Box::new(wordcraft_doc::wordart::TextEffects { shadow, outline, ..Default::default() }))
 }
 
 /// The DrawingML text warps of VML's WordArt shapes, `o:spt` 136 (plain text) to 175 (can down), in

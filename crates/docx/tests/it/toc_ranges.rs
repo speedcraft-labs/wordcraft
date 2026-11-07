@@ -30,6 +30,15 @@ const PAGE: &str = r#"<w:fldSimple w:instr="PAGEREF Original"><w:r><w:t>7</w:t><
 const ENTRY: &str = r#"<w:hyperlink w:anchor="Original"><w:r><w:rPr><w:b/><w:i/></w:rPr><w:t>Scope</w:t></w:r><w:r><w:tab/></w:r>"#;
 
 #[test]
+fn block_level_deletions_keep_their_text_as_tracked_content() {
+    let body = r#"<w:del w:id="7" w:author="Ada"><w:p><w:r><w:delText>deleted entry</w:delText></w:r></w:p></w:del>"#;
+    let doc = wordcraft_docx::read(&package(body)).unwrap();
+    let p = doc.body[0].as_para().unwrap();
+    assert_eq!(p.plain_text(), "deleted entry");
+    assert!(p.runs.iter().all(|run| run.props.del == Some(0)));
+}
+
+#[test]
 fn unstyled_toc_keeps_range_nested_field_and_formatting_through_two_edited_saves() {
     for split in [false, true] {
         let content = if split {

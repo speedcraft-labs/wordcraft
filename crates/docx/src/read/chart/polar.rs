@@ -136,6 +136,20 @@ pub(super) fn radar(out: &mut Vec<GraphicItem>, c: &Chart, area: Rect) {
 /// The data label of point `i` of series `s`, when it shows one: the value as the file has it,
 /// in the series' number format.
 pub(super) fn label_of(s: &Series, i: usize) -> Option<String> {
+    if let Some(label) = s.point_labels.get(i).and_then(Clone::clone) {
+        let mut text = label.text;
+        if label.percentage {
+            let total: f64 = s.raw.iter().flatten().map(|value| value.abs()).sum();
+            let value = s.raw.get(i).copied().flatten()?;
+            if total > 0.0 {
+                if !text.is_empty() && !text.chars().last().is_some_and(char::is_whitespace) {
+                    text.push(' ');
+                }
+                text.push_str(&format!("{:.0}%", value.abs() / total * 100.0));
+            }
+        }
+        return Some(text);
+    }
     if s.labels != Some(true) {
         return None;
     }

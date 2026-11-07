@@ -51,6 +51,16 @@ impl Reader<'_> {
                     }
                 }
                 "w:sdt" => self.read_block_sdt(sc, e, rels, out, depth),
+                // A block-level deletion wraps complete paragraphs, and often a whole cached
+                // TOC field. Keep those paragraphs in the model with the revision mark; dropping
+                // the wrapper here made such documents import as empty pages and made the text
+                // impossible to show in a markup view.
+                "w:del" | "w:moveFrom" => {
+                    let rev = if e.name == "w:moveFrom" { self.move_revision(false, e, true) } else { self.revision(RevisionKind::Delete, e) };
+                    let start = out.len();
+                    self.read_blocks(sc, e, rels, out, depth + 1);
+                    mark_deleted(&mut out[start..], rev);
+                }
                 "w:altChunk" => self.read_alt_chunk(sc, e, rels, out, depth),
                 "w:customXml" | "w:smartTag" | "w:ins" | "w:moveTo" => self.read_blocks(sc, e, rels, out, depth + 1),
                 // Math is allowed straight in a story (EG_BlockLevelElts takes EG_RunLevelElements,
@@ -371,5 +381,29 @@ impl Reader<'_> {
             table.grid = vec![72.0; cols];
         }
         Some(table)
+    }
+}
+
+fn mark_deleted(blocks: &mut [Arc<Block>], revision: u32) {
+    for block in blocks {
+        match Arc::make_mut(block) {
+            Block::Para(p) => {
+                if p.mark.del.is_none() {
+                    p.mark.del = Some(revision);
+                }
+                for run in &mut p.runs {
+                    if run.props.del.is_none() {
+                        run.props.del = Some(revision);
+                    }
+                }
+            }
+            Block::Table(t) => {
+                for row in &mut t.rows {
+                    for cell in &mut row.cells {
+                        mark_deleted(&mut cell.blocks, revision);
+                    }
+                }
+            }
+        }
     }
 }

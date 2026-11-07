@@ -111,7 +111,16 @@ pub(crate) fn box_items(ctx: &mut Ctx, id: u32, rect: Rect, depth: usize) -> Vec
             ctx.boxes.leave();
             // Text that doesn't fit inside the margins is hidden, as in Word; a box that resizes
             // to fit its text shows it all (#743).
-            if body.auto_fit { inner } else { fit_box(inner, across) }
+            if body.auto_fit {
+                inner
+            } else if body.inset == Some([0; 4]) {
+                // DrawingML explicitly zeroes the margins for some legacy frames. Their final
+                // caption line can start inside the frame and run a few points below it after
+                // paragraph spacing is counted; keep that line, as the LibreOffice reference does.
+                fit_text_box(inner, across)
+            } else {
+                fit_box(inner, across)
+            }
         }
     };
     place(items, &body, rect, across)
@@ -333,7 +342,7 @@ fn flow(ctx: &mut Ctx, chain: &[u32], depth: usize) -> Vec<Vec<Placed>> {
                 }
             },
         };
-        let (kept, next) = fit_flow(items, across);
+        let (kept, next) = fit_flow(items, across, body.inset == Some([0; 4]));
         start = next.map(Some);
         out.push(kept);
     }
@@ -398,8 +407,60 @@ fn from_y(items: Vec<Placed>, top: f32) -> Vec<Placed> {
     out
 }
 
-/// What fits in `across` (see [`fit_box`]), and where the text left over starts.
-fn fit_flow(items: Vec<Placed>, across: f32) -> (Vec<Placed>, Option<Cut>) {
+/// In legacy frames with explicit zero margins, keep the line whose top starts inside the frame
+/// even if its descenders or line spacing extend past the bottom. A following line starts outside.
+fn fit_text_box(items: Vec<Placed>, height: f32) -> Vec<Placed> {
+    let limit = height + 0.5;
+    let mut out = Vec::with_capacity(items.len());
+    let mut kept_line = false;
+    for it in items {
+        if let Some(r) = it.turned_bounds() {
+            if r.y < limit {
+                out.push(it);
+            }
+            continue;
+        }
+        match it {
+            Placed::Lines { story, path, para, l0, l1, x, y, turn } => {
+                let Some(first) = para.lines.get(l0) else { continue };
+                let mut end = l0;
+                for k in l0..l1 {
+                    let Some(line) = para.lines.get(k) else { break };
+                    if y + (line.top - first.top) >= limit && kept_line {
+                        break;
+                    }
+                    end = k + 1;
+                    kept_line = true;
+                }
+                if end > l0 {
+                    out.push(Placed::Lines { story, path, para, l0, l1: end, x, y, turn });
+                }
+            }
+            Placed::Fill { rect, color } if rect.y < limit => {
+                out.push(Placed::Fill { rect: Rect::new(rect.x, rect.y, rect.w, rect.h.min(limit - rect.y)), color });
+            }
+            Placed::Rule { x0, y0, x1, y1, border } if y0.min(y1) < limit => {
+                out.push(Placed::Rule { x0, y0: y0.min(limit), x1, y1: y1.min(limit), border });
+            }
+            Placed::Image { rect, .. }
+            | Placed::Shape { rect, .. }
+            | Placed::Graphic { rect, .. }
+            | Placed::Clip { rect, .. }
+            | Placed::Cell { rect, .. }
+            | Placed::Object { rect, .. }
+                if rect.y < limit =>
+            {
+                out.push(it);
+            }
+            _ => {}
+        }
+    }
+    out
+}
+
+/// What fits in `across`, and where text left over starts. Linked boxes with explicit zero
+/// margins use the same partial-final-line rule as [`fit_text_box`].
+fn fit_flow(items: Vec<Placed>, across: f32, keep_partial_line: bool) -> (Vec<Placed>, Option<Cut>) {
     let limit = across + 0.5;
     let mut kept_line = false;
     let mut cut: Option<(f32, Cut)> = None;
@@ -412,7 +473,8 @@ fn fit_flow(items: Vec<Placed>, across: f32) -> (Vec<Placed>, Option<Cut>) {
         for k in *l0..*l1 {
             let Some(l) = para.lines.get(k) else { break };
             let ly = y + l.top - first.top;
-            if ly + l.height > limit && kept_line {
+            let outside = if keep_partial_line { ly >= limit } else { ly + l.height > limit };
+            if outside && kept_line {
                 if cut.as_ref().is_none_or(|(cy, _)| ly < *cy) {
                     cut = Some((ly, Cut { path: path.clone(), byte: l.start }));
                 }
@@ -421,5 +483,6 @@ fn fit_flow(items: Vec<Placed>, across: f32) -> (Vec<Placed>, Option<Cut>) {
             kept_line = true;
         }
     }
-    (fit_box(items, across), cut.map(|(_, c)| c))
+    let kept = if keep_partial_line { fit_text_box(items, across) } else { fit_box(items, across) };
+    (kept, cut.map(|(_, c)| c))
 }
