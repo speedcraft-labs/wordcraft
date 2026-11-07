@@ -83,6 +83,8 @@ pub(super) struct Series {
     pub(super) x_fmt: Option<String>,
     /// Data labels on or off for this series (`c:dLbls` of its own), when it says.
     pub(super) labels: Option<bool>,
+    /// Percentage labels on or off for this series or chart type.
+    pub(super) percentage_labels: Option<bool>,
     /// The values as the file has them, for data labels (`values` become shares in a 100%
     /// stacked chart); empty when the series shows no labels.
     pub(super) raw: Vec<Option<f64>>,

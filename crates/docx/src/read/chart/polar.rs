@@ -150,15 +150,23 @@ pub(super) fn label_of(s: &Series, i: usize) -> Option<String> {
         }
         return Some(text);
     }
+    let percentage = if s.percentage_labels == Some(true) {
+        let total: f64 = s.raw.iter().flatten().map(|value| value.abs()).sum();
+        let value = s.raw.get(i).copied().flatten()?;
+        (total > 0.0).then(|| format!("{:.0}%", value.abs() / total * 100.0))
+    } else {
+        None
+    };
     if s.labels != Some(true) {
-        return None;
+        return percentage;
     }
     let v = s.raw.get(i).copied().flatten()?;
     let fmt = s.fmt.as_deref().filter(|f| !f.eq_ignore_ascii_case("General"));
-    Some(match fmt {
+    let value = match fmt {
         Some(f) => format_value(v, f, 1.0),
         None => general_value(v),
-    })
+    };
+    Some(percentage.map_or(value.clone(), |percent| format!("{value} {percent}")))
 }
 
 /// A value in the `General` format: whole numbers without decimals, others with up to six.

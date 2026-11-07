@@ -40,11 +40,13 @@ impl Chart {
         let radar_style = ty.child("c:radarStyle").and_then(|r| r.attr("val"));
         let type_dl = ty.child("c:dLbls");
         let type_labels = show_values(type_dl);
+        let type_percentages = show_percent(type_dl);
         let custom_labels = point_labels(type_dl, n);
         for s in &mut series {
             s.values.resize(n, None);
             s.xs.resize(n, None);
             s.labels = Some(s.labels.or(type_labels).unwrap_or(false));
+            s.percentage_labels = s.percentage_labels.or(type_percentages);
             for (i, label) in custom_labels.iter().enumerate() {
                 if s.point_labels.get(i).is_none_or(Option::is_none)
                     && let (Some(slot), Some(label)) = (s.point_labels.get_mut(i), label)
@@ -52,7 +54,7 @@ impl Chart {
                     *slot = Some(label.clone());
                 }
             }
-            if s.labels == Some(true) || s.point_labels.iter().flatten().any(|label| label.percentage) {
+            if s.labels == Some(true) || s.percentage_labels == Some(true) || s.point_labels.iter().flatten().any(|label| label.percentage) {
                 s.raw = s.values.clone();
             }
         }
@@ -186,6 +188,15 @@ fn show_values(d: Option<&El>) -> Option<bool> {
     d.child("c:showVal").map(|v| v.attr("val").is_none_or(truthy))
 }
 
+/// Whether a data-label set asks for each point's share of its series.
+fn show_percent(d: Option<&El>) -> Option<bool> {
+    let d = d?;
+    if d.child("c:delete").and_then(|e| e.attr("val")).is_some_and(truthy) {
+        return Some(false);
+    }
+    d.child("c:showPercent").map(|v| v.attr("val").is_none_or(truthy))
+}
+
 fn legend_pos(chart: &El) -> Option<Pos> {
     chart.child("c:legend").map(|l| match l.child("c:legendPos").and_then(|p| p.attr("val")).unwrap_or("r") {
         "l" => Pos::Left,
@@ -228,8 +239,9 @@ impl Series {
             }
         }
         let labels = show_values(ser.child("c:dLbls"));
+        let percentage_labels = show_percent(ser.child("c:dLbls"));
         let point_labels = point_labels(ser.child("c:dLbls"), values.len());
-        Series { name, color, line_w, line, values, xs, points, fmt, x_fmt, labels, raw: Vec::new(), point_labels }
+        Series { name, color, line_w, line, values, xs, points, fmt, x_fmt, labels, percentage_labels, raw: Vec::new(), point_labels }
     }
 }
 
