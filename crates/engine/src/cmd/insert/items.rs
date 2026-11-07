@@ -82,6 +82,28 @@ pub fn format_date_parts(fmt: &str, y: i64, m: usize, d: u32, (hh, mm, ss): (u32
     let day = DAYS.get(days_since.rem_euclid(7) as usize).copied().unwrap_or("Monday");
     let mut out = String::new();
     let chars: Vec<char> = fmt.chars().collect();
+    let has_ampm = {
+        let mut quoted = false;
+        let mut at = 0;
+        let mut found = false;
+        while at < chars.len() {
+            if chars.get(at) == Some(&'\'') {
+                if chars.get(at + 1) == Some(&'\'') {
+                    at += 2;
+                    continue;
+                }
+                quoted = !quoted;
+                at += 1;
+                continue;
+            }
+            if !quoted && chars.get(at..at.saturating_add(5)).is_some_and(|w| w.iter().collect::<String>().eq_ignore_ascii_case("am/pm")) {
+                found = true;
+                break;
+            }
+            at += 1;
+        }
+        found
+    };
     let mut i = 0;
     while i < chars.len() {
         let c = chars.get(i).copied().unwrap_or(' ');
@@ -128,6 +150,8 @@ pub fn format_date_parts(fmt: &str, y: i64, m: usize, d: u32, (hh, mm, ss): (u32
             ('d' | 'D', 3) => out.push_str(day.get(..3).unwrap_or(day)),
             ('d' | 'D', 2) => out.push_str(&format!("{d:02}")),
             ('d' | 'D', 1) => out.push_str(&d.to_string()),
+            ('H', 2..) if has_ampm => out.push_str(&format!("{:02}", if hh.is_multiple_of(12) { 12 } else { hh % 12 })),
+            ('H', _) if has_ampm => out.push_str(&(if hh.is_multiple_of(12) { 12 } else { hh % 12 }).to_string()),
             ('H', 2..) => out.push_str(&format!("{hh:02}")),
             ('H', _) => out.push_str(&hh.to_string()),
             ('h', 2..) => out.push_str(&format!("{:02}", if hh.is_multiple_of(12) { 12 } else { hh % 12 })),
