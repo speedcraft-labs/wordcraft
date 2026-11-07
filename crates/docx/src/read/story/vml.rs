@@ -407,9 +407,10 @@ impl Reader<'_> {
     }
 }
 
-/// VML WordArt shadows belong to the letters, not the empty text-box frame. Keep their common
-/// offset shadow. A perspective transform cannot be represented by the text-effects model, so use
-/// a thin outline in the shadow colour as a visible approximation when VML supplies a matrix.
+/// VML WordArt effects belong to the letters, not the empty text-box frame. Unfilled VML textpaths
+/// use a black outline in LibreOffice's PDF output; there, a separate VML shadow layer is omitted.
+/// Filled textpaths keep their common offset shadow. A perspective transform cannot be represented
+/// by the text-effects model, so use a thin outline in the shadow colour as an approximation.
 fn vml_wordart_effects(shape: &El) -> Option<Box<wordcraft_doc::wordart::TextEffects>> {
     let e = shape.child("v:shadow").filter(|e| !e.attr("on").is_some_and(|v| matches!(v.trim(), "f" | "false" | "0")));
     let hollow = shape.attr("fillcolor").is_none() && shape.child("v:fill").is_none();
@@ -449,8 +450,12 @@ fn vml_wordart_effects(shape: &El) -> Option<Box<wordcraft_doc::wordart::TextEff
         "emboss" | "double" => e.attr("color2").and_then(vml_color),
         _ => None,
     };
-    let outline =
-        outline_color.map(|color| wordcraft_doc::wordart::TextOutline { color: Some(color), width: 0.75, transparency }).or(default_outline);
+    let shadow = if hollow { None } else { shadow };
+    let outline = if hollow {
+        default_outline
+    } else {
+        outline_color.map(|color| wordcraft_doc::wordart::TextOutline { color: Some(color), width: 0.75, transparency })
+    };
     let fill = hollow.then_some(wordcraft_doc::wordart::TextFill::None);
     (shadow.is_some() || outline.is_some() || fill.is_some())
         .then(|| Box::new(wordcraft_doc::wordart::TextEffects { fill, shadow, outline, ..Default::default() }))
