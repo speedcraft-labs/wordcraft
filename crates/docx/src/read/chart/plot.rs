@@ -178,7 +178,8 @@ fn axis_margins(c: &Chart, ax: &Axes, right_ax: Option<&Axes>, area: Rect) -> Ma
     } else {
         0.0
     };
-    let right = right_ax.map_or(0.0, |axes| axes.vticks.iter().map(|(_, s)| text_w(s, fs)).fold(0.0, f32::max) + GAP);
+    let right =
+        right_ax.filter(|_| !c.val_right.deleted).map_or(0.0, |axes| axes.vticks.iter().map(|(_, s)| text_w(s, fs)).fold(0.0, f32::max) + GAP);
     let band_w = (area.w - left - right).max(1.0) / c.n as f32;
     let wrapped: Vec<Vec<String>> = if cat_on && !scatter {
         let width = if c.horizontal { left - GAP } else { band_w };
@@ -221,8 +222,8 @@ pub(super) fn cartesian(out: &mut Vec<GraphicItem>, c: &Chart, area: Rect) {
         return;
     }
     let ax = Axes::of(c);
-    let right_ax = (c.series.iter().any(|s| s.secondary_axis) && !c.val_right.deleted).then(|| Axes::right(c));
-    let m = axis_margins(c, &ax, right_ax.as_ref(), area);
+    let right_ax = c.series.iter().any(|s| s.secondary_axis).then(|| Axes::right(c));
+    let m = axis_margins(c, &ax, right_ax.as_ref().filter(|_| !c.val_right.deleted), area);
     let plot = Rect { x: area.x + m.left, y: area.y + m.top, w: area.w - m.left - m.right, h: area.h - m.top - m.bottom };
     if plot.w < 1.0 || plot.h < 1.0 {
         return;
@@ -241,7 +242,9 @@ pub(super) fn cartesian(out: &mut Vec<GraphicItem>, c: &Chart, area: Rect) {
         }
         draw_series(out, c, &right, &mut labels);
         draw_axes(out, c, &right);
-        draw_value_labels(out, c, &right, &right_axes.vticks, Rect { x: area.right() - m.right, w: m.right, ..area }, true);
+        if !c.val_right.deleted {
+            draw_value_labels(out, c, &right, &right_axes.vticks, Rect { x: area.right() - m.right, w: m.right, ..area }, true);
+        }
     }
     draw_data_labels(out, &labels, c.text_size, g.horiz && c.kind == Kind::Bar);
     if !c.val.deleted {
