@@ -45,6 +45,10 @@ pub enum Draw {
         synth_italic: bool,
         /// The text these glyphs show (for PDF text extraction), and the hyperlink.
         text: String,
+        /// Whether the PDF exporter includes searchable text for these glyphs. Display renderers
+        /// always draw the glyphs; equations can be painted as outlines to match office PDFs that
+        /// do not expose their math runs as searchable text.
+        pdf_searchable: bool,
         link: Option<String>,
         /// Byte range of `text` each glyph shows (one per glyph; a ligature's range covers all
         /// its characters). Empty when unknown: the PDF writer then guesses from the font.

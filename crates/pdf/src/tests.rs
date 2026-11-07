@@ -2363,6 +2363,26 @@ fn legacy_font_effects_keep_their_text() {
     assert_eq!(text.matches("Effect").count(), 4, "{text}");
 }
 
+/// LibreOffice paints Office Math as equation glyphs without a searchable text layer in its PDF.
+/// Keep WordCraft's equation glyphs vector-visible while matching that extraction behavior.
+#[test]
+fn equations_are_drawn_but_not_searchable_in_pdf() {
+    let mut d = Document::from_text("Before after.");
+    let math = wordcraft_doc::math::Math { nodes: wordcraft_doc::math::parse_linear("qzv=98765"), ..Default::default() };
+    d.para_mut(wordcraft_doc::StoryRef::Body, &wordcraft_doc::Path::top(0))
+        .unwrap()
+        .insert_object(7, InlineObject::Equation { linear: "qzv=98765".into(), display: false, math }, &Default::default())
+        .unwrap();
+
+    let lay = layout(&d, &mut LayoutCache::new(), &LayoutOptions::default());
+    let draws = wordcraft_layout::display::page_display(&d, &lay.pages[0], &DisplayOptions::default());
+    assert!(draws.iter().any(|draw| matches!(draw, Draw::Glyphs { text, pdf_searchable: false, .. } if text.contains("qzv"))));
+
+    let text = squash(&extract_text(&export(&d, &PdfOptions::default()).unwrap()).concat());
+    assert!(text.contains("Before") && text.contains("after"), "surrounding text stays searchable: {text}");
+    assert!(!text.contains("qzv") && !text.contains("98765"), "equation glyphs stay out of PDF text: {text}");
+}
+
 #[test]
 fn shape_dash_arrays_export() {
     use wordcraft_doc::{

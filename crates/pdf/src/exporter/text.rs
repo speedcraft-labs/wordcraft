@@ -86,6 +86,7 @@ impl Exporter<'_> {
         glyphs: &[(u32, f32, f32)],
         style: GlyphPaint,
         (text, known): (&str, &[std::ops::Range<usize>]),
+        searchable: bool,
     ) {
         let GlyphPaint { color, alpha, bold, italic } = style;
         if !size.is_finite() || size <= 0.0 || size > 5000.0 {
@@ -95,6 +96,32 @@ impl Exporter<'_> {
             return;
         }
         if !glyphs.iter().all(|(_, x, y)| ok(*x) && ok(*y)) {
+            return;
+        }
+        if !searchable {
+            if let Some(path) = glyph_outlines(face, size, glyphs) {
+                if italic {
+                    let base = baseline(glyphs).unwrap_or(glyphs.first().map_or(0.0, |g| g.2));
+                    s.push_transform(&Transform::from_row(1.0, 0.0, -0.21, 1.0, 0.21 * base, 0.0));
+                }
+                s.set_fill(Some(fill(color, alpha)));
+                s.set_stroke(if bold {
+                    Some(Stroke {
+                        paint: rgb::Color::new(color.0, color.1, color.2).into(),
+                        width: size * 0.03,
+                        opacity: norm(alpha),
+                        ..Default::default()
+                    })
+                } else {
+                    None
+                });
+                s.draw_path(&path);
+                s.set_fill(None);
+                s.set_stroke(None);
+                if italic {
+                    s.pop();
+                }
+            }
             return;
         }
         let font = self.font(face);

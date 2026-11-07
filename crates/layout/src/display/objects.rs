@@ -323,6 +323,7 @@ fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32, k: f32) ->
             synth_bold,
             synth_italic: false,
             text: s.to_string(),
+            pdf_searchable: true,
             link: None,
             ranges: Vec::new(),
             text_bg: None,
