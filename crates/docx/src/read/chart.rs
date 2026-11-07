@@ -180,8 +180,10 @@ struct Chart {
     /// Category axis (scatter: the x axis).
     cat: Axis,
     val: Axis,
+    val_right: Axis,
     text_size: f32,
     val_fmt: String,
+    val_fmt_right: String,
     /// Serial days count from 1904 (`c:date1904`), not 1900.
     date1904: bool,
     /// Outline of the plot area, when the file draws one.

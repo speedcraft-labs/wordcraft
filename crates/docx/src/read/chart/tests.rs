@@ -109,6 +109,17 @@ fn chart_series_in_multiple_type_groups_are_drawn() {
 }
 
 #[test]
+fn secondary_value_axis_labels_use_the_secondary_series_scale() {
+    let first = format!(r#"<c:lineChart><c:axId val="1"/><c:axId val="2"/>{}</c:lineChart>"#, ser(0, "Primary", None, &["A", "B"], &["1", "2"]));
+    let second =
+        format!(r#"<c:lineChart><c:axId val="3"/><c:axId val="4"/>{}</c:lineChart>"#, ser(1, "Secondary", None, &["A", "B"], &["100", "200"]));
+    let axes = r#"<c:catAx><c:axId val="1"/><c:crossAx val="2"/></c:catAx><c:valAx><c:axId val="2"/><c:axPos val="l"/><c:scaling><c:min val="0"/><c:max val="2"/></c:scaling></c:valAx><c:catAx><c:axId val="3"/><c:crossAx val="4"/></c:catAx><c:valAx><c:axId val="4"/><c:axPos val="r"/><c:scaling><c:min val="0"/><c:max val="200"/></c:scaling></c:valAx>"#;
+    let drawn = chart_items(&space(&format!("{first}{second}{axes}")), &theme(), 300.0, 200.0);
+    let shown: Vec<String> = drawn.iter().filter_map(|it| if let GraphicItem::Text { text, .. } = it { Some(text.clone()) } else { None }).collect();
+    assert!(shown.contains(&"100".to_string()) && shown.contains(&"200".to_string()), "secondary ticks missing: {shown:?}");
+}
+
+#[test]
 fn custom_data_labels_override_generated_values_and_3d_bars_are_drawn() {
     let series = ser(0, "Share", None, &["A"], &["100"]);
     let labels = r#"<c:dLbls><c:showVal val="0"/><c:showPercent val="1"/><c:dLbl><c:idx val="0"/><c:tx><c:rich><a:p><a:r><a:t>Custom</a:t></a:r><a:r><a:t> label</a:t></a:r></a:p><a:p><a:fld type="PERCENTAGE"><a:rPr/><a:pPr/><a:t>[PERCENT]</a:t></a:fld></a:p></c:rich></c:tx></c:dLbl></c:dLbls>"#;

@@ -20,12 +20,14 @@ impl Chart {
                 primary_grouping = grouping(chart_type, group_kind);
                 cats = chart_type.children("c:ser").find_map(|s| s.child("c:cat")).map(|c| labels(Some(c), MAX_POINTS, date1904)).unwrap_or_default();
             }
+            let secondary_axis = group_uses_right_axis(chart_type, plot);
             let type_dl = chart_type.child("c:dLbls");
             let type_labels = show_values(type_dl);
             let type_percentages = show_percent(type_dl);
             let group_n = group.iter().map(|s| s.values.len()).max().unwrap_or(0);
             let custom_labels = point_labels(type_dl, group_n);
             for s in &mut group {
+                s.secondary_axis = secondary_axis;
                 s.labels = Some(s.labels.or(type_labels).unwrap_or(false));
                 s.percentage_labels = s.percentage_labels.or(type_percentages);
                 s.point_labels.resize(group_n, None);
@@ -70,12 +72,17 @@ impl Chart {
         if grouping == Grouping::Percent {
             to_percent(&mut series, n);
         }
-        let (cat, val) = chart_axes(plot, kind == Kind::Scatter);
+        let (cat, val, val_right) = chart_axes(plot, kind == Kind::Scatter);
         let val_fmt = if grouping == Grouping::Percent {
             "0%".to_string()
         } else {
             val.fmt.clone().or_else(|| series.iter().find_map(|s| s.fmt.clone())).unwrap_or_else(|| "General".to_string())
         };
+        let val_fmt_right = val_right
+            .fmt
+            .clone()
+            .or_else(|| series.iter().filter(|s| s.secondary_axis).find_map(|s| s.fmt.clone()))
+            .unwrap_or_else(|| "General".to_string());
         let num = |n: &str| ty.child(n).and_then(|g| g.attr("val")).and_then(int);
         Some(Chart {
             kind,
@@ -96,8 +103,10 @@ impl Chart {
             legend: legend_pos(chart),
             cat,
             val,
+            val_right,
             text_size: text_size(space),
             val_fmt,
+            val_fmt_right,
             date1904,
             plot_border: plot.child("c:spPr").and_then(|p| p.child("a:ln")).and_then(|l| fill_colour(l, theme)),
         })
@@ -175,7 +184,7 @@ fn to_percent(series: &mut [Series], n: usize) {
 }
 
 /// The category axis (scatter: the horizontal value axis) and the value axis of a plot area.
-fn chart_axes(plot: &El, scatter: bool) -> (Axis, Axis) {
+fn chart_axes(plot: &El, scatter: bool) -> (Axis, Axis, Axis) {
     let vals_ax: Vec<&El> = plot.children("c:valAx").collect();
     let horiz_pos = |a: &&El| matches!(a.child("c:axPos").and_then(|p| p.attr("val")), Some("b" | "t"));
     let (val_el, x_el) = if scatter {
@@ -183,10 +192,19 @@ fn chart_axes(plot: &El, scatter: bool) -> (Axis, Axis) {
         let y = vals_ax.iter().copied().find(|a| !horiz_pos(a)).or_else(|| vals_ax.iter().copied().find(|a| Some(*a) != x));
         (y, x)
     } else {
-        (vals_ax.first().copied(), None)
+        (vals_ax.iter().copied().find(|a| a.child("c:axPos").and_then(|p| p.attr("val")) != Some("r")).or_else(|| vals_ax.first().copied()), None)
     };
+    let right_el = vals_ax.iter().copied().find(|a| a.child("c:axPos").and_then(|p| p.attr("val")) == Some("r") && Some(*a) != val_el);
     let cat_el = plot.els().find(|e| matches!(e.name.as_str(), "c:catAx" | "c:dateAx"));
-    (axis(if scatter { x_el } else { cat_el }), axis(val_el))
+    (axis(if scatter { x_el } else { cat_el }), axis(val_el), axis(right_el))
+}
+
+fn group_uses_right_axis(group: &El, plot: &El) -> bool {
+    let ids: Vec<&str> = group.children("c:axId").filter_map(|id| id.attr("val")).collect();
+    plot.children("c:valAx").any(|axis| {
+        axis.child("c:axId").and_then(|id| id.attr("val")).is_some_and(|id| ids.contains(&id))
+            && axis.child("c:axPos").and_then(|pos| pos.attr("val")) == Some("r")
+    })
 }
 
 /// The chart's title. An empty `c:title` shows the series name (Word's automatic title of a
@@ -259,7 +277,23 @@ impl Series {
         let labels = show_values(ser.child("c:dLbls"));
         let percentage_labels = show_percent(ser.child("c:dLbls"));
         let point_labels = point_labels(ser.child("c:dLbls"), values.len());
-        Series { name, kind, color, line_w, line, values, xs, points, fmt, x_fmt, labels, percentage_labels, raw: Vec::new(), point_labels }
+        Series {
+            name,
+            kind,
+            secondary_axis: false,
+            color,
+            line_w,
+            line,
+            values,
+            xs,
+            points,
+            fmt,
+            x_fmt,
+            labels,
+            percentage_labels,
+            raw: Vec::new(),
+            point_labels,
+        }
     }
 }
 
