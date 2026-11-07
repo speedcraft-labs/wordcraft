@@ -1,5 +1,5 @@
 use super::format::{date_text, excel_stamp, format_value, is_date_code};
-use super::model::{Axis, Grouping, Kind, Pos, Series};
+use super::model::{Axis, Grouping, Kind, PointLabel, Pos, Series};
 use super::plot::label;
 use super::{Chart, El, FONT, LINE_W, MAX_CELLS, MAX_POINTS, MAX_RADAR_SERIES, MAX_SERIES, MAX_SPOKES, Rgb, fill_colour, int, measure, slot};
 
@@ -38,12 +38,21 @@ impl Chart {
         let mut cats = cats;
         cats.resize(n, String::new());
         let radar_style = ty.child("c:radarStyle").and_then(|r| r.attr("val"));
-        let type_labels = show_values(ty.child("c:dLbls"));
+        let type_dl = ty.child("c:dLbls");
+        let type_labels = show_values(type_dl);
+        let custom_labels = point_labels(type_dl, n);
         for s in &mut series {
             s.values.resize(n, None);
             s.xs.resize(n, None);
             s.labels = Some(s.labels.or(type_labels).unwrap_or(false));
-            if s.labels == Some(true) {
+            for (i, label) in custom_labels.iter().enumerate() {
+                if s.point_labels.get(i).is_none_or(Option::is_none)
+                    && let (Some(slot), Some(label)) = (s.point_labels.get_mut(i), label)
+                {
+                    *slot = Some(label.clone());
+                }
+            }
+            if s.labels == Some(true) || s.point_labels.iter().flatten().any(|label| label.percentage) {
                 s.raw = s.values.clone();
             }
         }
@@ -219,7 +228,50 @@ impl Series {
             }
         }
         let labels = show_values(ser.child("c:dLbls"));
-        Series { name, color, line_w, line, values, xs, points, fmt, x_fmt, labels, raw: Vec::new() }
+        let point_labels = point_labels(ser.child("c:dLbls"), values.len());
+        Series { name, color, line_w, line, values, xs, points, fmt, x_fmt, labels, raw: Vec::new(), point_labels }
+    }
+}
+
+fn point_labels(dlbls: Option<&El>, count: usize) -> Vec<Option<PointLabel>> {
+    let mut labels = vec![None; count];
+    for label in dlbls.into_iter().flat_map(|d| d.children("c:dLbl")) {
+        let Some(index) = label.child("c:idx").and_then(|i| i.attr("val")).and_then(|i| i.parse::<usize>().ok()) else { continue };
+        let Some(text) = label.child("c:tx") else { continue };
+        let custom = if let Some(rich) = text.child("c:rich") {
+            let mut runs = Vec::new();
+            let mut percentage = false;
+            for paragraph in rich.children("a:p") {
+                let mut paragraph_text = String::new();
+                rich_label_text(paragraph, &mut paragraph_text, &mut percentage);
+                if !paragraph_text.is_empty() {
+                    runs.push(paragraph_text);
+                }
+            }
+            let text = runs.join(" ");
+            (!text.is_empty() || percentage).then_some(PointLabel { text, percentage })
+        } else {
+            text.find("c:v").map(|value| PointLabel { text: value.text(), percentage: false })
+        };
+        let Some(custom) = custom else { continue };
+        if let Some(slot) = labels.get_mut(index) {
+            *slot = Some(custom);
+        }
+    }
+    labels
+}
+
+/// Read a rich custom label in run order. Word stores dynamic chart fields as `a:fld`; the
+/// text inside one is a localized placeholder, so keep the field type and calculate its value.
+fn rich_label_text(element: &El, text: &mut String, percentage: &mut bool) {
+    for child in element.els() {
+        if child.name == "a:fld" {
+            *percentage |= child.attr("type") == Some("PERCENTAGE");
+        } else if child.name == "a:t" {
+            text.push_str(&child.text());
+        } else {
+            rich_label_text(child, text, percentage);
+        }
     }
 }
 

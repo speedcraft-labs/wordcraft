@@ -87,6 +87,20 @@ fn data_labels_show_the_values() {
 }
 
 #[test]
+fn custom_data_labels_override_generated_values_and_3d_bars_are_drawn() {
+    let series = ser(0, "Share", None, &["A"], &["100"]);
+    let labels = r#"<c:dLbls><c:showVal val="0"/><c:showPercent val="1"/><c:dLbl><c:idx val="0"/><c:tx><c:rich><a:p><a:r><a:t>Custom</a:t></a:r><a:r><a:t> label</a:t></a:r></a:p><a:p><a:fld type="PERCENTAGE"><a:rPr/><a:pPr/><a:t>[PERCENT]</a:t></a:fld></a:p></c:rich></c:tx></c:dLbl></c:dLbls>"#;
+    let pie = format!("<c:pieChart>{series}{labels}</c:pieChart>");
+    let drawn = chart_items(&space(&pie), &theme(), 240.0, 160.0);
+    assert!(texts(&drawn).contains(&"Custom label 100%"), "{drawn:?}");
+
+    let bar3d = format!("<c:bar3DChart><c:barDir val=\"col\"/>{series}</c:bar3DChart>");
+    let drawn = chart_items(&space(&bar3d), &theme(), 240.0, 160.0);
+    assert!(!texts(&drawn).iter().any(|t| t.contains("not supported")), "{drawn:?}");
+    assert!(!filled(&drawn).is_empty(), "cached 3-D series data is drawn: {drawn:?}");
+}
+
+#[test]
 fn pie_draws_one_slice_per_point() {
     let plot =
         format!(r#"<c:pieChart><c:varyColors val="1"/>{}</c:pieChart>"#, ser(0, "Share", None, &["A", "B", "C", "D"], &["50", "25", "15", "10"]));

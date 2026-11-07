@@ -24,6 +24,9 @@ impl Kind {
     pub(super) fn of(name: &str) -> Option<Kind> {
         Some(match name {
             "c:barChart" => Kind::Bar,
+            // Word's 3-D bars still carry the same cached series and labels. We draw their
+            // data in the 2-D chart plane instead of replacing the chart with a placeholder.
+            "c:bar3DChart" => Kind::Bar,
             "c:lineChart" => Kind::Line,
             "c:areaChart" => Kind::Area,
             "c:pieChart" => Kind::Pie,
@@ -83,4 +86,13 @@ pub(super) struct Series {
     /// The values as the file has them, for data labels (`values` become shares in a 100%
     /// stacked chart); empty when the series shows no labels.
     pub(super) raw: Vec<Option<f64>>,
+    /// Per-point custom labels (`c:dLbl/c:tx`), which take precedence over generated values.
+    pub(super) point_labels: Vec<Option<PointLabel>>,
+}
+
+#[derive(Clone)]
+pub(super) struct PointLabel {
+    pub(super) text: String,
+    /// A rich-text field can ask Word to insert the point's percentage of the pie.
+    pub(super) percentage: bool,
 }
