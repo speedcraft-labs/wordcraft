@@ -1284,6 +1284,7 @@ fn cell_picture(pic: &wordcraft_doc::props::CellPicture, rect: Rect, story: Stor
         rect: r,
         media: pic.media.clone(),
         crop: [0.0; 4],
+        ole_preview: false,
         story,
         path: wordcraft_doc::Path(path.to_vec()),
         off: usize::MAX,

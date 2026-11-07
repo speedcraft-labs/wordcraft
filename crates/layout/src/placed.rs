@@ -32,6 +32,8 @@ pub enum Placed {
         rect: Rect,
         media: String,
         crop: [f32; 4],
+        /// The picture is only a preview for a kept embedded object (not searchable PDF content).
+        ole_preview: bool,
         story: StoryRef,
         path: Path,
         off: usize,

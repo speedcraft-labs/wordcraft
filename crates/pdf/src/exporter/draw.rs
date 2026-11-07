@@ -44,7 +44,7 @@ impl Exporter<'_> {
                 }
             }
             Draw::Line { x0, y0, x1, y1, width, color, stroke, alpha, .. } => self.line(s, (*x0, *y0, *x1, *y1), *width, *color, *stroke, *alpha),
-            Draw::Image { rect, media, crop, alpha, fx, .. } => self.picture(s, rect, media, crop, *alpha, *fx),
+            Draw::Image { rect, media, crop, alpha, fx, pdf_searchable, .. } => self.picture(s, rect, media, crop, *alpha, *fx, *pdf_searchable),
             Draw::Path { segs, fill: f, stroke, stroke_width, dash, cap } => {
                 let mut pb = PathBuilder::new();
                 append_path(&mut pb, &wordcraft_layout::display::seg_path(segs));
@@ -290,7 +290,7 @@ impl Exporter<'_> {
         // Centred once at its natural size (an ODT page background that doesn't repeat).
         if let Some((pw, ph)) = dims.filter(|_| pic.fill_type.eq_ignore_ascii_case("center")) {
             let (iw, ih) = centred_size(pw, ph, w, h);
-            self.picture(s, &Rect::new((w - iw) / 2.0, (h - ih) / 2.0, iw, ih), &pic.media, &[0.0; 4], 1.0, PicFx::default());
+            self.picture(s, &Rect::new((w - iw) / 2.0, (h - ih) / 2.0, iw, ih), &pic.media, &[0.0; 4], 1.0, PicFx::default(), true);
             return;
         }
         if let Some((pw, ph)) = dims.filter(|_| pic.fill_type.eq_ignore_ascii_case("tile")) {
@@ -300,7 +300,7 @@ impl Exporter<'_> {
                 while y < h {
                     let mut x = 0.0;
                     while x < w {
-                        self.picture(s, &Rect::new(x, y, tw, th), &pic.media, &[0.0; 4], 1.0, PicFx::default());
+                        self.picture(s, &Rect::new(x, y, tw, th), &pic.media, &[0.0; 4], 1.0, PicFx::default(), true);
                         x += tw;
                     }
                     y += th;
@@ -308,13 +308,13 @@ impl Exporter<'_> {
                 return;
             }
         }
-        self.picture(s, &Rect::new(0.0, 0.0, w, h), &pic.media, &[0.0; 4], 1.0, PicFx::default());
+        self.picture(s, &Rect::new(0.0, 0.0, w, h), &pic.media, &[0.0; 4], 1.0, PicFx::default(), true);
     }
 
-    fn picture(&mut self, s: &mut Surface, rect: &Rect, media: &str, crop: &[f32; 4], alpha: f32, fx: PicFx) {
+    fn picture(&mut self, s: &mut Surface, rect: &Rect, media: &str, crop: &[f32; 4], alpha: f32, fx: PicFx, searchable: bool) {
         let Some(clip) = rect_path(rect) else { return };
         if let Some(v) = self.vector(media) {
-            vector_picture(self, s, &v, rect, crop, &clip, alpha);
+            vector_picture(self, s, &v, rect, crop, &clip, alpha, searchable);
             return;
         }
         let Some(img) = self.image(media, fx) else {

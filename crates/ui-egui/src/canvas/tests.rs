@@ -4976,6 +4976,7 @@ fn a_pictures_corrections_and_crop_change_its_page_key() {
             rect: Default::default(),
             media: "m".into(),
             crop,
+            ole_preview: false,
             story: StoryRef::Body,
             path: Default::default(),
             off: 0,

@@ -91,6 +91,8 @@ pub enum Draw {
         alt: String,
         /// Brightness and contrast to apply to the pixels (transparency is in `alpha`).
         fx: wordcraft_doc::picfx::PicFx,
+        /// Whether metafile text remains searchable in PDF. OLE previews are visible outlines only.
+        pdf_searchable: bool,
         /// Marked decorative (Alt Text › Mark as decorative): an artifact in tagged PDF, which
         /// screen readers skip. Always `false` for a floating or diagram picture, as `alt`.
         decorative: bool,
