@@ -201,12 +201,17 @@ pub(super) fn cartesian(out: &mut Vec<GraphicItem>, c: &Chart, area: Rect) {
         draw_grid(out, &g, &ax.vticks);
     }
     let mut labels = Vec::new();
-    match c.kind {
-        Kind::Bar => bars(out, c, &g, &mut labels),
-        Kind::Line => lines(out, c, &g, &mut labels),
-        Kind::Area => areas(out, c, &g, &mut labels),
-        Kind::Scatter => draw_scatter(out, c, &g, &mut labels),
-        Kind::Pie | Kind::Doughnut | Kind::Radar => {}
+    if c.series.iter().any(|s| s.kind == Kind::Bar) {
+        bars(out, c, &g, &mut labels);
+    }
+    if c.series.iter().any(|s| s.kind == Kind::Area) {
+        areas(out, c, &g, &mut labels);
+    }
+    if c.series.iter().any(|s| s.kind == Kind::Line) {
+        lines(out, c, &g, &mut labels);
+    }
+    if c.series.iter().any(|s| s.kind == Kind::Scatter) {
+        draw_scatter(out, c, &g, &mut labels);
     }
     draw_axes(out, c, &g);
     draw_data_labels(out, &labels, c.text_size, g.horiz && c.kind == Kind::Bar);
@@ -331,7 +336,8 @@ fn x_extent(c: &Chart) -> (f64, f64) {
 
 fn bars(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<DataLabel>) {
     let stacked = c.stacked();
-    let slots = if stacked { 1 } else { c.series.len().max(1) };
+    let bar_count = c.series.iter().filter(|s| s.kind == Kind::Bar && has_values(s)).count().max(1);
+    let slots = if stacked { 1 } else { bar_count };
     let ov = if stacked { 0.0 } else { c.overlap };
     let ns = slots as f32;
     let band = g.band();
@@ -339,8 +345,8 @@ fn bars(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<DataL
     let group = thick * (ns - (ns - 1.0) * ov);
     let mut pos = vec![0.0f64; g.n];
     let mut neg = vec![0.0f64; g.n];
-    for (j, s) in c.series.iter().enumerate().filter(|(_, s)| has_values(s)) {
-        let slot = if stacked { 0 } else { j };
+    for (slot_index, (j, s)) in c.series.iter().enumerate().filter(|(_, s)| s.kind == Kind::Bar && has_values(s)).enumerate() {
+        let slot = if stacked { 0 } else { slot_index };
         let slot = (if g.horiz { slots.saturating_sub(1 + slot) } else { slot }) as f32;
         for i in 0..g.n {
             let Some(v) = s.values.get(i).copied().flatten() else { continue };
@@ -385,7 +391,7 @@ pub(super) fn has_values(s: &Series) -> bool {
 /// Line series; stacked ones are drawn at the running total of the series up to them.
 fn lines(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<DataLabel>) {
     let mut total = vec![0.0f64; g.n];
-    for (j, s) in c.series.iter().enumerate().filter(|(_, s)| has_values(s)) {
+    for (j, s) in c.series.iter().enumerate().filter(|(_, s)| s.kind == Kind::Line && has_values(s)) {
         let pts: Vec<Option<(f32, f32)>> = (0..g.n)
             .map(|i| {
                 let v = s.values.get(i).copied().flatten()?;
@@ -410,7 +416,7 @@ fn lines(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<Data
 
 fn areas(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<DataLabel>) {
     let mut base = vec![0.0f64; g.n];
-    for (j, s) in c.series.iter().enumerate().filter(|(_, s)| has_values(s)) {
+    for (j, s) in c.series.iter().enumerate().filter(|(_, s)| s.kind == Kind::Area && has_values(s)) {
         let vals = (0..g.n).map(|i| s.values.get(i).copied().flatten().unwrap_or(0.0));
         let top: Vec<f64> = base.iter().zip(vals).map(|(b, v)| b + v).collect();
         let mut segs = Vec::with_capacity(2 * g.n + 1);
@@ -437,7 +443,7 @@ fn areas(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<Data
 /// Scatter series as lines, or as small markers when the series has no line.
 fn draw_scatter(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<DataLabel>) {
     const MARKER: f32 = 6.0;
-    for (j, s) in c.series.iter().enumerate() {
+    for (j, s) in c.series.iter().enumerate().filter(|(_, s)| s.kind == Kind::Scatter) {
         let pts: Vec<Option<(f32, f32)>> =
             s.xs.iter()
                 .zip(&s.values)

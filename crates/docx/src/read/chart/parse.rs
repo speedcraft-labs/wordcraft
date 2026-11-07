@@ -7,15 +7,41 @@ impl Chart {
     pub(super) fn parse(space: &El, theme: &[Rgb]) -> Option<Chart> {
         let chart = space.child("c:chart")?;
         let plot = chart.child("c:plotArea")?;
-        let ty = plot.els().find(|e| Kind::of(&e.name).is_some())?;
-        let kind = Kind::of(&ty.name)?;
-        let scatter = kind == Kind::Scatter;
+        let types: Vec<(&El, Kind)> = plot.els().filter_map(|e| Kind::of(&e.name).map(|kind| (e, kind))).collect();
+        let (ty, kind) = *types.first()?;
         let date1904 = space.child("c:date1904").is_some_and(|d| d.attr("val").is_none_or(truthy));
-        let mut series = read_series(ty, scatter, theme);
+        let mut series = Vec::new();
+        let mut cats = Vec::new();
+        let mut primary_grouping = Grouping::Clustered;
+        for (group_index, (chart_type, group_kind)) in types.iter().enumerate() {
+            let group_kind = *group_kind;
+            let mut group = read_series(chart_type, group_kind == Kind::Scatter, theme);
+            if group_index == 0 {
+                primary_grouping = grouping(chart_type, group_kind);
+                cats = chart_type.children("c:ser").find_map(|s| s.child("c:cat")).map(|c| labels(Some(c), MAX_POINTS, date1904)).unwrap_or_default();
+            }
+            let type_dl = chart_type.child("c:dLbls");
+            let type_labels = show_values(type_dl);
+            let type_percentages = show_percent(type_dl);
+            let group_n = group.iter().map(|s| s.values.len()).max().unwrap_or(0);
+            let custom_labels = point_labels(type_dl, group_n);
+            for s in &mut group {
+                s.labels = Some(s.labels.or(type_labels).unwrap_or(false));
+                s.percentage_labels = s.percentage_labels.or(type_percentages);
+                s.point_labels.resize(group_n, None);
+                for (i, label) in custom_labels.iter().enumerate() {
+                    if s.point_labels.get(i).is_none_or(Option::is_none)
+                        && let (Some(slot), Some(label)) = (s.point_labels.get_mut(i), label)
+                    {
+                        *slot = Some(label.clone());
+                    }
+                }
+            }
+            series.extend(group);
+        }
         if series.is_empty() {
             return None;
         }
-        let cats = ty.children("c:ser").find_map(|s| s.child("c:cat")).map(|c| labels(Some(c), MAX_POINTS, date1904)).unwrap_or_default();
         let n = if kind == Kind::Radar {
             series.iter().map(|s| s.values.len()).max().unwrap_or(0).max(cats.len()).min(MAX_SPOKES)
         } else if matches!(kind, Kind::Pie | Kind::Doughnut) {
@@ -30,30 +56,13 @@ impl Chart {
         if kind == Kind::Radar {
             series.truncate(MAX_RADAR_SERIES);
         }
-        let grouping = match ty.child("c:grouping").and_then(|g| g.attr("val")) {
-            Some("stacked") if matches!(kind, Kind::Bar | Kind::Area | Kind::Line) => Grouping::Stacked,
-            Some("percentStacked") if matches!(kind, Kind::Bar | Kind::Area | Kind::Line) => Grouping::Percent,
-            _ => Grouping::Clustered,
-        };
+        let grouping = primary_grouping;
         let mut cats = cats;
         cats.resize(n, String::new());
-        let radar_style = ty.child("c:radarStyle").and_then(|r| r.attr("val"));
-        let type_dl = ty.child("c:dLbls");
-        let type_labels = show_values(type_dl);
-        let type_percentages = show_percent(type_dl);
-        let custom_labels = point_labels(type_dl, n);
         for s in &mut series {
             s.values.resize(n, None);
             s.xs.resize(n, None);
-            s.labels = Some(s.labels.or(type_labels).unwrap_or(false));
-            s.percentage_labels = s.percentage_labels.or(type_percentages);
-            for (i, label) in custom_labels.iter().enumerate() {
-                if s.point_labels.get(i).is_none_or(Option::is_none)
-                    && let (Some(slot), Some(label)) = (s.point_labels.get_mut(i), label)
-                {
-                    *slot = Some(label.clone());
-                }
-            }
+            s.point_labels.resize(n, None);
             if s.labels == Some(true) || s.percentage_labels == Some(true) || s.point_labels.iter().flatten().any(|label| label.percentage) {
                 s.raw = s.values.clone();
             }
@@ -61,7 +70,7 @@ impl Chart {
         if grouping == Grouping::Percent {
             to_percent(&mut series, n);
         }
-        let (cat, val) = chart_axes(plot, scatter);
+        let (cat, val) = chart_axes(plot, kind == Kind::Scatter);
         let val_fmt = if grouping == Grouping::Percent {
             "0%".to_string()
         } else {
@@ -76,8 +85,8 @@ impl Chart {
             overlap: num("c:overlap").unwrap_or(0).clamp(-100, 100) as f32 / 100.0,
             hole: num("c:holeSize").unwrap_or(50).clamp(10, 90) as f32 / 100.0,
             first_angle: num("c:firstSliceAng").unwrap_or(0).clamp(0, 360) as f64,
-            radar_fill: radar_style == Some("filled"),
-            radar_marks: radar_style == Some("marker"),
+            radar_fill: ty.child("c:radarStyle").and_then(|r| r.attr("val")) == Some("filled"),
+            radar_marks: ty.child("c:radarStyle").and_then(|r| r.attr("val")) == Some("marker"),
             vary: matches!(kind, Kind::Pie | Kind::Doughnut) && ty.child("c:varyColors").and_then(|v| v.attr("val")).is_none_or(truthy),
             n,
             cats,
@@ -132,12 +141,21 @@ impl Chart {
     }
 }
 
+fn grouping(ty: &El, kind: Kind) -> Grouping {
+    match ty.child("c:grouping").and_then(|g| g.attr("val")) {
+        Some("stacked") if matches!(kind, Kind::Bar | Kind::Area | Kind::Line) => Grouping::Stacked,
+        Some("percentStacked") if matches!(kind, Kind::Bar | Kind::Area | Kind::Line) => Grouping::Percent,
+        _ => Grouping::Clustered,
+    }
+}
+
 /// The series of a chart type element, within the chart's cell budget.
 pub(super) fn read_series(ty: &El, scatter: bool, theme: &[Rgb]) -> Vec<Series> {
+    let kind = Kind::of(&ty.name).unwrap_or(if scatter { Kind::Scatter } else { Kind::Bar });
     let mut budget = MAX_CELLS;
     let mut series = Vec::new();
     for ser in ty.children("c:ser").take(MAX_SERIES) {
-        let s = Series::parse(ser, scatter, theme, budget.min(MAX_POINTS));
+        let s = Series::parse(ser, kind, scatter, theme, budget.min(MAX_POINTS));
         budget = budget.saturating_sub(s.values.len().max(s.xs.len()));
         series.push(s);
     }
@@ -217,7 +235,7 @@ pub(super) fn text_size(space: &El) -> f32 {
 }
 
 impl Series {
-    fn parse(ser: &El, scatter: bool, theme: &[Rgb], cap: usize) -> Series {
+    fn parse(ser: &El, kind: Kind, scatter: bool, theme: &[Rgb], cap: usize) -> Series {
         let name = ser.child("c:tx").and_then(|t| t.find("c:v")).map(|v| label(v.text().trim())).unwrap_or_default();
         let sp = ser.child("c:spPr");
         let ln = sp.and_then(|p| p.child("a:ln"));
@@ -241,7 +259,7 @@ impl Series {
         let labels = show_values(ser.child("c:dLbls"));
         let percentage_labels = show_percent(ser.child("c:dLbls"));
         let point_labels = point_labels(ser.child("c:dLbls"), values.len());
-        Series { name, color, line_w, line, values, xs, points, fmt, x_fmt, labels, percentage_labels, raw: Vec::new(), point_labels }
+        Series { name, kind, color, line_w, line, values, xs, points, fmt, x_fmt, labels, percentage_labels, raw: Vec::new(), point_labels }
     }
 }
 

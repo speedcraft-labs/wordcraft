@@ -69,6 +69,8 @@ pub(super) struct Axis {
 
 pub(super) struct Series {
     pub(super) name: String,
+    /// The chart type group this series belongs to (combo charts can mix types).
+    pub(super) kind: Kind,
     pub(super) color: Option<Rgb>,
     pub(super) line_w: f32,
     /// Whether the series is drawn as a line (scatter series without one get markers).
