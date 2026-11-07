@@ -38,8 +38,9 @@ impl Reader<'_> {
             let canvas = gd.child("lc:lockedCanvas")?;
             let tree = locked_canvas_drawing(canvas);
             let theme = self.doc.settings.theme_colors.clone();
+            let graphic_budget = self.chunks.graphic;
             let mut image = |id: &str| self.media_for(rels, id);
-            let items = if self.chunks.graphic == 0 { Vec::new() } else { crate::read::diagram::diagram_items(&tree, &theme, w, h, &mut image) };
+            let items = if graphic_budget == 0 { Vec::new() } else { crate::read::diagram::diagram_items(&tree, &theme, w, h, &mut image) };
             drop(image);
             self.chunks.graphic = self.chunks.graphic.saturating_sub(graphic_work(&items));
             let source = c.child("a:graphic").and_then(|g| self.keep_embedded(g, rels, &[]));
