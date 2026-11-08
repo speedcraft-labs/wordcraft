@@ -71,6 +71,8 @@ pub(super) struct Series {
     pub(super) name: String,
     /// The chart type group this series belongs to (combo charts can mix types).
     pub(super) kind: Kind,
+    /// Whether the chart group links this series to a right-side value axis.
+    pub(super) secondary_axis: bool,
     pub(super) color: Option<Rgb>,
     pub(super) line_w: f32,
     /// Whether the series is drawn as a line (scatter series without one get markers).
