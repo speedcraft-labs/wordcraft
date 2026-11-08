@@ -38,44 +38,24 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
             GraphicItem::Text { rect: r, .. } => out.extend(text_glyphs(doc, inside(r), it, alpha, k)),
             GraphicItem::RotatedText { rect: r, rotation, .. } => {
                 let rect = inside(r);
-                let mut items = text_glyphs(doc, rect, it, alpha, k);
+                let separate = item_index > 0 && g.items.get(item_index - 1).is_some_and(|previous| same_rotated_text_style(previous, it));
+                let mut searchable = it.clone();
+                if separate && let GraphicItem::RotatedText { text, .. } = &mut searchable {
+                    text.insert(0, ' ');
+                }
+                let mut items = text_glyphs(doc, rect, &searchable, alpha, k);
                 if !items.is_empty() {
-                    // Draw the visible rotated label as outlines. Searchable text is added below
-                    // as a horizontal run; PDF extractors otherwise split rotated labels by glyph.
-                    for item in &mut items {
-                        if let Draw::Glyphs { pdf_searchable, .. } = item {
-                            *pdf_searchable = false;
-                        }
+                    // A leading blank is part of this label's actual text run, so it survives
+                    // extraction between adjacent labels. Move the remaining glyphs back by the
+                    // blank's alignment offset to keep the visible labels in their original places.
+                    if separate {
+                        let align = match it {
+                            GraphicItem::RotatedText { align, .. } => *align,
+                            _ => TextAlign::Left,
+                        };
+                        offset_after_leading_space(&mut items, align);
                     }
                     out.push(Draw::Rotated { cx: rect.x + rect.w / 2.0, cy: rect.y + rect.h / 2.0, spin: Spin::new(*rotation, false, false), items });
-
-                    let next_is_label = g.items.get(item_index + 1).is_some_and(|next| same_rotated_text_style(it, next));
-                    if !next_is_label {
-                        let mut start = item_index;
-                        while start > 0 && g.items.get(start - 1).is_some_and(|previous| same_rotated_text_style(previous, it)) {
-                            start -= 1;
-                        }
-                        let labels = g
-                            .items
-                            .get(start..=item_index)
-                            .unwrap_or(&[])
-                            .iter()
-                            .filter_map(|item| if let GraphicItem::RotatedText { text, .. } = item { Some(text.as_str()) } else { None })
-                            .collect::<Vec<_>>()
-                            .join(" ");
-                        let mut searchable = g.items.get(start).cloned().unwrap_or_else(|| it.clone());
-                        if let GraphicItem::RotatedText { text, align, .. } = &mut searchable {
-                            *text = labels;
-                            *align = TextAlign::Left;
-                        }
-                        let search_rect = match &searchable {
-                            GraphicItem::RotatedText { rect, .. } => inside(rect),
-                            _ => rect,
-                        };
-                        // Internal spaces survive PDF text extraction; trailing spaces on separate
-                        // glyph runs are discarded by common readers.
-                        out.extend(text_glyphs(doc, search_rect, &searchable, 0.0, k));
-                    }
                 }
             }
             GraphicItem::Image { rect: r, media } => out.push(Draw::Image {
@@ -91,6 +71,39 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
         }
     }
     out
+}
+
+/// Offset the glyphs after a leading space back into place after shaping a rotated label with an
+/// extraction separator. The space glyph itself has no mark, so labels keep their visible geometry.
+fn offset_after_leading_space(items: &mut [Draw], align: TextAlign) {
+    let Some((space_gid, space_width)) = items.iter().find_map(|item| {
+        let Draw::Glyphs { face, size, text, .. } = item else { return None };
+        if !text.starts_with(' ') {
+            return None;
+        }
+        let gid = face.glyph_for(' ');
+        let width = face.advance(gid) as f32 * size / face.upem.max(1.0) as f32;
+        Some((gid, width))
+    }) else {
+        return;
+    };
+    let fraction = match align {
+        TextAlign::Left => 1.0,
+        TextAlign::Center => 0.5,
+        TextAlign::Right => 0.0,
+    };
+    let shift = space_width * fraction;
+    let mut separator_skipped = false;
+    for item in items {
+        let Draw::Glyphs { glyphs, .. } = item else { continue };
+        for (gid, x, _) in glyphs {
+            if !separator_skipped && *gid == space_gid {
+                separator_skipped = true;
+            } else {
+                *x -= shift;
+            }
+        }
+    }
 }
 
 /// Whether adjacent rotated labels share the style that lets their searchable text form one run.
