@@ -163,7 +163,7 @@ impl Axes {
         let (vmin, vmax) = if !secondary && c.grouping == Grouping::Percent { (Some(0.0), Some(1.0)) } else { (axis.min, axis.max) };
         let line_like = c.series.iter().filter(|s| s.secondary_axis == secondary).all(|s| matches!(s.kind, Kind::Line | Kind::Scatter));
         // Lines and scatters don't need zero for a narrow range (1000..1050 stays on its own scale).
-        let zero = !line_like || !narrow(dlo, dhi);
+        let zero = !line_like || !narrow(dlo, dhi) || dhi <= dlo;
         let vs = if c.three_d { nice_scale_3d(dlo, dhi, zero, vmin, vmax) } else { nice_value_scale(dlo, dhi, zero, vmin, vmax) };
         let vticks = vs.ticks().into_iter().map(|t| (t, format_value(t, val_fmt, vs.step))).collect();
         let xs = (c.kind == Kind::Scatter).then(|| {
