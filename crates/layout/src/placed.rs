@@ -32,7 +32,7 @@ pub enum Placed {
         rect: Rect,
         media: String,
         crop: [f32; 4],
-        /// The picture is an icon-view OLE preview (not searchable PDF content).
+        /// An embedded preview whose metafile text isn't searchable in the LibreOffice PDF.
         ole_preview: bool,
         story: StoryRef,
         path: Path,
