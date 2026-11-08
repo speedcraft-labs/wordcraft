@@ -122,6 +122,7 @@ fn every_char_prop_round_trips() {
             glow: Some(wordcraft_doc::effects::Glow { color: Rgb(0x0F, 0x9E, 0xD5), size: 5.0, transparency: 40.0 }),
             reflection: Some(wordcraft_doc::wordart::Reflection::default()),
         })),
+        pdf_searchable: None,
         lang: Some("fr-FR".into()),
         no_proof: Some(true),
         rtl: Some(false),

@@ -55,6 +55,9 @@ pub struct ResolvedChar {
     /// WordArt text effects (sanitized; `None` when there are none).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub text_effects: Option<Box<crate::wordart::TextEffects>>,
+    /// Whether PDF export includes searchable text alongside drawn glyph outlines.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub pdf_searchable: Option<bool>,
     pub link: Option<String>,
     pub ins: Option<u32>,
     pub del: Option<u32>,
@@ -107,6 +110,7 @@ impl ResolvedChar {
             emboss: c.emboss.unwrap_or(false),
             engrave: c.engrave.unwrap_or(false),
             text_effects: c.text_effects.as_deref().map(crate::wordart::TextEffects::sanitized).filter(|t| !t.is_empty()).map(Box::new),
+            pdf_searchable: c.pdf_searchable,
             link: c.link.clone(),
             ins: c.ins,
             del: c.del,
