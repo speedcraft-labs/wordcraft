@@ -413,7 +413,7 @@ pub(super) fn object_draws(o: &InlineObject, rect: Rect, outer: Spin, alpha: f32
                     alpha,
                     alt: alt.clone(),
                     fx: *fx,
-                    pdf_searchable: ole.as_ref().map_or(true, |embedded| !embedded.is_ole_icon()),
+                    pdf_searchable: ole.as_ref().is_none_or(|embedded| !embedded.is_ole_icon()),
                     decorative,
                 }],
                 out,
