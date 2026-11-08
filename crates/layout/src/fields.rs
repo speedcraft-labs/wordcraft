@@ -284,6 +284,23 @@ pub fn field_text(instr: &str, result: &str, ctx: &FieldCtx) -> (String, bool) {
     field_text_on(instr, result, ctx, ctx.page)
 }
 
+/// The visible label in a MACROBUTTON field when the file has no cached result.
+fn macrobutton_text(instr: &str) -> Option<String> {
+    let (name, args) = instr.trim_start().split_once(char::is_whitespace)?;
+    if !name.eq_ignore_ascii_case("MACROBUTTON") {
+        return None;
+    }
+    let args = args.trim_start();
+    let (_, display) = args.split_once(char::is_whitespace)?;
+    let display = display.trim();
+    let display = if let Some(quoted) = display.strip_prefix('"') {
+        quoted.get(..quoted.find('"')?)?
+    } else {
+        display.split_once("\\*").map_or(display, |(text, _)| text.trim_end())
+    };
+    (!display.is_empty()).then(|| display.to_string())
+}
+
 /// Display text for a field on page `page` (see [`field_text`]).
 pub fn field_text_on(instr: &str, result: &str, ctx: &FieldCtx, page: u32) -> (String, bool) {
     let name = field_name(instr);
@@ -311,6 +328,7 @@ pub fn field_text_on(instr: &str, result: &str, ctx: &FieldCtx, page: u32) -> (S
         }
         // ASK and SET only assign text to a bookmark: they never show a result (ECMA-376 §17.16.5).
         "ASK" | "SET" => (String::new(), false),
+        "MACROBUTTON" if result.is_empty() => (macrobutton_text(instr).unwrap_or_default(), false),
         "STYLEREF" => match &ctx.styleref {
             Some((ix, at)) => (apply_case_switch(instr, ix.eval(instr, *at)), true),
             None => (result.to_string(), false),
