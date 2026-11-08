@@ -354,8 +354,9 @@ impl Reader<'_> {
             let omitted_height_rule = trpr_el.and_then(|p| p.child("w:trHeight")).is_some_and(|h| h.attr("w:hRule").is_none());
             // Word keeps the legacy at-least interpretation in compatibility modes before 15.
             // LibreOffice also uses the supplied extent for positioned table wrapping, even when
-            // modern floating rows omit hRule. In modern inline tables, the OOXML default is auto.
-            if omitted_height_rule && (self.doc.settings.compat_mode < 15 || table.props.float.is_some()) {
+            // modern floating rows omit hRule, and preserves it on repeated header rows in modern
+            // inline tables. Other modern inline rows use the OOXML auto default.
+            if omitted_height_rule && (self.doc.settings.compat_mode < 15 || table.props.float.is_some() || row.props.header) {
                 row.props.height_rule = wordcraft_doc::props::HeightRule::AtLeast;
             }
             row.props.exceptions = tr.child("w:tblPrEx").map(|e| Box::new(self.pc.tblpr(e)));
