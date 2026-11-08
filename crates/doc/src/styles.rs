@@ -192,14 +192,26 @@ impl PartSet {
         (ri, nrows): (usize, usize),
         (g, span, ncols): (usize, usize, usize),
     ) -> PartSet {
-        let header = look.header_row && ri == 0;
+        Self::of_cell_with_header_rows(look, (row_size, col_size), (ri, nrows), (g, span, ncols), 1)
+    }
+
+    /// The parts of a cell when `header_rows` leading rows share first-row formatting.
+    pub fn of_cell_with_header_rows(
+        look: &TableLook,
+        (row_size, col_size): (u32, u32),
+        (ri, nrows): (usize, usize),
+        (g, span, ncols): (usize, usize, usize),
+        header_rows: usize,
+    ) -> PartSet {
+        let header_count = if look.header_row { header_rows.max(1).min(nrows) } else { 0 };
+        let header = ri < header_count;
         let total = look.total_row && ri + 1 == nrows && nrows > 1;
         let first_col = look.first_column && g == 0;
         let last_col = look.last_column && g.saturating_add(span) >= ncols && ncols > 1;
         let rows = row_size.min(1000) as usize;
         let cols = col_size.min(1000) as usize;
-        let row_band = look.banded_rows && !header && rows > 0;
-        let odd_row = (ri.saturating_sub(usize::from(look.header_row)) / rows.max(1)).is_multiple_of(2);
+        let row_band = look.banded_rows && ri >= header_count && rows > 0;
+        let odd_row = (ri.saturating_sub(header_count) / rows.max(1)).is_multiple_of(2);
         let col_band = look.banded_columns && !first_col && cols > 0;
         let odd_col = (g.saturating_sub(usize::from(look.first_column)) / cols.max(1)).is_multiple_of(2);
         let mut bits = TablePart::WholeTable.bit();
