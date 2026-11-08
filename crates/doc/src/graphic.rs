@@ -64,11 +64,29 @@ impl Embedded {
     /// Is this an icon-view OLE object? Its metafile is a visible icon preview, whose lettering
     /// LibreOffice leaves out of PDF search text. Content-view OLE previews remain searchable.
     pub fn is_ole_icon(&self) -> bool {
-        let Some(i) = self.xml.find("DrawAspect=") else { return false };
-        let Some(value) = self.xml.get(i + "DrawAspect=".len()..) else { return false };
-        let Some(quote) = value.chars().next().filter(|c| matches!(c, '\'' | '"')) else { return false };
-        let value = &value[quote.len_utf8()..];
-        value.find(quote).is_some_and(|end| value[..end].eq_ignore_ascii_case("Icon"))
+        self.ole_attr("DrawAspect").is_some_and(|value| value.eq_ignore_ascii_case("Icon"))
+    }
+
+    /// Does a content-view Excel object contribute searchable PDF text in LibreOffice?
+    /// Other OLE previews, and non-OLE embedded pictures, remain outline-only.
+    pub fn has_searchable_ole_content(&self) -> bool {
+        let content_view = self.ole_attr("DrawAspect").is_none_or(|v| v.eq_ignore_ascii_case("Content"));
+        let spreadsheet = self.ole_attr("ProgID").is_some_and(|v| {
+            ["Excel.Sheet", "Excel.Chart"].iter().any(|prefix| v.get(..prefix.len()).is_some_and(|s| s.eq_ignore_ascii_case(prefix)))
+        });
+        content_view && spreadsheet
+    }
+
+    fn ole_attr(&self, name: &str) -> Option<&str> {
+        let start = self.xml.find("OLEObject")?;
+        let rest = self.xml.get(start..)?;
+        let end = rest.find('>')?;
+        let element = rest.get(..end)?;
+        let attr = element.find(&format!("{name}="))? + name.len() + 1;
+        let value = element.get(attr..)?;
+        let quote = value.chars().next().filter(|c| matches!(c, '\'' | '"'))?;
+        let value = value.get(quote.len_utf8()..)?;
+        value.get(..value.find(quote)?)
     }
 }
 

@@ -249,7 +249,7 @@ fn float_items(o: &InlineObject, rect: Rect, outer: (Spin, Point), story: StoryR
                 rect,
                 media: media.clone(),
                 crop: *crop,
-                ole_preview: ole.as_ref().is_some_and(|embedded| embedded.is_ole_icon()),
+                ole_preview: ole.as_ref().is_some_and(|embedded| !embedded.has_searchable_ole_content()),
                 story,
                 path: Path(path.to_vec()),
                 off,
