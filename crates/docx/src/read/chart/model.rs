@@ -94,6 +94,8 @@ pub(super) struct Series {
     /// The values as the file has them, for data labels (`values` become shares in a 100%
     /// stacked chart); empty when the series shows no labels.
     pub(super) raw: Vec<Option<f64>>,
+    /// Points whose individual `c:dLbl` explicitly deletes their data label.
+    pub(super) point_deleted: Vec<bool>,
     /// Per-point custom labels (`c:dLbl/c:tx`), which take precedence over generated values.
     pub(super) point_labels: Vec<Option<PointLabel>>,
 }

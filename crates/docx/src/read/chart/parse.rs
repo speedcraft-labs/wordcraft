@@ -26,10 +26,15 @@ impl Chart {
             let type_percentages = show_percent(type_dl);
             let group_n = group.iter().map(|s| s.values.len()).max().unwrap_or(0);
             let custom_labels = point_labels(type_dl, group_n);
+            let deleted_points = point_label_deletions(type_dl, group_n);
             for s in &mut group {
                 s.secondary_axis = secondary_axis;
                 s.labels = Some(s.labels.or(type_labels).unwrap_or(false));
                 s.percentage_labels = s.percentage_labels.or(type_percentages);
+                s.point_deleted.resize(group_n, false);
+                for (point, deleted) in s.point_deleted.iter_mut().zip(deleted_points.iter()) {
+                    *point |= *deleted;
+                }
                 s.point_labels.resize(group_n, None);
                 for (i, label) in custom_labels.iter().enumerate() {
                     if s.point_labels.get(i).is_none_or(Option::is_none)
@@ -63,6 +68,7 @@ impl Chart {
         for s in &mut series {
             s.values.resize(n, None);
             s.xs.resize(n, None);
+            s.point_deleted.resize(n, false);
             s.point_labels.resize(n, None);
             if s.labels == Some(true) || s.percentage_labels == Some(true) || s.point_labels.iter().flatten().any(|label| label.percentage) {
                 s.raw = s.values.clone();
@@ -276,6 +282,7 @@ impl Series {
         }
         let labels = show_values(ser.child("c:dLbls"));
         let percentage_labels = show_percent(ser.child("c:dLbls"));
+        let point_deleted = point_label_deletions(ser.child("c:dLbls"), values.len());
         let point_labels = point_labels(ser.child("c:dLbls"), values.len());
         Series {
             name,
@@ -292,9 +299,25 @@ impl Series {
             labels,
             percentage_labels,
             raw: Vec::new(),
+            point_deleted,
             point_labels,
         }
     }
+}
+
+/// Points with an explicit `c:dLbl/c:delete val="1"`, even when the point has no custom text.
+fn point_label_deletions(dlbls: Option<&El>, count: usize) -> Vec<bool> {
+    let mut deleted = vec![false; count];
+    for label in dlbls.into_iter().flat_map(|d| d.children("c:dLbl")) {
+        if !label.child("c:delete").and_then(|e| e.attr("val")).is_some_and(truthy) {
+            continue;
+        }
+        let Some(index) = label.child("c:idx").and_then(|i| i.attr("val")).and_then(|i| i.parse::<usize>().ok()) else { continue };
+        if let Some(point) = deleted.get_mut(index) {
+            *point = true;
+        }
+    }
+    deleted
 }
 
 fn point_labels(dlbls: Option<&El>, count: usize) -> Vec<Option<PointLabel>> {
