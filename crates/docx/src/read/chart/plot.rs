@@ -48,14 +48,30 @@ pub(super) fn nice_scale(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: 
     nice_scale_with(dlo, dhi, zero, min, max, 7.5, 0.05)
 }
 
+/// LibreOffice uses denser automatic ticks on short value ranges, where labels remain compact.
+pub(super) fn nice_value_scale(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>) -> Scale {
+    let span = (max.unwrap_or(dhi) - min.unwrap_or(dlo)).abs();
+    let target = if span <= 10.0 { 10.0 } else { 7.5 };
+    nice_scale_with(dlo, dhi, zero, min, max, target, 0.05)
+}
+
 /// LibreOffice uses denser, unpadded automatic ticks for 3-D value axes.
 pub(super) fn nice_scale_3d(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>) -> Scale {
     nice_scale_with(dlo, dhi, zero, min, max, 10.0, 0.0)
 }
 
 fn nice_scale_with(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>, steps: f64, padding: f64) -> Scale {
-    let (dlo, dhi) = if dhi > dlo { (dlo, dhi) } else { (dlo, dlo + 1.0) };
-    let span = dhi - dlo;
+    // A single nonzero bar still needs a scale from zero, so preserve its magnitude when
+    // calculating the padding instead of inventing a one-unit data range above the value.
+    let collapsed_at_nonzero = dhi <= dlo && zero && dlo != 0.0;
+    let (dlo, dhi) = if dhi > dlo {
+        (dlo, dhi)
+    } else if collapsed_at_nonzero {
+        (dlo, dlo)
+    } else {
+        (dlo, dlo + 1.0)
+    };
+    let span = if collapsed_at_nonzero { dlo.abs() } else { dhi - dlo };
     // With zero, the ends reach it: all-negative data still starts its bars at zero.
     let (ends_lo, ends_hi) = if zero { (dlo.min(0.0), dhi.max(0.0)) } else { (dlo, dhi) };
     let lo = min.unwrap_or(if ends_lo < 0.0 { ends_lo - padding * span } else { ends_lo });
@@ -148,7 +164,7 @@ impl Axes {
         let line_like = c.series.iter().filter(|s| s.secondary_axis == secondary).all(|s| matches!(s.kind, Kind::Line | Kind::Scatter));
         // Lines and scatters don't need zero for a narrow range (1000..1050 stays on its own scale).
         let zero = !line_like || !narrow(dlo, dhi);
-        let vs = if c.three_d { nice_scale_3d(dlo, dhi, zero, vmin, vmax) } else { nice_scale(dlo, dhi, zero, vmin, vmax) };
+        let vs = if c.three_d { nice_scale_3d(dlo, dhi, zero, vmin, vmax) } else { nice_value_scale(dlo, dhi, zero, vmin, vmax) };
         let vticks = vs.ticks().into_iter().map(|t| (t, format_value(t, val_fmt, vs.step))).collect();
         let xs = (c.kind == Kind::Scatter).then(|| {
             let (xl, xh) = x_extent(c);
