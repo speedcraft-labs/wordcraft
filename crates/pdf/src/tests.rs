@@ -2421,7 +2421,7 @@ fn equations_are_drawn_but_not_searchable_in_pdf() {
     }
     let mut equation_text = String::new();
     append_hidden_text(&draws, &mut equation_text);
-    assert!(equation_text.contains("qzv"), "equation glyphs remain drawn but unsearchable: {equation_text:?}");
+    assert!(equation_text.contains("98765"), "equation glyphs remain drawn but unsearchable: {equation_text:?}");
 
     let text = squash(&extract_text(&export(&d, &PdfOptions::default()).unwrap()).concat());
     assert!(text.contains("Before") && text.contains("after"), "surrounding text stays searchable: {text}");
