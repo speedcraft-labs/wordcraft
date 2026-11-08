@@ -35,7 +35,6 @@ impl Chart {
             Some("percentStacked") if matches!(kind, Kind::Bar | Kind::Area | Kind::Line) => Grouping::Percent,
             _ => Grouping::Clustered,
         };
-        let mut cats = cats;
         cats.resize(n, String::new());
         let radar_style = ty.child("c:radarStyle").and_then(|r| r.attr("val"));
         let type_dl = ty.child("c:dLbls");
