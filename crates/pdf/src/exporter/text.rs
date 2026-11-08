@@ -3,13 +3,14 @@ use super::{
     left_to_right, norm, ok, paint_of, rgb, split_clusters, visual_order,
 };
 
-/// How a run of glyphs is painted: its colour, opacity and synthetic bold and italic.
+/// How a run of glyphs is painted and whether its text is searchable.
 #[derive(Clone, Copy)]
 pub(super) struct GlyphPaint {
     pub color: Rgb,
     pub alpha: f32,
     pub bold: bool,
     pub italic: bool,
+    pub searchable: bool,
 }
 
 impl Exporter<'_> {
@@ -86,9 +87,8 @@ impl Exporter<'_> {
         glyphs: &[(u32, f32, f32)],
         style: GlyphPaint,
         (text, known): (&str, &[std::ops::Range<usize>]),
-        searchable: bool,
     ) {
-        let GlyphPaint { color, alpha, bold, italic } = style;
+        let GlyphPaint { color, alpha, bold, italic, searchable } = style;
         if !size.is_finite() || size <= 0.0 || size > 5000.0 {
             return;
         }
