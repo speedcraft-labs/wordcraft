@@ -3,13 +3,14 @@ use super::{
     left_to_right, norm, ok, paint_of, rgb, split_clusters, visual_order,
 };
 
-/// How a run of glyphs is painted: its colour, opacity and synthetic bold and italic.
+/// How a run of glyphs is painted and whether its text is searchable.
 #[derive(Clone, Copy)]
 pub(super) struct GlyphPaint {
     pub color: Rgb,
     pub alpha: f32,
     pub bold: bool,
     pub italic: bool,
+    pub searchable: bool,
 }
 
 impl Exporter<'_> {
@@ -87,7 +88,7 @@ impl Exporter<'_> {
         style: GlyphPaint,
         (text, known): (&str, &[std::ops::Range<usize>]),
     ) {
-        let GlyphPaint { color, alpha, bold, italic } = style;
+        let GlyphPaint { color, alpha, bold, italic, searchable } = style;
         if !size.is_finite() || size <= 0.0 || size > 5000.0 {
             return;
         }
@@ -95,6 +96,32 @@ impl Exporter<'_> {
             return;
         }
         if !glyphs.iter().all(|(_, x, y)| ok(*x) && ok(*y)) {
+            return;
+        }
+        if !searchable {
+            if let Some(path) = glyph_outlines(face, size, glyphs) {
+                if italic {
+                    let base = baseline(glyphs).unwrap_or(glyphs.first().map_or(0.0, |g| g.2));
+                    s.push_transform(&Transform::from_row(1.0, 0.0, -0.21, 1.0, 0.21 * base, 0.0));
+                }
+                s.set_fill(Some(fill(color, alpha)));
+                s.set_stroke(if bold {
+                    Some(Stroke {
+                        paint: rgb::Color::new(color.0, color.1, color.2).into(),
+                        width: size * 0.03,
+                        opacity: norm(alpha),
+                        ..Default::default()
+                    })
+                } else {
+                    None
+                });
+                s.draw_path(&path);
+                s.set_fill(None);
+                s.set_stroke(None);
+                if italic {
+                    s.pop();
+                }
+            }
             return;
         }
         let font = self.font(face);
@@ -180,15 +207,15 @@ impl Exporter<'_> {
         }
     }
 
-    /// Draws a metafile text run as PDF text (outlines when the font cannot be embedded). `tf` maps
-    /// the run's own space (see [`PlacedItem::Text`]) to the page.
-    pub(crate) fn vector_text(&mut self, s: &mut Surface, t: &wordcraft_metafile::Text, tf: kurbo::Affine) {
+    /// Draws a metafile text run as searchable PDF text, or as outlines when its picture is a kept
+    /// embedded-object preview. `tf` maps the run's own space (see [`PlacedItem::Text`]) to the page.
+    pub(crate) fn vector_text(&mut self, s: &mut Surface, t: &wordcraft_metafile::Text, tf: kurbo::Affine, searchable: bool) {
         let face = wordcraft_fonts::word::resolve(&t.font, t.bold, t.italic).face;
         let shaped = wordcraft_fonts::shape(&face, &t.text, &[], |c| c);
         let glyphs: Vec<_> = shaped.iter().map(|g| (g.cluster, f64::from(g.x_advance), f64::from(g.x_offset), f64::from(g.y_offset))).collect();
         let Some(lay) = t.layout(face.upem, face.ascent, face.descent, &glyphs) else { return };
-        let font = self.font(&face);
-        if font.is_none() && !self.outlined.contains(&face.id()) {
+        let font = if searchable { self.font(&face) } else { None };
+        if searchable && font.is_none() && !self.outlined.contains(&face.id()) {
             return;
         }
         let em = lay.em as f32;
@@ -200,33 +227,40 @@ impl Exporter<'_> {
         s.push_transform(&Transform::from_row(c[0], c[1], c[2], c[3], c[4], c[5]));
         s.set_stroke(None);
         s.set_fill(Some(Fill { paint: paint.into(), opacity, rule: FillRule::NonZero }));
-        match font {
-            Some(font) => {
-                let upem = face.upem.max(1.0) as f32;
-                let ends = cluster_ends(&shaped.iter().map(|g| g.cluster).collect::<Vec<_>>(), t.text.len());
-                let kg: Vec<KrillaGlyph> = shaped
-                    .iter()
-                    .enumerate()
-                    .map(|(i, g)| {
-                        let end = ends.get(i).copied().unwrap_or(t.text.len());
-                        let start = g.cluster.min(end);
-                        let x = lay.glyphs.get(i).map_or(0.0, |p| p.0);
-                        let adv = match lay.glyphs.get(i + 1) {
-                            Some(n) => ((n.0 - x) / lay.em) as f32,
-                            None => g.x_advance as f32 / upem,
-                        };
-                        let dy = lay.glyphs.get(i).map_or(0.0, |p| ((lay.baseline - p.1) / lay.em) as f32);
-                        KrillaGlyph::new(glyph_id(g.gid), adv, 0.0, dy, 0.0, start..end, None)
-                    })
-                    .collect();
-                let x0 = lay.glyphs.first().map_or(0.0, |p| p.0) as f32;
-                s.draw_glyphs(Point::from_xy(x0, lay.baseline as f32), &kg, font, &t.text, em, false);
-            }
-            None => {
-                let pen: Vec<(u32, f32, f32)> = shaped.iter().zip(&lay.glyphs).map(|(g, (x, y))| (g.gid, *x as f32, *y as f32)).collect();
-                if let Some(path) = glyph_outlines(&face, em, &pen) {
-                    s.draw_path(&path);
+        if searchable {
+            match font {
+                Some(font) => {
+                    let upem = face.upem.max(1.0) as f32;
+                    let ends = cluster_ends(&shaped.iter().map(|g| g.cluster).collect::<Vec<_>>(), t.text.len());
+                    let kg: Vec<KrillaGlyph> = shaped
+                        .iter()
+                        .enumerate()
+                        .map(|(i, g)| {
+                            let end = ends.get(i).copied().unwrap_or(t.text.len());
+                            let start = g.cluster.min(end);
+                            let x = lay.glyphs.get(i).map_or(0.0, |p| p.0);
+                            let adv = match lay.glyphs.get(i + 1) {
+                                Some(n) => ((n.0 - x) / lay.em) as f32,
+                                None => g.x_advance as f32 / upem,
+                            };
+                            let dy = lay.glyphs.get(i).map_or(0.0, |p| ((lay.baseline - p.1) / lay.em) as f32);
+                            KrillaGlyph::new(glyph_id(g.gid), adv, 0.0, dy, 0.0, start..end, None)
+                        })
+                        .collect();
+                    let x0 = lay.glyphs.first().map_or(0.0, |p| p.0) as f32;
+                    s.draw_glyphs(Point::from_xy(x0, lay.baseline as f32), &kg, font, &t.text, em, false);
                 }
+                None => {
+                    let pen: Vec<(u32, f32, f32)> = shaped.iter().zip(&lay.glyphs).map(|(g, (x, y))| (g.gid, *x as f32, *y as f32)).collect();
+                    if let Some(path) = glyph_outlines(&face, em, &pen) {
+                        s.draw_path(&path);
+                    }
+                }
+            }
+        } else {
+            let pen: Vec<(u32, f32, f32)> = shaped.iter().zip(&lay.glyphs).map(|(g, (x, y))| (g.gid, *x as f32, *y as f32)).collect();
+            if let Some(path) = glyph_outlines(&face, em, &pen) {
+                s.draw_path(&path);
             }
         }
         s.set_fill(None);

@@ -43,6 +43,7 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
                 alpha,
                 alt: String::new(),
                 fx: Default::default(),
+                pdf_searchable: true,
                 decorative: false,
             }),
         }
@@ -323,6 +324,7 @@ fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32, k: f32) ->
             synth_bold,
             synth_italic: false,
             text: s.to_string(),
+            pdf_searchable: true,
             link: None,
             ranges: Vec::new(),
             text_bg: None,
@@ -398,10 +400,24 @@ pub(super) fn spun(spin: Spin, rect: Rect, items: Vec<Draw>, out: &mut Vec<Draw>
 pub(super) fn object_draws(o: &InlineObject, rect: Rect, outer: Spin, alpha: f32, opts: &DisplayOptions, out: &mut Vec<Draw>) {
     let own = o.frame().map(|(_, _, f)| f.spin()).unwrap_or_default();
     match o {
-        InlineObject::Image { media, crop, alt, fx, .. } => {
+        InlineObject::Image { media, crop, alt, fx, ole, .. } => {
             let alpha = alpha * fx.opacity();
             let decorative = o.is_decorative();
-            spun(own, rect, vec![Draw::Image { rect, media: media.clone(), crop: *crop, alpha, alt: alt.clone(), fx: *fx, decorative }], out)
+            spun(
+                own,
+                rect,
+                vec![Draw::Image {
+                    rect,
+                    media: media.clone(),
+                    crop: *crop,
+                    alpha,
+                    alt: alt.clone(),
+                    fx: *fx,
+                    pdf_searchable: ole.as_ref().is_none_or(|embedded| embedded.has_searchable_ole_content()),
+                    decorative,
+                }],
+                out,
+            )
         }
         InlineObject::Shape { kind, fill, stroke, stroke_width, effects, freeform, extra, .. } => {
             let effects = effects_in(*effects, own.within(outer));
@@ -459,6 +475,7 @@ pub(super) fn object_draws(o: &InlineObject, rect: Rect, outer: Spin, alpha: f32
                         alpha,
                         alt: String::new(),
                         fx: Default::default(),
+                        pdf_searchable: true,
                         decorative: false,
                     }),
                     _ => None,

@@ -4,6 +4,8 @@ use super::{
     TextWarp, Wrap, WrapText, cap_alt, children_of_choice, int, measure, on_off_attr, own_fill, preset_kind, rt, shape_paint, u32_of,
 };
 
+const LOCKED_CANVAS_URI: &str = "http://schemas.openxmlformats.org/drawingml/2006/lockedCanvas";
+
 impl Reader<'_> {
     // ---- drawings ----
 
@@ -32,6 +34,21 @@ impl Reader<'_> {
         let gd = c.child("a:graphic").and_then(|g| g.child("a:graphicData"))?;
         // Checked by URI before the blip search: a diagram's data can hold a blip further down.
         let uri = gd.attr("uri").unwrap_or("");
+        if uri == LOCKED_CANVAS_URI {
+            let canvas = gd.child("lc:lockedCanvas")?;
+            let tree = locked_canvas_drawing(canvas);
+            let theme = self.doc.settings.theme_colors.clone();
+            let graphic_budget = self.chunks.graphic;
+            let mut image = |id: &str| self.media_for(rels, id);
+            let items = if graphic_budget == 0 { Vec::new() } else { crate::read::diagram::diagram_items(&tree, &theme, w, h, &mut image) };
+            drop(image);
+            self.chunks.graphic = self.chunks.graphic.saturating_sub(graphic_work(&items));
+            let source = c.child("a:graphic").and_then(|g| self.keep_embedded(g, rels, &[]));
+            let graphic = Arc::new(Graphic { kind: GraphicKind::Diagram, items, w, h, source, ..Default::default() });
+            float.set_spin(xfrm_spin(canvas.child("a:grpSpPr")));
+            float.effect = float.effect.map(|e| e.max(0.0));
+            return Some(InlineObject::Graphic { w, h, alt, float, graphic });
+        }
         if uri == INK_URI {
             let content = gd.child("w14:contentPart")?;
             let part = crate::read::part_of(rels, content.attr("r:id")?, INK_REL)?;
@@ -561,6 +578,49 @@ impl Reader<'_> {
         self.flush_pending(&mut inner, &mut blocks);
         self.doc.add_part(PartKind::TextBox, blocks)
     }
+}
+
+/// Present a DrawingML locked canvas to the SmartArt drawing reader. Its geometry and text use the
+/// same DrawingML vocabulary; only the container and shape element names differ.
+fn locked_canvas_drawing(canvas: &El) -> El {
+    let group = locked_canvas_group(canvas);
+    let tree = El { name: "dsp:spTree".into(), attrs: Vec::new(), kids: vec![Node::El(group)] };
+    El { name: "dsp:drawing".into(), attrs: Vec::new(), kids: vec![Node::El(tree)] }
+}
+
+fn locked_canvas_group(source: &El) -> El {
+    let mut group = El { name: "dsp:grpSp".into(), attrs: source.attrs.clone(), kids: Vec::new() };
+    for node in &source.kids {
+        match node {
+            Node::El(e) if e.name == "a:grpSpPr" => group.kids.push(Node::El(renamed(e, "dsp:grpSpPr"))),
+            Node::El(e) if matches!(e.name.as_str(), "a:sp" | "a:cxnSp") => group.kids.push(Node::El(locked_canvas_shape(e))),
+            Node::El(e) if e.name == "a:grpSp" => group.kids.push(Node::El(locked_canvas_group(e))),
+            _ => {}
+        }
+    }
+    group
+}
+
+fn locked_canvas_shape(source: &El) -> El {
+    let mut shape = El { name: "dsp:sp".into(), attrs: source.attrs.clone(), kids: Vec::new() };
+    for node in &source.kids {
+        match node {
+            Node::El(e) if e.name == "a:spPr" => shape.kids.push(Node::El(renamed(e, "dsp:spPr"))),
+            Node::El(e) if e.name == "a:style" => shape.kids.push(Node::El(renamed(e, "dsp:style"))),
+            Node::El(e) if e.name == "a:txBody" => shape.kids.push(Node::El(renamed(e, "dsp:txBody"))),
+            Node::El(e) if e.name == "a:txSp" => {
+                if let Some(body) = e.child("a:txBody") {
+                    shape.kids.push(Node::El(renamed(body, "dsp:txBody")));
+                }
+            }
+            _ => {}
+        }
+    }
+    shape
+}
+
+fn renamed(element: &El, name: &str) -> El {
+    El { name: name.into(), attrs: element.attrs.clone(), kids: element.kids.clone() }
 }
 
 /// The alternative text of a `wp:docPr`, `pic:cNvPr` or `wps:cNvPr` (ECMA-376

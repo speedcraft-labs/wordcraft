@@ -45,6 +45,10 @@ pub enum Draw {
         synth_italic: bool,
         /// The text these glyphs show (for PDF text extraction), and the hyperlink.
         text: String,
+        /// Whether the PDF exporter includes searchable text for these glyphs. Display renderers
+        /// always draw the glyphs; equations can be painted as outlines to match office PDFs that
+        /// do not expose their math runs as searchable text.
+        pdf_searchable: bool,
         link: Option<String>,
         /// Byte range of `text` each glyph shows (one per glyph; a ligature's range covers all
         /// its characters). Empty when unknown: the PDF writer then guesses from the font.
@@ -87,6 +91,8 @@ pub enum Draw {
         alt: String,
         /// Brightness and contrast to apply to the pixels (transparency is in `alpha`).
         fx: wordcraft_doc::picfx::PicFx,
+        /// Whether metafile text remains searchable in PDF. OLE previews are visible outlines only.
+        pdf_searchable: bool,
         /// Marked decorative (Alt Text › Mark as decorative): an artifact in tagged PDF, which
         /// screen readers skip. Always `false` for a floating or diagram picture, as `alt`.
         decorative: bool,

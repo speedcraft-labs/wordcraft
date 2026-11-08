@@ -15,6 +15,15 @@ pub(crate) struct Vector {
     images: Vec<Option<Image>>,
 }
 
+/// Placement and PDF text behavior for a vector picture.
+pub(crate) struct VectorPlacement<'a> {
+    pub rect: &'a Rect,
+    pub crop: &'a [f32; 4],
+    pub clip: &'a Path,
+    pub alpha: f32,
+    pub searchable: bool,
+}
+
 /// Parses a metafile and embeds its bitmaps. None when the picture has no usable size.
 pub(crate) fn build_vector(bytes: &[u8]) -> Option<Vector> {
     let mut pic = wordcraft_metafile::parse(bytes).ok()?;
@@ -38,8 +47,9 @@ const HAIRLINE: f64 = 0.25;
 /// Draws a metafile picture into the clip (the picture frame): paths are filled and stroked in page
 /// space (strokes keep their width under non-uniform scaling), bitmaps stretched, all faded by `alpha`.
 /// Every path sets its fill and stroke, so none carries over; strokes have round caps and joins. Text
-/// runs are drawn as text.
-pub(crate) fn vector_picture(ex: &mut Exporter, s: &mut Surface, v: &Vector, r: &Rect, crop: &[f32; 4], clip: &Path, alpha: f32) {
+/// runs stay searchable unless the picture is an embedded-object preview.
+pub(crate) fn vector_picture(ex: &mut Exporter, s: &mut Surface, v: &Vector, placement: VectorPlacement<'_>) {
+    let VectorPlacement { rect: r, crop, clip, alpha, searchable } = placement;
     let target = kurbo::Rect::new(f64::from(r.x), f64::from(r.y), f64::from(r.x + r.w), f64::from(r.y + r.h));
     let fade = alpha < 0.999;
     if fade {
@@ -79,7 +89,7 @@ pub(crate) fn vector_picture(ex: &mut Exporter, s: &mut Surface, v: &Vector, r: 
             }
             PlacedItem::Text { index, tf } => {
                 if let Some(wordcraft_metafile::Item::Text(t)) = v.pic.items.get(index) {
-                    ex.vector_text(s, t, tf);
+                    ex.vector_text(s, t, tf, searchable);
                 }
             }
         }

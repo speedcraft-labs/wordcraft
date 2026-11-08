@@ -1415,6 +1415,39 @@ fn metafile_text_records_are_drawn_as_text() {
     assert!(text.contains("Cell42"), "the metafile's text is drawn: {text:?}");
 }
 
+/// An OLE preview remains visible, but text printed inside its metafile is not searchable PDF text.
+#[test]
+fn ole_preview_metafile_text_is_not_searchable() {
+    use wordcraft_doc::graphic::Embedded;
+
+    let mut recs = emf_text_records("Cell42");
+    recs.push(emf_rec(14, &[0; 3]));
+    let mut d = Document::new();
+    let media = d.add_media(emf_file(&recs), "emf");
+    let mut p = Paragraph::with_text("Figure: ", CharProps::default());
+    let n = p.len();
+    p.insert_object(
+        n,
+        InlineObject::Image {
+            media,
+            w: 70.0,
+            h: 70.0,
+            alt: String::new(),
+            float: Default::default(),
+            crop: [0.0; 4],
+            fx: Default::default(),
+            ole: Some(Arc::new(Embedded::default())),
+        },
+        &CharProps::default(),
+    )
+    .unwrap();
+    d.body = vec![para_block(p)];
+    let bytes = export(&d, &PdfOptions { compress: false, tagged: false, ..Default::default() }).unwrap();
+    let text = extract_text(&bytes).concat();
+    assert!(text.contains("Figure:"), "surrounding document text remains searchable: {text:?}");
+    assert!(!text.contains("Cell42"), "preview lettering is drawn as outlines, not searchable text: {text:?}");
+}
+
 /// #455: a link to a bookmark after a page break inside its paragraph goes to the page the
 /// bookmark is on, not the paragraph's first page.
 /// A bookmark after a page break targets its laid-out start, independent of paragraph origin.
@@ -2361,6 +2394,38 @@ fn legacy_font_effects_keep_their_text() {
     .collect();
     let text = extract_text(&export(&d, &PdfOptions::default()).unwrap()).concat();
     assert_eq!(text.matches("Effect").count(), 4, "{text}");
+}
+
+/// LibreOffice paints Office Math as equation glyphs without a searchable text layer in its PDF.
+/// Keep WordCraft's equation glyphs vector-visible while matching that extraction behavior.
+#[test]
+fn equations_are_drawn_but_not_searchable_in_pdf() {
+    let mut d = Document::from_text("Before after.");
+    let math = wordcraft_doc::math::Math { nodes: wordcraft_doc::math::parse_linear("qzv=98765"), ..Default::default() };
+    d.para_mut(wordcraft_doc::StoryRef::Body, &wordcraft_doc::Path::top(0))
+        .unwrap()
+        .insert_object(7, InlineObject::Equation { linear: "qzv=98765".into(), display: false, math }, &Default::default())
+        .unwrap();
+
+    let lay = layout(&d, &mut LayoutCache::new(), &LayoutOptions::default());
+    let draws = wordcraft_layout::display::page_display(&d, &lay.pages[0], &DisplayOptions::default());
+    fn append_hidden_text(draws: &[Draw], text: &mut String) {
+        for draw in draws {
+            match draw {
+                Draw::Glyphs { text: glyph_text, pdf_searchable: false, .. } => text.push_str(glyph_text),
+                Draw::Figure { draws, .. } => append_hidden_text(draws, text),
+                Draw::Turned { items, .. } | Draw::Rotated { items, .. } | Draw::Clip { items, .. } => append_hidden_text(items, text),
+                _ => {}
+            }
+        }
+    }
+    let mut equation_text = String::new();
+    append_hidden_text(&draws, &mut equation_text);
+    assert!(equation_text.contains("98765"), "equation glyphs remain drawn but unsearchable: {equation_text:?}");
+
+    let text = squash(&extract_text(&export(&d, &PdfOptions::default()).unwrap()).concat());
+    assert!(text.contains("Before") && text.contains("after"), "surrounding text stays searchable: {text}");
+    assert!(!text.contains("qzv") && !text.contains("98765"), "equation glyphs stay out of PDF text: {text}");
 }
 
 #[test]

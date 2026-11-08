@@ -85,6 +85,7 @@ impl Chart {
         let num = |n: &str| ty.child(n).and_then(|g| g.attr("val")).and_then(int);
         Some(Chart {
             kind,
+            three_d: types.iter().any(|(chart_type, _)| chart_type.name.ends_with("3DChart")),
             horizontal: kind == Kind::Bar && ty.child("c:barDir").and_then(|d| d.attr("val")) == Some("bar"),
             grouping,
             gap: num("c:gapWidth").unwrap_or(150).clamp(0, 500) as f32 / 100.0,

@@ -32,6 +32,8 @@ pub enum Placed {
         rect: Rect,
         media: String,
         crop: [f32; 4],
+        /// An embedded preview whose metafile text isn't searchable in the LibreOffice PDF.
+        ole_preview: bool,
         story: StoryRef,
         path: Path,
         off: usize,

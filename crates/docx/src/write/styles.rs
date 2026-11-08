@@ -233,7 +233,11 @@ pub(super) fn numbering_xml(doc: &Document) -> Vec<u8> {
 fn write_level(w: &mut W, i: usize, l: &Level) {
     w.open("w:lvl", &[("w:ilvl", &i.to_string())]);
     w.val("w:start", &l.start.to_string());
-    w.val("w:numFmt", l.format.ooxml());
+    if let Some(format) = l.custom_format.as_deref() {
+        w.empty("w:numFmt", &[("w:val", "custom"), ("w:format", format)]);
+    } else {
+        w.val("w:numFmt", l.format.ooxml());
+    }
     if !l.restart {
         w.val("w:lvlRestart", "0");
     } else if let Some(k) = l.restart_after.filter(|k| (1..=9).contains(k)) {

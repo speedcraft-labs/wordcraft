@@ -309,8 +309,15 @@ impl Reader<'_> {
         if let Some(s) = l.child_val("w:start").and_then(u32_of) {
             lv.start = s;
         }
-        if let Some(f) = l.child_val("w:numFmt") {
-            lv.format = NumFormat::from_ooxml(f);
+        let num_fmt = l
+            .child("w:numFmt")
+            .or_else(|| l.child("mc:AlternateContent").and_then(super::story::children_of_choice).and_then(|choice| choice.child("w:numFmt")));
+        if let Some(f) = num_fmt {
+            let value = f.attr("w:val").unwrap_or("");
+            lv.format = NumFormat::from_ooxml(value);
+            if value.eq_ignore_ascii_case("custom") {
+                lv.custom_format = f.attr("w:format").map(|s| s.chars().take(256).collect()).filter(|s: &String| !s.is_empty());
+            }
         }
         lv.text = l.child_val("w:lvlText").map(|t| t.chars().take(64).collect()).unwrap_or_default();
         if let Some(j) = l.child_val("w:lvlJc") {

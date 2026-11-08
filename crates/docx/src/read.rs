@@ -271,11 +271,24 @@ fn read_opened_in(pkg: &Package, chunks: ChunkState) -> Result<(Document, usize,
     if let Some(fill) = root.child("w:background").and_then(|b| b.child("v:background")).and_then(|b| b.child("v:fill")) {
         let rid = fill.attr("r:id").or_else(|| fill.attr("r:embed")).or_else(|| fill.attr("o:relid"));
         if let Some(media) = rid.and_then(|id| r.media_for(&rels, id)) {
-            r.doc.settings.page_picture = Some(PagePicture {
-                media,
-                fill_type: fill.attr("type").unwrap_or("").chars().take(32).collect(),
-                title: fill.attr("o:title").unwrap_or("").chars().take(255).collect(),
+            let fill_type = fill.attr("type").unwrap_or("").chars().take(32).collect::<String>();
+            let pattern_colors = fill_type.eq_ignore_ascii_case("pattern").then(|| {
+                let background = fill
+                    .attr("color")
+                    .and_then(shape_style::vml_color)
+                    .or_else(|| {
+                        root.child("w:background")
+                            .and_then(|b| b.child("v:background"))
+                            .and_then(|b| b.attr("fillcolor"))
+                            .and_then(shape_style::vml_color)
+                    })
+                    .or(r.doc.settings.page_color)
+                    .unwrap_or(Rgb::WHITE);
+                let foreground = fill.attr("color2").and_then(shape_style::vml_color).unwrap_or(background);
+                [background, foreground]
             });
+            r.doc.settings.page_picture =
+                Some(PagePicture { media, fill_type, pattern_colors, title: fill.attr("o:title").unwrap_or("").chars().take(255).collect() });
         }
     }
     if let Some(body) = root.child("w:body") {

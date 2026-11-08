@@ -34,7 +34,7 @@ use model::{Axis, Grouping, Kind, Pos, Series};
 use parse::{axis, category_text, labels, numbers};
 use parse::{read_series, text_size, title_of};
 #[cfg(test)]
-use plot::{Scale, narrow, nice_scale};
+use plot::{Scale, narrow, nice_scale, nice_scale_3d};
 use plot::{backdrop, cartesian};
 use polar::{pie, radar};
 
@@ -156,6 +156,8 @@ fn unsupported_name(name: &str) -> &'static str {
 
 struct Chart {
     kind: Kind,
+    /// 3-D value axes use LibreOffice's denser automatic tick spacing.
+    three_d: bool,
     horizontal: bool,
     grouping: Grouping,
     /// Gap between groups as a fraction of a bar's width.
