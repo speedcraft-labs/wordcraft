@@ -292,12 +292,24 @@ fn write_document_body(doc: &Document, wr: &mut Writer<'_>, rels: &mut PartRels,
         {
             let rid = rels.add(rt::IMAGE, &format!("media/{file}"), false);
             wr.used_media.insert(p.media.clone());
-            w.open("v:background", &[("id", "_x0000_s1025"), ("o:bwmode", "white")]);
+            let pattern_background = p.pattern_colors.map(|c| c[0].hex());
+            let pattern_foreground = p.pattern_colors.map(|c| c[1].hex());
+            let mut ba: Vec<(&str, &str)> = vec![("id", "_x0000_s1025"), ("o:bwmode", "white")];
+            if let Some(c) = pattern_background.as_deref() {
+                ba.push(("fillcolor", c));
+            }
+            w.open("v:background", &ba);
             let mut fa: Vec<(&str, &str)> = vec![("r:id", &rid)];
             // VML has no centred fill (an ODT page background's): stretched to the page.
             let kind = if p.fill_type.eq_ignore_ascii_case("center") { "frame" } else { p.fill_type.as_str() };
             if !kind.is_empty() {
                 fa.push(("type", kind));
+            }
+            if let Some(c) = pattern_background.as_deref() {
+                fa.push(("color", c));
+            }
+            if let Some(c) = pattern_foreground.as_deref() {
+                fa.push(("color2", c));
             }
             if !p.title.is_empty() {
                 fa.push(("o:title", &p.title));

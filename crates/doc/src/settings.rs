@@ -223,6 +223,8 @@ pub struct PagePicture {
     pub media: String,
     /// `v:fill/@type` (`tile`, `frame`, `tile`...); tiled when `tile`, stretched to the page otherwise.
     pub fill_type: String,
+    /// The two VML colours for a monochrome `pattern` fill: background, then foreground.
+    pub pattern_colors: Option<[Rgb; 2]>,
     /// `o:title` of the fill (texture name), kept for round trip.
     pub title: String,
 }

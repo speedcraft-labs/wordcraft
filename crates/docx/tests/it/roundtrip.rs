@@ -2793,7 +2793,8 @@ fn page_background_picture_round_trips() {
     let mut d = Document::new();
     d.settings.page_color = Some(Rgb(0xFF, 0xFF, 0xCC));
     d.media.insert("paper.png".into(), Arc::new(png.clone()));
-    d.settings.page_picture = Some(wordcraft_doc::PagePicture { media: "paper.png".into(), fill_type: "tile".into(), title: "Paper".into() });
+    d.settings.page_picture =
+        Some(wordcraft_doc::PagePicture { media: "paper.png".into(), fill_type: "tile".into(), pattern_colors: None, title: "Paper".into() });
     let r = rt(&d);
     let pic = r.settings.page_picture.as_ref().expect("picture kept");
     assert_eq!((pic.fill_type.as_str(), pic.title.as_str()), ("tile", "Paper"));
@@ -2801,6 +2802,28 @@ fn page_background_picture_round_trips() {
     assert_eq!(r.settings.page_color, d.settings.page_color);
     // Saved again, it is still there.
     assert!(rt(&r).settings.page_picture.is_some());
+}
+
+#[test]
+fn page_background_pattern_colors_round_trip() {
+    let mut png = Vec::new();
+    image::RgbaImage::from_fn(2, 1, |x, _| if x == 0 { image::Rgba([0, 0, 0, 255]) } else { image::Rgba([255, 255, 255, 255]) })
+        .write_to(&mut std::io::Cursor::new(&mut png), image::ImageFormat::Png)
+        .unwrap();
+    let colors = [Rgb::WHITE, Rgb(0, 128, 0)];
+    let mut d = Document::new();
+    d.media.insert("pattern.png".into(), Arc::new(png));
+    d.settings.page_picture = Some(wordcraft_doc::PagePicture {
+        media: "pattern.png".into(),
+        fill_type: "pattern".into(),
+        pattern_colors: Some(colors),
+        title: String::new(),
+    });
+
+    let r = rt(&d);
+    let pic = r.settings.page_picture.as_ref().expect("pattern kept");
+    assert_eq!(pic.fill_type, "pattern");
+    assert_eq!(pic.pattern_colors, Some(colors));
 }
 
 /// #2601: Drop Cap Options — a dropped cap with its lines, distance from the text and font, and

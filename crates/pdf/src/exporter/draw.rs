@@ -1,7 +1,7 @@
 use super::text::GlyphPaint;
 use super::{
-    Draw, Exporter, Fill, FillRule, LineCap, LineJoin, LineStyle, PathBuilder, Rect, Rgb, ShapeKind, Size, Stroke, StrokeDash, Surface, Transform,
-    append_path, fill, grown, krilla, norm, ok, paint_fill, pdf_line_cap, rect_path, rgb, shape_effects, shape_path, vector_picture,
+    Draw, Exporter, Fill, FillRule, Image, LineCap, LineJoin, LineStyle, PathBuilder, Rect, Rgb, ShapeKind, Size, Stroke, StrokeDash, Surface,
+    Transform, append_path, fill, grown, krilla, norm, ok, paint_fill, pdf_line_cap, rect_path, rgb, shape_effects, shape_path, vector_picture,
 };
 use wordcraft_doc::picfx::PicFx;
 
@@ -282,6 +282,16 @@ impl Exporter<'_> {
         if !(w.is_finite() && h.is_finite() && w > 0.0 && h > 0.0) {
             return;
         }
+        if let Some(colors) = pic.pattern_colors {
+            let paper = self.doc.settings.page_color.unwrap_or(Rgb::WHITE);
+            if colors[0] == colors[1] && colors[0] == paper {
+                return;
+            }
+            let Some(img) = self.pattern_image(pic, colors, w, h) else { return };
+            let Some(size) = Size::from_wh(w, h) else { return };
+            s.draw_image(img, size);
+            return;
+        }
         let dims = self
             .doc
             .media
@@ -309,6 +319,36 @@ impl Exporter<'_> {
             }
         }
         self.picture(s, &Rect::new(0.0, 0.0, w, h), &pic.media, &[0.0; 4], 1.0, PicFx::default(), true);
+    }
+
+    /// Paint a VML monochrome pattern as a bounded 96 dpi page bitmap. VML uses the source image
+    /// as a two-colour mask; stretching the raw black-and-white tile over the page paints most of
+    /// it black (the fillcolor and color2 attributes supply the actual colours).
+    fn pattern_image(&self, pic: &wordcraft_doc::PagePicture, colors: [Rgb; 2], w: f32, h: f32) -> Option<Image> {
+        const MAX_SIDE: u32 = 30_000;
+        const MAX_PIXELS: u64 = 32_000_000;
+        let bytes = self.doc.media.get(&pic.media)?;
+        if !wordcraft_geom::picture::probe(bytes).is_ok_and(|p| p.fits(wordcraft_geom::MAX_DECODED_BYTES)) {
+            return None;
+        }
+        let source = image::ImageReader::new(std::io::Cursor::new(bytes.as_slice())).with_guessed_format().ok()?.decode().ok()?.into_rgba8();
+        let width = (f64::from(w) / 0.75).ceil();
+        let height = (f64::from(h) / 0.75).ceil();
+        if !(width.is_finite()
+            && height.is_finite()
+            && width >= 1.0
+            && height >= 1.0
+            && width <= f64::from(MAX_SIDE)
+            && height <= f64::from(MAX_SIDE))
+        {
+            return None;
+        }
+        let (width, height) = (width as u32, height as u32);
+        if u64::from(width) * u64::from(height) > MAX_PIXELS {
+            return None;
+        }
+        let pixels = color_pattern(&source, colors, width, height);
+        Some(Image::from_rgba8(pixels.into_raw(), width, height))
     }
 
     fn picture(&mut self, s: &mut Surface, rect: &Rect, media: &str, crop: &[f32; 4], alpha: f32, fx: PicFx, searchable: bool) {
@@ -339,6 +379,46 @@ impl Exporter<'_> {
         if fade {
             s.pop();
         }
+    }
+}
+
+/// Tile a black-and-white VML mask at its natural 96 dpi size and colour it with the fill colours.
+fn color_pattern(source: &image::RgbaImage, colors: [Rgb; 2], width: u32, height: u32) -> image::RgbaImage {
+    let mut out = image::RgbaImage::new(width, height);
+    let (sw, sh) = (source.width(), source.height());
+    if sw == 0 || sh == 0 {
+        return out;
+    }
+    for y in 0..height {
+        for x in 0..width {
+            let p = source.get_pixel(x % sw, y % sh).0;
+            let luminance = (299u32 * u32::from(p[0]) + 587 * u32::from(p[1]) + 114 * u32::from(p[2])) / 1000;
+            let weight = (luminance * u32::from(p[3]) + 127) / 255;
+            let channel = |a: u8, b: u8| ((u32::from(a) * (255 - weight) + u32::from(b) * weight + 127) / 255) as u8;
+            out.put_pixel(
+                x,
+                y,
+                image::Rgba([channel(colors[0].0, colors[1].0), channel(colors[0].1, colors[1].1), channel(colors[0].2, colors[1].2), 255]),
+            );
+        }
+    }
+    out
+}
+
+#[cfg(test)]
+mod pattern_tests {
+    use super::*;
+
+    #[test]
+    fn vml_pattern_mask_tiles_and_uses_its_two_fill_colors() {
+        let mut mask = image::RgbaImage::new(2, 1);
+        mask.put_pixel(0, 0, image::Rgba([0, 0, 0, 255]));
+        mask.put_pixel(1, 0, image::Rgba([255, 255, 255, 255]));
+        let pixels = color_pattern(&mask, [Rgb(255, 255, 255), Rgb(0, 128, 0)], 4, 1);
+        assert_eq!(pixels.get_pixel(0, 0).0, [255, 255, 255, 255]);
+        assert_eq!(pixels.get_pixel(1, 0).0, [0, 128, 0, 255]);
+        assert_eq!(pixels.get_pixel(2, 0).0, [255, 255, 255, 255]);
+        assert_eq!(pixels.get_pixel(3, 0).0, [0, 128, 0, 255]);
     }
 }
 
