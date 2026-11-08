@@ -504,8 +504,16 @@ impl CharProps {
     }
 
     fn minus_text_style(&mut self, base: &CharProps) {
-        drop_same_fields!(self, base; style, font, sym_font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight,
-            shading, border, vert_align, caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, pdf_searchable, lang, no_proof, rtl);
+        self.minus_text_appearance(base);
+        self.minus_text_layout(base);
+    }
+
+    fn minus_text_appearance(&mut self, base: &CharProps) {
+        drop_same_fields!(self, base; style, font, sym_font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight, shading, border, vert_align);
+    }
+
+    fn minus_text_layout(&mut self, base: &CharProps) {
+        drop_same_fields!(self, base; caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, pdf_searchable, lang, no_proof, rtl);
     }
 
     fn minus_run_visibility(&mut self, base: &CharProps) {
@@ -535,8 +543,16 @@ impl CharProps {
     }
 
     fn overlay_text_style(&mut self, patch: &CharProps) {
-        overlay_fields!(self, patch; style, font, sym_font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight,
-            shading, border, vert_align, caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, pdf_searchable, lang, no_proof, rtl);
+        self.overlay_text_appearance(patch);
+        self.overlay_text_layout(patch);
+    }
+
+    fn overlay_text_appearance(&mut self, patch: &CharProps) {
+        overlay_fields!(self, patch; style, font, sym_font, size, bold, italic, underline, underline_color, strike, double_strike, color, highlight, shading, border, vert_align);
+    }
+
+    fn overlay_text_layout(&mut self, patch: &CharProps) {
+        overlay_fields!(self, patch; caps, small_caps, hidden, spacing, scale, position, kern, outline, shadow, emboss, engrave, pdf_searchable, lang, no_proof, rtl);
     }
 
     fn overlay_run_visibility(&mut self, patch: &CharProps) {
