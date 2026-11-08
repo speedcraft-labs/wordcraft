@@ -23,7 +23,8 @@ USAGE:
                                               an .xml file is a Word XML Document (Flat OPC), or with
                                               --format wordml2003 a Word 2003 XML Document;
                                               --markup (Print Markup): comments beside each page and
-                                              tracked changes in pdf/png, a comment list in html/md/txt
+                                              tracked changes in pdf/png, a comment list in html/md/txt;
+                                              pdf/png exports of documents with tracked changes use it by default
   wordcraft-cli info <file>                   pages, words, paragraphs, properties (JSON)
   wordcraft-cli text <file>                   plain text
   wordcraft-cli inspect <file>                document structure (JSON)
@@ -433,9 +434,14 @@ fn run<S: AsRef<OsStr>>(args: &[S]) -> Result<(), Failure> {
             let format = arg_value(&rest, "--format");
             let paths = positionals(&rest, CONVERT_OPTIONS);
             let (i, o) = (paths.first().ok_or_else(missing_argument)?.to_string(), paths.get(1).ok_or_else(missing_argument)?.to_string());
-            let markup = rest.iter().any(|a| a == "--markup");
+            let explicit_markup = rest.iter().any(|a| a == "--markup");
             let password = password_from(&rest)?;
             let mut s = open(&i, password.as_deref())?;
+            let pdf_or_png = o.to_ascii_lowercase().ends_with(".pdf") || o.to_ascii_lowercase().ends_with(".png");
+            // LibreOffice prints tracked changes inline on PDF/PNG conversion by default. Keep
+            // WordCraft's command-line oracle output in that view when the imported document has
+            // revisions, while leaving format-to-format conversions in the final view.
+            let markup = explicit_markup || (pdf_or_png && !s.doc.revisions.is_empty());
             if rest.iter().any(|a| a == "--update-fields") {
                 s.run("references.updateFields", &json!({})).map_err(|e| e.to_string())?;
             }

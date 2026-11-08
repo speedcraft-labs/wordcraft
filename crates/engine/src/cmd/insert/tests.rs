@@ -370,6 +370,9 @@ fn date_pictures() {
     assert_eq!(format_date_parts("hh:mm", 2026, 10, 21, (17, 27, 3), 0), "05:27");
     assert_eq!(format_date_parts("h:mm", 2026, 10, 21, (17, 27, 3), 0), "5:27");
     assert_eq!(format_date_parts("HH:mm", 2026, 10, 21, (5, 7, 3), 0), "05:07");
+    assert_eq!(format_date_parts("H:mm:ss AM/PM", 2026, 10, 21, (21, 31, 45), 0), "9:31:45 PM");
+    assert_eq!(format_date_parts("H:mm 'AM/PM'", 2026, 10, 21, (21, 31, 45), 0), "21:31 AM/PM");
+    assert_eq!(format_date_parts(r"dd\/MM\/yyyy\ H:mm:ss\ AM/PM", 2026, 10, 21, (21, 31, 45), 0), "21/10/2026 9:31:45 PM");
     let d = format_date("yyyy-MM-dd");
     assert_eq!(d.len(), 10);
     assert!(format_date("MMMM d, yyyy").contains(", "));
