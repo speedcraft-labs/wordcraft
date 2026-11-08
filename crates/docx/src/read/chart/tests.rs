@@ -183,6 +183,12 @@ fn nice_scale_rounds_to_round_steps() {
 }
 
 #[test]
+fn single_value_axes_include_zero_without_inventing_a_unit_above_the_value() {
+    assert_eq!(nice_value_scale(4.3, 4.3, true, None, None), Scale { lo: 0.0, hi: 5.0, step: 0.5 });
+    assert_eq!(nice_value_scale(-4.3, -4.3, true, None, None), Scale { lo: -5.0, hi: 0.0, step: 0.5 });
+}
+
+#[test]
 fn number_formats() {
     assert_eq!(format_value(1234567.0, "#,##0", 1.0), "1,234,567");
     assert_eq!(format_value(-1500.0, "#,##0", 500.0), "-1,500");

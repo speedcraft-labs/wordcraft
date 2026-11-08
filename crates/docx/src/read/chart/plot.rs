@@ -61,8 +61,17 @@ pub(super) fn nice_scale_3d(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, ma
 }
 
 fn nice_scale_with(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>, steps: f64, padding: f64) -> Scale {
-    let (dlo, dhi) = if dhi > dlo { (dlo, dhi) } else { (dlo, dlo + 1.0) };
-    let span = dhi - dlo;
+    // A single nonzero bar still needs a scale from zero, so preserve its magnitude when
+    // calculating the padding instead of inventing a one-unit data range above the value.
+    let collapsed_at_nonzero = dhi <= dlo && zero && dlo != 0.0;
+    let (dlo, dhi) = if dhi > dlo {
+        (dlo, dhi)
+    } else if collapsed_at_nonzero {
+        (dlo, dlo)
+    } else {
+        (dlo, dlo + 1.0)
+    };
+    let span = if collapsed_at_nonzero { dlo.abs() } else { dhi - dlo };
     // With zero, the ends reach it: all-negative data still starts its bars at zero.
     let (ends_lo, ends_hi) = if zero { (dlo.min(0.0), dhi.max(0.0)) } else { (dlo, dhi) };
     let lo = min.unwrap_or(if ends_lo < 0.0 { ends_lo - padding * span } else { ends_lo });
