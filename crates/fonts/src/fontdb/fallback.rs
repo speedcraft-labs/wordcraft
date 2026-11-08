@@ -61,11 +61,32 @@ impl FontDb {
         if let Some(face) = self.circle_fallback(c, exclude) {
             return (Some(face), self.read_faces().len());
         }
+        #[cfg(all(not(target_arch = "wasm32"), not(any(windows, target_os = "macos"))))]
+        if crate::is_rtl(c) || arabic_block(c) {
+            self.load_preferred_rtl_system_font();
+        }
         let (found, n) = self.loaded_fallback(c, exclude);
         if found.is_some() {
             return (found, n);
         }
         self.system_search(c, exclude)
+    }
+
+    /// Load FreeSerif before the bundled Arabic face when the native system has it. LibreOffice
+    /// uses it for Arabic fallback on Linux, and its line metrics and advances affect page flow.
+    #[cfg(all(not(target_arch = "wasm32"), not(any(windows, target_os = "macos"))))]
+    fn load_preferred_rtl_system_font(&self) {
+        if !self.sys.lock().unwrap_or_else(std::sync::PoisonError::into_inner).enabled {
+            return;
+        }
+        let should_try = self.sys.lock().unwrap_or_else(std::sync::PoisonError::into_inner).tried.insert("FreeSerif");
+        if !should_try {
+            return;
+        }
+        let available = self.read_catalog().iter().any(|entry| entry.family.eq_ignore_ascii_case("FreeSerif"));
+        if available {
+            self.load_cataloged("FreeSerif");
+        }
     }
 
     fn circle_fallback(&self, c: char, exclude: u32) -> Option<Arc<FontFace>> {
