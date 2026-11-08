@@ -107,7 +107,9 @@ pub fn format_date_parts(fmt: &str, y: i64, m: usize, d: u32, (hh, mm, ss): (u32
     let mut i = 0;
     while i < chars.len() {
         let c = chars.get(i).copied().unwrap_or(' ');
-        if c == '\\' && let Some(escaped) = chars.get(i + 1) {
+        if c == '\\'
+            && let Some(escaped) = chars.get(i + 1)
+        {
             out.push(*escaped);
             i += 2;
             continue;
