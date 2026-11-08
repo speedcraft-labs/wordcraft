@@ -59,7 +59,6 @@ impl Chart {
             series.truncate(MAX_RADAR_SERIES);
         }
         let grouping = primary_grouping;
-        let mut cats = cats;
         cats.resize(n, String::new());
         for s in &mut series {
             s.values.resize(n, None);
