@@ -15,7 +15,7 @@ impl Chart {
         if series.is_empty() {
             return None;
         }
-        let cats = ty.children("c:ser").find_map(|s| s.child("c:cat")).map(|c| labels(Some(c), MAX_POINTS, date1904)).unwrap_or_default();
+        let mut cats = ty.children("c:ser").find_map(|s| s.child("c:cat")).map(|c| labels(Some(c), MAX_POINTS, date1904)).unwrap_or_default();
         let n = if kind == Kind::Radar {
             series.iter().map(|s| s.values.len()).max().unwrap_or(0).max(cats.len()).min(MAX_SPOKES)
         } else if matches!(kind, Kind::Pie | Kind::Doughnut) {
