@@ -49,7 +49,13 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
                         }
                     }
                     out.push(Draw::Rotated { cx: rect.x + rect.w / 2.0, cy: rect.y + rect.h / 2.0, spin: Spin::new(*rotation, false, false), items });
-                    out.extend(text_glyphs(doc, rect, it, 0.0, k));
+                    let mut searchable = it.clone();
+                    if let GraphicItem::RotatedText { text, .. } = &mut searchable {
+                        // Keep adjacent labels separate in PDF text extraction. The trailing
+                        // space has no visible mark and this copy is transparent.
+                        text.push(' ');
+                    }
+                    out.extend(text_glyphs(doc, rect, &searchable, 0.0, k));
                 }
             }
             GraphicItem::Image { rect: r, media } => out.push(Draw::Image {
