@@ -87,6 +87,18 @@ fn data_labels_show_the_values() {
 }
 
 #[test]
+fn pie_data_labels_show_percentages() {
+    let series = ser(0, "Sales", None, &["Q1", "Q2", "Q3", "Q4"], &["8.2", "3.2", "1.4", "1.2"]);
+    let labels = r#"<c:dLbls><c:showVal val="0"/><c:showPercent val="1"/></c:dLbls>"#;
+    let pie = format!("<c:pieChart>{series}{labels}</c:pieChart>");
+    let drawn = chart_items(&space(&pie), &theme(), 240.0, 160.0);
+    let shown: Vec<String> = drawn.iter().filter_map(|it| if let GraphicItem::Text { text, .. } = it { Some(text.clone()) } else { None }).collect();
+    for percentage in ["59%", "23%", "10%", "9%"] {
+        assert!(shown.contains(&percentage.to_string()), "missing {percentage} in {shown:?}");
+    }
+}
+
+#[test]
 fn custom_data_labels_override_generated_values_and_3d_bars_are_drawn() {
     let series = ser(0, "Share", None, &["A"], &["100"]);
     let labels = r#"<c:dLbls><c:showVal val="0"/><c:showPercent val="1"/><c:dLbl><c:idx val="0"/><c:tx><c:rich><a:p><a:r><a:t>Custom</a:t></a:r><a:r><a:t> label</a:t></a:r></a:p><a:p><a:fld type="PERCENTAGE"><a:rPr/><a:pPr/><a:t>[PERCENT]</a:t></a:fld></a:p></c:rich></c:tx></c:dLbl></c:dLbls>"#;
