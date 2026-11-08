@@ -60,6 +60,16 @@ impl Embedded {
     pub fn is_odf_object(&self) -> bool {
         self.xml.trim_start().starts_with(Self::ODF_OBJECT)
     }
+
+    /// Is this an icon-view OLE object? Its metafile is a visible icon preview, whose lettering
+    /// LibreOffice leaves out of PDF search text. Content-view OLE previews remain searchable.
+    pub fn is_ole_icon(&self) -> bool {
+        let Some(i) = self.xml.find("DrawAspect=") else { return false };
+        let Some(value) = self.xml.get(i + "DrawAspect=".len()..) else { return false };
+        let Some(quote) = value.chars().next().filter(|c| matches!(c, '\'' | '"')) else { return false };
+        let value = &value[quote.len_utf8()..];
+        value.find(quote).is_some_and(|end| value[..end].eq_ignore_ascii_case("Icon"))
+    }
 }
 
 /// One relationship an [`Embedded`] object uses.
