@@ -45,16 +45,25 @@ impl Scale {
 /// out to a step of 1, 2, 2.5, 5 or 10 times a power of ten (about seven steps). `min`/`max`
 /// from the file replace the ends.
 pub(super) fn nice_scale(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>) -> Scale {
+    nice_scale_with(dlo, dhi, zero, min, max, 7.5, 0.05)
+}
+
+/// LibreOffice uses denser, unpadded automatic ticks for 3-D value axes.
+pub(super) fn nice_scale_3d(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>) -> Scale {
+    nice_scale_with(dlo, dhi, zero, min, max, 10.0, 0.0)
+}
+
+fn nice_scale_with(dlo: f64, dhi: f64, zero: bool, min: Option<f64>, max: Option<f64>, steps: f64, padding: f64) -> Scale {
     let (dlo, dhi) = if dhi > dlo { (dlo, dhi) } else { (dlo, dlo + 1.0) };
     let span = dhi - dlo;
     // With zero, the ends reach it: all-negative data still starts its bars at zero.
     let (ends_lo, ends_hi) = if zero { (dlo.min(0.0), dhi.max(0.0)) } else { (dlo, dhi) };
-    let lo = min.unwrap_or(if ends_lo < 0.0 { ends_lo - 0.05 * span } else { ends_lo });
-    let hi = max.unwrap_or(if ends_hi > 0.0 { ends_hi + 0.05 * span } else { ends_hi });
+    let lo = min.unwrap_or(if ends_lo < 0.0 { ends_lo - padding * span } else { ends_lo });
+    let hi = max.unwrap_or(if ends_hi > 0.0 { ends_hi + padding * span } else { ends_hi });
     if !(hi > lo && hi.is_finite() && lo.is_finite()) {
         return Scale { lo: 0.0, hi: 1.0, step: 0.2 };
     }
-    let raw = (hi - lo) / 7.5;
+    let raw = (hi - lo) / steps;
     let mag = 10f64.powf(raw.log10().floor());
     let step = [1.0, 2.0, 2.5, 5.0, 10.0].iter().map(|m| m * mag).find(|s| *s >= raw).unwrap_or(10.0 * mag);
     let lo_r = if min.is_some() { lo } else { ((lo / step) + 1e-9).floor() * step };
@@ -139,7 +148,7 @@ impl Axes {
         let line_like = c.series.iter().filter(|s| s.secondary_axis == secondary).all(|s| matches!(s.kind, Kind::Line | Kind::Scatter));
         // Lines and scatters don't need zero for a narrow range (1000..1050 stays on its own scale).
         let zero = !line_like || !narrow(dlo, dhi);
-        let vs = nice_scale(dlo, dhi, zero, vmin, vmax);
+        let vs = if c.three_d { nice_scale_3d(dlo, dhi, zero, vmin, vmax) } else { nice_scale(dlo, dhi, zero, vmin, vmax) };
         let vticks = vs.ticks().into_iter().map(|t| (t, format_value(t, val_fmt, vs.step))).collect();
         let xs = (c.kind == Kind::Scatter).then(|| {
             let (xl, xh) = x_extent(c);

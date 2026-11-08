@@ -179,6 +179,7 @@ fn nice_scale_rounds_to_round_steps() {
     assert_eq!(nice_scale(0.0, 22.3, true, Some(0.0), Some(30.0)).hi, 30.0);
     let flat = nice_scale(0.0, 0.0, true, None, None);
     assert!(flat.lo == 0.0 && (flat.hi - 1.2).abs() < 1e-9 && flat.step == 0.2, "{flat:?}");
+    assert_eq!(nice_scale_3d(2.0, 5.0, true, None, None), Scale { lo: 0.0, hi: 5.0, step: 0.5 });
 }
 
 #[test]
