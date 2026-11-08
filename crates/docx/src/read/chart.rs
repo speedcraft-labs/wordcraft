@@ -1,7 +1,7 @@
 //! Charts (ECMA-376 Part 1 §21.2): the cached data of a `c:chartSpace` drawn as items in points.
 //!
 //! Bar and column (clustered, stacked or 100% stacked), line, area, pie, doughnut and scatter
-//! charts are drawn from the first supported chart type of the plot area, with their values as
+//! charts are drawn from supported chart type groups in the plot area, with their values as
 //! data labels where `c:dLbls` shows them (`c:showVal`). Radar charts (standard, with markers or
 //! filled) draw as spokes, concentric grid polygons and one polygon per series. A chart of only other types (stock, bubble…)
 //! draws a placeholder: its frame, its title and the type it is. Text widths are estimated ([`CHAR_W`] em a character), so label places are approximate.
