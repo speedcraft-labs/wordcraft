@@ -11,7 +11,7 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
     let k = (sx + sy) / 2.0;
     let inside = |r: &[f32; 4]| Rect::new(rect.x + r[0] * sx, rect.y + r[1] * sy, r[2] * sx, r[3] * sy);
     let mut out = Vec::with_capacity(g.items.len());
-    for it in &g.items {
+    for (item_index, it) in g.items.iter().enumerate() {
         match it {
             GraphicItem::Shape { rect: r, kind, fill, stroke, stroke_width } => out.push(Draw::Shape {
                 rect: inside(r),
@@ -38,8 +38,23 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
             GraphicItem::Text { rect: r, .. } => out.extend(text_glyphs(doc, inside(r), it, alpha, k)),
             GraphicItem::RotatedText { rect: r, rotation, .. } => {
                 let rect = inside(r);
-                let items = text_glyphs(doc, rect, it, alpha, k);
+                let separate = item_index > 0 && g.items.get(item_index - 1).is_some_and(|previous| same_rotated_text_style(previous, it));
+                let mut searchable = it.clone();
+                if separate && let GraphicItem::RotatedText { text, .. } = &mut searchable {
+                    text.insert(0, ' ');
+                }
+                let mut items = text_glyphs(doc, rect, &searchable, alpha, k);
                 if !items.is_empty() {
+                    // A leading blank is part of this label's actual text run, so it survives
+                    // extraction between adjacent labels. Move the remaining glyphs back by the
+                    // blank's alignment offset to keep the visible labels in their original places.
+                    if separate {
+                        let align = match it {
+                            GraphicItem::RotatedText { align, .. } => *align,
+                            _ => TextAlign::Left,
+                        };
+                        offset_after_leading_space(&mut items, align);
+                    }
                     out.push(Draw::Rotated { cx: rect.x + rect.w / 2.0, cy: rect.y + rect.h / 2.0, spin: Spin::new(*rotation, false, false), items });
                 }
             }
@@ -56,6 +71,50 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
         }
     }
     out
+}
+
+/// Offset the glyphs after a leading space back into place after shaping a rotated label with an
+/// extraction separator. The space glyph itself has no mark, so labels keep their visible geometry.
+fn offset_after_leading_space(items: &mut [Draw], align: TextAlign) {
+    let Some((space_gid, space_width)) = items.iter().find_map(|item| {
+        let Draw::Glyphs { face, size, text, .. } = item else { return None };
+        if !text.starts_with(' ') {
+            return None;
+        }
+        let gid = face.glyph_for(' ');
+        let width = face.advance(gid) as f32 * size / face.upem.max(1.0) as f32;
+        Some((gid, width))
+    }) else {
+        return;
+    };
+    let fraction = match align {
+        TextAlign::Left => 1.0,
+        TextAlign::Center => 0.5,
+        TextAlign::Right => 0.0,
+    };
+    let shift = space_width * fraction;
+    let mut separator_skipped = false;
+    for item in items {
+        let Draw::Glyphs { glyphs, .. } = item else { continue };
+        for (gid, x, _) in glyphs {
+            if !separator_skipped && *gid == space_gid {
+                separator_skipped = true;
+            } else {
+                *x -= shift;
+            }
+        }
+    }
+}
+
+/// Whether adjacent rotated labels share the style that lets their searchable text form one run.
+fn same_rotated_text_style(a: &GraphicItem, b: &GraphicItem) -> bool {
+    match (a, b) {
+        (
+            GraphicItem::RotatedText { size: a_size, color: a_color, bold: a_bold, align: a_align, font: a_font, rotation: a_rotation, .. },
+            GraphicItem::RotatedText { size: b_size, color: b_color, bold: b_bold, align: b_align, font: b_font, rotation: b_rotation, .. },
+        ) => a_size == b_size && a_color == b_color && a_bold == b_bold && a_align == b_align && a_font == b_font && a_rotation == b_rotation,
+        _ => false,
+    }
 }
 
 /// Scale from the size `built` points a graphic's items were made for to `len` points; 1 when
