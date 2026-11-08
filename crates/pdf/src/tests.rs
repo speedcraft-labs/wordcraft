@@ -2409,7 +2409,19 @@ fn equations_are_drawn_but_not_searchable_in_pdf() {
 
     let lay = layout(&d, &mut LayoutCache::new(), &LayoutOptions::default());
     let draws = wordcraft_layout::display::page_display(&d, &lay.pages[0], &DisplayOptions::default());
-    assert!(draws.iter().any(|draw| matches!(draw, Draw::Glyphs { text, pdf_searchable: false, .. } if text.contains("qzv"))));
+    fn append_hidden_text(draws: &[Draw], text: &mut String) {
+        for draw in draws {
+            match draw {
+                Draw::Glyphs { text: glyph_text, pdf_searchable: false, .. } => text.push_str(glyph_text),
+                Draw::Figure { draws, .. } => append_hidden_text(draws, text),
+                Draw::Turned { items, .. } | Draw::Rotated { items, .. } | Draw::Clip { items, .. } => append_hidden_text(items, text),
+                _ => {}
+            }
+        }
+    }
+    let mut equation_text = String::new();
+    append_hidden_text(&draws, &mut equation_text);
+    assert!(equation_text.contains("qzv"), "equation glyphs remain drawn but unsearchable: {equation_text:?}");
 
     let text = squash(&extract_text(&export(&d, &PdfOptions::default()).unwrap()).concat());
     assert!(text.contains("Before") && text.contains("after"), "surrounding text stays searchable: {text}");
