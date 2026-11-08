@@ -44,6 +44,12 @@ impl Reader<'_> {
                     out.push(para_block(p));
                 }
                 "w:tbl" => {
+                    // Block tables can appear between the separator and end of a complex
+                    // REF field. They are the cached display, not independent document content;
+                    // the REF field updates to the bookmark text or its missing-bookmark error.
+                    if super::fields::is_unlocked_ref_result(sc) {
+                        continue;
+                    }
                     if depth / 4 >= MAX_TABLE_DEPTH {
                         out.push(para_block(Paragraph::with_text(&clean_text(&e.deep_text()), CharProps::default())));
                     } else if let Some(t) = self.read_table(sc, e, rels, depth) {

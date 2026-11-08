@@ -25,6 +25,15 @@ fn is_range_instr(instr: &str) -> bool {
     crate::read::is_toc(instr) || instr.trim_start().get(..5).is_some_and(|k| k.eq_ignore_ascii_case("ADDIN"))
 }
 
+/// A table between a `REF` field's separator and end is only its cached result. The field itself
+/// resolves to text (or an error), so retaining the table as a separate body block displays both
+/// the updated field and a stale copy of the result.
+pub(super) fn is_unlocked_ref_result(sc: &StoryCtx) -> bool {
+    sc.fields
+        .iter()
+        .any(|f| f.phase == Phase::Result && !f.locked && f.instr.split_whitespace().next().is_some_and(|name| name.eq_ignore_ascii_case("REF")))
+}
+
 impl Reader<'_> {
     // ---- fields ----
 
