@@ -38,9 +38,18 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
             GraphicItem::Text { rect: r, .. } => out.extend(text_glyphs(doc, inside(r), it, alpha, k)),
             GraphicItem::RotatedText { rect: r, rotation, .. } => {
                 let rect = inside(r);
-                let items = text_glyphs(doc, rect, it, alpha, k);
+                let mut items = text_glyphs(doc, rect, it, alpha, k);
                 if !items.is_empty() {
+                    // PDF text extractors split glyphs along a rotated baseline into separate
+                    // words. Keep the visible label as outlines and add a transparent horizontal
+                    // text run so copy/paste and text comparison retain the whole label.
+                    for item in &mut items {
+                        if let Draw::Glyphs { pdf_searchable, .. } = item {
+                            *pdf_searchable = false;
+                        }
+                    }
                     out.push(Draw::Rotated { cx: rect.x + rect.w / 2.0, cy: rect.y + rect.h / 2.0, spin: Spin::new(*rotation, false, false), items });
+                    out.extend(text_glyphs(doc, rect, it, 0.0, k));
                 }
             }
             GraphicItem::Image { rect: r, media } => out.push(Draw::Image {
