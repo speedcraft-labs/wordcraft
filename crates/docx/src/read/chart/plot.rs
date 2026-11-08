@@ -3,7 +3,7 @@ use super::format::format_value;
 use super::model::{DataLabel, Grouping, Kind, Series};
 use super::parse::category_text;
 use super::polar::{draw_data_labels, label_of};
-use super::{AXIS, Chart, El, GAP, GRID, GraphicItem, LINE, MAX_LABEL, MAX_TICKS, PathSeg, Rgb, ShapeKind, TextAlign, fill_colour, measure};
+use super::{AXIS, Chart, El, GAP, GRID, GraphicItem, LINE, MAX_LABEL, MAX_TICKS, PathSeg, Rgb, ShapeKind, TEXT, TextAlign, fill_colour, measure};
 
 pub(super) fn label(s: &str) -> String {
     s.chars().take(MAX_LABEL).collect()
@@ -171,6 +171,8 @@ struct Margins {
     wrapped: Vec<Vec<String>>,
     /// Every `skip`-th category label is shown under a column chart.
     skip: usize,
+    /// Category labels turned 45 degrees to fit when the file specifies a tick-label skip.
+    rotated: bool,
 }
 
 /// The margins the axis labels need around the plot in `area`. Category labels under a column
@@ -197,17 +199,24 @@ fn axis_margins(c: &Chart, ax: &Axes, right_ax: Option<&Axes>, area: Rect) -> Ma
         Vec::new()
     };
     let widest_line = wrapped.iter().flatten().map(|s| text_w(s, fs)).fold(0.0, f32::max);
-    let skip = ((widest_line / band_w).ceil() as usize).max(1);
+    let skip = c.cat.label_skip.unwrap_or_else(|| ((widest_line / band_w).ceil() as usize).max(1)).max(1);
+    let rotated = !c.horizontal && !scatter && c.cat.label_skip.is_some() && widest_line > band_w;
     let label_lines = wrapped.iter().map(Vec::len).max().unwrap_or(1) as f32;
     let bottom = if cat_on && !c.horizontal {
-        if scatter { lh + GAP } else { label_lines * lh + GAP }
+        if scatter {
+            lh + GAP
+        } else if rotated {
+            (widest_line + lh) * std::f32::consts::FRAC_1_SQRT_2 + GAP
+        } else {
+            label_lines * lh + GAP
+        }
     } else if c.horizontal && val_on {
         lh + GAP
     } else {
         0.0
     };
     let top = if !c.horizontal && val_on { lh / 2.0 } else { 0.0 };
-    Margins { left, right, top, bottom, wrapped, skip }
+    Margins { left, right, top, bottom, wrapped, skip, rotated }
 }
 
 fn draw_series(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, labels: &mut Vec<DataLabel>) {
@@ -331,6 +340,25 @@ fn draw_category_labels(out: &mut Vec<GraphicItem>, c: &Chart, g: &Frame, xticks
         }
     } else {
         let band = g.band();
+        if m.rotated {
+            let cos = std::f32::consts::FRAC_1_SQRT_2;
+            for (i, s) in c.cats.iter().enumerate().step_by(m.skip) {
+                let width = text_w(s, fs) + 4.0;
+                let x = g.cat_x(i) - width * (0.5 + cos / 2.0);
+                let y = plot.bottom() + GAP + width * cos / 2.0 - lh / 2.0;
+                out.push(GraphicItem::RotatedText {
+                    rect: [x, y, width, lh],
+                    text: s.clone(),
+                    size: fs,
+                    color: TEXT,
+                    bold: false,
+                    align: TextAlign::Left,
+                    font: None,
+                    rotation: 315.0,
+                });
+            }
+            return;
+        }
         for (i, lines) in m.wrapped.iter().enumerate().filter(|(i, _)| i % m.skip == 0) {
             for (k, s) in lines.iter().enumerate() {
                 let y = plot.bottom() + GAP / 2.0 + k as f32 * lh;

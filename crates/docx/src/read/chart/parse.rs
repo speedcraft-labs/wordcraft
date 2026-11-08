@@ -419,6 +419,7 @@ pub(super) fn axis(a: Option<&El>) -> Axis {
             .and_then(|f| f.attr("formatCode"))
             .filter(|f| f.len() <= MAX_FORMAT_CODE)
             .map(str::to_string),
+        label_skip: a.child("c:tickLblSkip").and_then(|e| e.attr("val")).and_then(int).filter(|n| *n > 0).map(|n| n.min(MAX_POINTS as i64) as usize),
     }
 }
 
