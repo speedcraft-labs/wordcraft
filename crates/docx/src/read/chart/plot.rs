@@ -184,10 +184,8 @@ fn axis_margins(c: &Chart, ax: &Axes, right_ax: Option<&Axes>, area: Rect) -> Ma
     let (cat_on, val_on) = (!c.cat.deleted, !c.val.deleted);
     let left = if c.horizontal {
         if cat_on { widest(&c.cats, fs).min(area.w * 0.4) + GAP } else { 0.0 }
-    } else if val_on {
-        ax.vticks.iter().map(|(_, s)| text_w(s, fs)).fold(0.0, f32::max) + GAP
     } else {
-        0.0
+        ax.vticks.iter().map(|(_, s)| text_w(s, fs)).fold(0.0, f32::max) + GAP
     };
     let right =
         right_ax.filter(|_| !c.val_right.deleted).map_or(0.0, |axes| axes.vticks.iter().map(|(_, s)| text_w(s, fs)).fold(0.0, f32::max) + GAP);
@@ -210,7 +208,7 @@ fn axis_margins(c: &Chart, ax: &Axes, right_ax: Option<&Axes>, area: Rect) -> Ma
         } else {
             label_lines * lh + GAP
         }
-    } else if c.horizontal && val_on {
+    } else if c.horizontal {
         lh + GAP
     } else {
         0.0
