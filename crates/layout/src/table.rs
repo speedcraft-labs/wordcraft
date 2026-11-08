@@ -202,6 +202,8 @@ pub fn measure_table_columns(doc: &wordcraft_doc::Document, t: &Table) -> Vec<(f
     let margins_def = default_margins(t, style.as_ref());
     let ncols = grid_cols(t).clamp(1, wordcraft_doc::table::MAX_COLS);
     let fields = crate::FieldCtx::default();
+    let header_style_rows =
+        if doc.settings.differentiate_multirow_table_headers { t.rows.iter().take_while(|row| row.props.header).count().max(1) } else { 1 };
     let mut cols = vec![(0.0f32, 0.0f32); ncols];
     // Cells spanning several columns: (first column, span, min, max), applied after the others.
     let mut spanned: Vec<(usize, usize, f32, f32)> = Vec::new();
@@ -212,7 +214,7 @@ pub fn measure_table_columns(doc: &wordcraft_doc::Document, t: &Table) -> Vec<(f
             let span = cell.span();
             let margins = cell.props.resolved_margins(margins_def);
             let side = margins[1].max(0.0) + margins[3].max(0.0);
-            let text = style.as_ref().map(|st| region_text(st, region_of(t, style.as_ref(), ri, g, span, ncols)));
+            let text = style.as_ref().map(|st| region_text(st, region_of(t, style.as_ref(), ri, g, span, ncols, header_style_rows)));
             let env = crate::para::ParaEnv {
                 doc,
                 width: MEASURE_WIDE,
@@ -485,6 +487,8 @@ fn table_frame(ctx: &mut Ctx, t: &Table, avail: f32, depth: usize, style: Option
 
 pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], avail: f32, depth: usize) -> TableLayout {
     let style = table_style(ctx, t);
+    let header_style_rows =
+        if ctx.doc.settings.differentiate_multirow_table_headers { t.rows.iter().take_while(|row| row.props.header).count().max(1) } else { 1 };
     // Cell text formatting and looks per set of style parts, built once per table.
     let mut cell_text: Vec<(Region, CellText)> = Vec::new();
     let mut looks: Vec<(Region, RegionLook)> = Vec::new();
@@ -523,7 +527,7 @@ pub fn layout_table(ctx: &mut Ctx, story: StoryRef, t: &Table, path: &[u32], ava
             let m = cell.props.resolved_margins(margins_def);
             let margins = if rtl { [row_top, m[3], row_bottom, m[1]] } else { [row_top, m[1], row_bottom, m[3]] };
             let cw = (x1 - x0 - margins[1] - margins[3]).max(4.0);
-            let region = region_of(t, style.as_ref(), ri, g, span, ncols);
+            let region = region_of(t, style.as_ref(), ri, g, span, ncols, header_style_rows);
             // Conditional formatting, later parts winning (ECMA-376 §17.7.6): whole table, column
             // bands, row bands, first/last column, header/total row, corner cells.
             if let Some(st) = &style
@@ -1331,10 +1335,10 @@ fn split_rect(r: Rect, cut: f32, shift: f32) -> (Option<Rect>, Option<Rect>) {
 type Region = PartSet;
 
 /// The parts of the cell at grid column `g` spanning `span` of `ncols` columns in row `ri`.
-fn region_of(t: &Table, style: Option<&TableStyleProps>, ri: usize, g: usize, span: usize, ncols: usize) -> Region {
+fn region_of(t: &Table, style: Option<&TableStyleProps>, ri: usize, g: usize, span: usize, ncols: usize, header_rows: usize) -> Region {
     let rows = style.and_then(|s| s.parts.band_size).unwrap_or(0);
     let cols = style.and_then(|s| s.parts.col_band_size).unwrap_or(0);
-    PartSet::of_cell(&t.props.look, (rows, cols), (ri, t.rows.len()), (g, span, ncols))
+    PartSet::of_cell_with_header_rows(&t.props.look, (rows, cols), (ri, t.rows.len()), (g, span, ncols), header_rows)
 }
 
 /// The table style's text formatting in `region`: each part's character formatting and paragraph
@@ -1359,6 +1363,8 @@ fn column_content(ctx: &mut Ctx, t: &Table, style: Option<&TableStyleProps>, dep
     let margins_def = default_margins(t, style);
     // The grid's width once: counting it walks every row.
     let ncols = grid_cols(t);
+    let header_style_rows =
+        if ctx.doc.settings.differentiate_multirow_table_headers { t.rows.iter().take_while(|row| row.props.header).count().max(1) } else { 1 };
     let mut cols = vec![(0.0f32, 0.0f32); ncols.max(1)];
     let mut spanning = Vec::new();
     let mut any = false;
@@ -1367,7 +1373,7 @@ fn column_content(ctx: &mut Ctx, t: &Table, style: Option<&TableStyleProps>, dep
         for cell in &row.cells {
             let span = cell.span();
             if cell.props.vmerge != VMerge::Continue {
-                let text = style.map(|st| region_text(st, region_of(t, style, ri, g, cell.span(), cols.len())));
+                let text = style.map(|st| region_text(st, region_of(t, style, ri, g, cell.span(), cols.len(), header_style_rows)));
                 let (lo, hi) = blocks_content(ctx, &cell.blocks, text.as_ref(), depth);
                 any |= hi > 0.0;
                 let m = cell.props.resolved_margins(margins_def);
