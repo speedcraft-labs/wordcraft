@@ -138,6 +138,20 @@ pub enum GraphicItem {
         #[serde(default)]
         font: Option<String>,
     },
+    /// One line of chart text turned about its rectangle's centre (clockwise degrees, page axes).
+    RotatedText {
+        rect: [f32; 4],
+        text: String,
+        size: f32,
+        color: Rgb,
+        #[serde(default)]
+        bold: bool,
+        #[serde(default)]
+        align: TextAlign,
+        #[serde(default)]
+        font: Option<String>,
+        rotation: f32,
+    },
     /// A picture (`Document::media` key) stretched into `rect`.
     Image { rect: [f32; 4], media: String },
 }

@@ -36,6 +36,13 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
                 })
             }
             GraphicItem::Text { rect: r, .. } => out.extend(text_glyphs(doc, inside(r), it, alpha, k)),
+            GraphicItem::RotatedText { rect: r, rotation, .. } => {
+                let rect = inside(r);
+                let items = text_glyphs(doc, rect, it, alpha, k);
+                if !items.is_empty() {
+                    out.push(Draw::Rotated { cx: rect.x + rect.w / 2.0, cy: rect.y + rect.h / 2.0, spin: Spin::new(*rotation, false, false), items });
+                }
+            }
             GraphicItem::Image { rect: r, media } => out.push(Draw::Image {
                 rect: inside(r),
                 media: media.clone(),
@@ -274,14 +281,18 @@ pub fn seg_path(segs: &[PathSeg]) -> BezPath {
     p
 }
 
-/// One line of a `GraphicItem::Text` in `r`, shaped in its font (the document's body font when
-/// unset) and aligned horizontally, centred vertically, at its size times `k`. Characters the font
-/// lacks (Chinese in a chart drawn in Calibri's substitute, #4720) are drawn in a fallback face, as
-/// in body text: one draw per run of a face, in reading order. Empty when there is nothing to draw,
-/// or the item's rectangle or size isn't a finite number (a degenerate scale: `r` itself is always
+/// One line of graphic text in `r`, shaped in its font (the document's body font when unset) and
+/// aligned horizontally, centred vertically, at its size times `k`. Characters the font lacks
+/// (Chinese in a chart drawn in Calibri's substitute, #4720) are drawn in a fallback face, as in
+/// body text: one draw per run of a face, in reading order. Empty when there is nothing to draw, or
+/// the item's rectangle or size isn't a finite number (a degenerate scale: `r` itself is always
 /// finite, as [`Rect::new`] makes it).
 fn text_glyphs(doc: &Document, r: Rect, it: &GraphicItem, alpha: f32, k: f32) -> Vec<Draw> {
-    let GraphicItem::Text { rect, text, size, color, bold, align, font } = it else { return Vec::new() };
+    let (rect, text, size, color, bold, align, font) = match it {
+        GraphicItem::Text { rect, text, size, color, bold, align, font }
+        | GraphicItem::RotatedText { rect, text, size, color, bold, align, font, .. } => (rect, text, size, color, bold, align, font),
+        _ => return Vec::new(),
+    };
     let size = *size * k;
     if !rect.iter().chain([&size]).all(|v| v.is_finite()) {
         return Vec::new();

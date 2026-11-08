@@ -65,6 +65,8 @@ pub(super) struct Axis {
     pub(super) max: Option<f64>,
     /// Number format of the tick labels, when not linked to the source data.
     pub(super) fmt: Option<String>,
+    /// Number of categories between shown labels (`c:tickLblSkip`).
+    pub(super) label_skip: Option<usize>,
 }
 
 pub(super) struct Series {
