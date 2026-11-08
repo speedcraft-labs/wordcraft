@@ -16,6 +16,47 @@ mod draw;
 mod nav;
 mod text;
 
+/// Searchable text in a single line that contains an inline preview with no PDF text layer.
+/// The image occupies space on the page, but LibreOffice omits it from text extraction, so its
+/// horizontal gap must not become a word boundary either.
+fn inline_preview_line_text(draws: &[Draw]) -> Option<String> {
+    fn has_hidden_image(draw: &Draw) -> bool {
+        match draw {
+            Draw::Image { pdf_searchable: false, .. } => true,
+            Draw::Turned { items, .. } | Draw::Rotated { items, .. } | Draw::Clip { items, .. } => items.iter().any(has_hidden_image),
+            _ => false,
+        }
+    }
+    fn can_be_in_text_span(draw: &Draw) -> bool {
+        match draw {
+            Draw::Glyphs { pdf_searchable: true, .. } => true,
+            Draw::Image { pdf_searchable: false, alt, decorative, .. } => *decorative || alt.trim().is_empty(),
+            Draw::Turned { items, .. } | Draw::Rotated { items, .. } | Draw::Clip { items, .. } => items.iter().all(can_be_in_text_span),
+            _ => false,
+        }
+    }
+    fn append_text(draw: &Draw, text: &mut String) {
+        match draw {
+            Draw::Glyphs { text: run, pdf_searchable: true, .. } => text.push_str(run),
+            Draw::Turned { items, .. } | Draw::Rotated { items, .. } | Draw::Clip { items, .. } => {
+                for item in items {
+                    append_text(item, text);
+                }
+            }
+            _ => {}
+        }
+    }
+
+    if !draws.iter().any(has_hidden_image) || !draws.iter().all(can_be_in_text_span) {
+        return None;
+    }
+    let mut text = String::new();
+    for draw in draws {
+        append_text(draw, &mut text);
+    }
+    (!text.is_empty()).then_some(text)
+}
+
 pub(crate) struct Exporter<'a> {
     pub(crate) doc: &'a Document,
     pub(crate) lay: &'a DocLayout,
@@ -218,9 +259,20 @@ impl Exporter<'_> {
         for it in &page.items {
             let draws = shown.draws(it, &dopts);
             match it {
-                Placed::Lines { story, path, para, .. } => {
+                Placed::Lines { story, path, para, l0, l1, .. } => {
                     let idx = self.entry(*story, path, para);
+                    // For a one-line paragraph with an inline preview omitted from PDF text,
+                    // ActualText keeps the paragraph's text continuous across the preview gap.
+                    let actual_text = (*l1 == *l0 + 1).then(|| inline_preview_line_text(&draws)).flatten();
+                    let actual_id = actual_text
+                        .as_deref()
+                        .filter(|_| self.opts.tagged)
+                        .map(|text| s.start_tagged(ContentTag::Span(SpanTag::empty().with_actual_text(Some(text)))));
                     for d in &draws {
+                        if actual_id.is_some() {
+                            self.draw(s, d);
+                            continue;
+                        }
                         match d {
                             Draw::Glyphs { .. } | Draw::Turned { .. } => self.tagged(s, Role::Para(idx), None, |me, s| me.draw(s, d)),
                             // A picture marked decorative: an artifact screen readers skip.
@@ -241,6 +293,12 @@ impl Exporter<'_> {
                                 }
                             }),
                             _ => self.tagged(s, Role::Artifact(ArtifactType::Other), None, |me, s| me.draw(s, d)),
+                        }
+                    }
+                    if let Some(id) = actual_id {
+                        s.end_tagged();
+                        if let Some(entry) = self.tags.get_mut(idx) {
+                            entry.children.push(Node::Leaf(id));
                         }
                     }
                 }
