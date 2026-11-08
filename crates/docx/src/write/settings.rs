@@ -150,6 +150,12 @@ fn write_compatibility_settings(w: &mut W, doc: &Document) {
     }
     let mode = doc.settings.compat_mode.clamp(11, 15).to_string();
     w.empty("w:compatSetting", &[("w:name", "compatibilityMode"), ("w:uri", "http://schemas.microsoft.com/office/word"), ("w:val", &mode)]);
+    if doc.settings.differentiate_multirow_table_headers {
+        w.empty(
+            "w:compatSetting",
+            &[("w:name", "differentiateMultirowTableHeaders"), ("w:uri", "http://schemas.microsoft.com/office/word"), ("w:val", "1")],
+        );
+    }
     w.close("w:compat");
 }
 

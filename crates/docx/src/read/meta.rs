@@ -37,6 +37,13 @@ impl Reader<'_> {
                     if let Some(m) = mode.and_then(u32_of) {
                         s.compat_mode = m.clamp(11, 99);
                     }
+                    s.differentiate_multirow_table_headers = k
+                        .children("w:compatSetting")
+                        .find(|c| {
+                            c.attr("w:name") == Some("differentiateMultirowTableHeaders")
+                                && c.attr("w:uri") == Some("http://schemas.microsoft.com/office/word")
+                        })
+                        .is_some_and(on_off);
                     s.sum_paragraph_spacing = k.children("w:doNotUseHTMLParagraphAutoSpacing").any(on_off);
                     s.do_not_expand_shift_return = k.children("w:doNotExpandShiftReturn").any(on_off);
                 }
