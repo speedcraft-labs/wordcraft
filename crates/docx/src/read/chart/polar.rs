@@ -136,6 +136,9 @@ pub(super) fn radar(out: &mut Vec<GraphicItem>, c: &Chart, area: Rect) {
 /// The data label of point `i` of series `s`, when it shows one: the value as the file has it,
 /// in the series' number format.
 pub(super) fn label_of(s: &Series, i: usize) -> Option<String> {
+    if s.point_deleted.get(i).copied().unwrap_or(false) {
+        return None;
+    }
     if let Some(label) = s.point_labels.get(i).and_then(Clone::clone) {
         let mut text = label.text;
         if label.percentage {
