@@ -111,8 +111,34 @@ pub(crate) fn chart_items(space: &El, theme: &[Rgb], w: f32, h: f32) -> Vec<Grap
 /// The title at the top of `area`; returns the room left under it.
 fn title_block(out: &mut Vec<GraphicItem>, t: &str, area: Rect) -> Rect {
     let lh = TITLE_SIZE * LINE;
-    text(out, Rect { x: area.x, y: area.y, w: area.w, h: lh }, t, TITLE_SIZE, TextAlign::Center, true);
-    Rect { y: area.y + lh + PAD, h: (area.h - lh - PAD).max(1.0), ..area }
+    let lines = wrap_title(t, area.w);
+    for (i, line) in lines.iter().enumerate() {
+        text(out, Rect { x: area.x, y: area.y + i as f32 * lh, w: area.w, h: lh }, line, TITLE_SIZE, TextAlign::Center, true);
+    }
+    let used = lh * lines.len() as f32 + PAD;
+    Rect { y: area.y + used, h: (area.h - used).max(1.0), ..area }
+}
+
+/// Keep a long chart title inside its area, wrapping at word boundaries without dropping text.
+fn wrap_title(title: &str, width: f32) -> Vec<String> {
+    let mut lines = Vec::new();
+    let mut current = String::new();
+    for word in title.split_whitespace() {
+        let joined = if current.is_empty() { word.to_string() } else { format!("{current} {word}") };
+        if current.is_empty() || text_w(&joined, TITLE_SIZE) <= width {
+            current = joined;
+        } else {
+            lines.push(std::mem::take(&mut current));
+            current = word.to_string();
+        }
+    }
+    if !current.is_empty() {
+        lines.push(current);
+    }
+    if lines.is_empty() {
+        lines.push(String::new());
+    }
+    lines
 }
 
 /// A chart whose plot area holds only chart types WordCraft doesn't draw (stock, bubble…): its
