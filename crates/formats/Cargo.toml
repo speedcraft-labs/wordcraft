@@ -30,6 +30,9 @@ getrandom = { workspace = true }
 zeroize = { workspace = true }
 miniz_oxide = { workspace = true }
 
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rayon = { workspace = true }
+
 [target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
 # The browser clock (`SystemTime::now()` panics on wasm32-unknown-unknown): ODT change dates.
 js-sys = "0.3"
