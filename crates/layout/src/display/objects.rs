@@ -11,7 +11,7 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
     let k = (sx + sy) / 2.0;
     let inside = |r: &[f32; 4]| Rect::new(rect.x + r[0] * sx, rect.y + r[1] * sy, r[2] * sx, r[3] * sy);
     let mut out = Vec::with_capacity(g.items.len());
-    for it in &g.items {
+    for (item_index, it) in g.items.iter().enumerate() {
         match it {
             GraphicItem::Shape { rect: r, kind, fill, stroke, stroke_width } => out.push(Draw::Shape {
                 rect: inside(r),
@@ -40,22 +40,42 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
                 let rect = inside(r);
                 let mut items = text_glyphs(doc, rect, it, alpha, k);
                 if !items.is_empty() {
-                    // PDF text extractors split glyphs along a rotated baseline into separate
-                    // words. Keep the visible label as outlines and add a transparent horizontal
-                    // text run so copy/paste and text comparison retain the whole label.
+                    // Draw the visible rotated label as outlines. Searchable text is added below
+                    // as a horizontal run; PDF extractors otherwise split rotated labels by glyph.
                     for item in &mut items {
                         if let Draw::Glyphs { pdf_searchable, .. } = item {
                             *pdf_searchable = false;
                         }
                     }
                     out.push(Draw::Rotated { cx: rect.x + rect.w / 2.0, cy: rect.y + rect.h / 2.0, spin: Spin::new(*rotation, false, false), items });
-                    let mut searchable = it.clone();
-                    if let GraphicItem::RotatedText { text, .. } = &mut searchable {
-                        // Keep adjacent labels separate in PDF text extraction. The trailing
-                        // space has no visible mark and this copy is transparent.
-                        text.push(' ');
+
+                    let next_is_label = g.items.get(item_index + 1).is_some_and(|next| same_rotated_text_style(it, next));
+                    if !next_is_label {
+                        let mut start = item_index;
+                        while start > 0 && g.items.get(start - 1).is_some_and(|previous| same_rotated_text_style(previous, it)) {
+                            start -= 1;
+                        }
+                        let labels = g
+                            .items
+                            .get(start..=item_index)
+                            .unwrap_or(&[])
+                            .iter()
+                            .filter_map(|item| if let GraphicItem::RotatedText { text, .. } = item { Some(text.as_str()) } else { None })
+                            .collect::<Vec<_>>()
+                            .join(" ");
+                        let mut searchable = g.items.get(start).cloned().unwrap_or_else(|| it.clone());
+                        if let GraphicItem::RotatedText { text, align, .. } = &mut searchable {
+                            *text = labels;
+                            *align = TextAlign::Left;
+                        }
+                        let search_rect = match &searchable {
+                            GraphicItem::RotatedText { rect, .. } => inside(rect),
+                            _ => rect,
+                        };
+                        // Internal spaces survive PDF text extraction; trailing spaces on separate
+                        // glyph runs are discarded by common readers.
+                        out.extend(text_glyphs(doc, search_rect, &searchable, 0.0, k));
                     }
-                    out.extend(text_glyphs(doc, rect, &searchable, 0.0, k));
                 }
             }
             GraphicItem::Image { rect: r, media } => out.push(Draw::Image {
@@ -71,6 +91,17 @@ pub(super) fn graphic_draws(doc: &Document, g: &Graphic, rect: Rect, alpha: f32)
         }
     }
     out
+}
+
+/// Whether adjacent rotated labels share the style that lets their searchable text form one run.
+fn same_rotated_text_style(a: &GraphicItem, b: &GraphicItem) -> bool {
+    match (a, b) {
+        (
+            GraphicItem::RotatedText { size: a_size, color: a_color, bold: a_bold, align: a_align, font: a_font, rotation: a_rotation, .. },
+            GraphicItem::RotatedText { size: b_size, color: b_color, bold: b_bold, align: b_align, font: b_font, rotation: b_rotation, .. },
+        ) => a_size == b_size && a_color == b_color && a_bold == b_bold && a_align == b_align && a_font == b_font && a_rotation == b_rotation,
+        _ => false,
+    }
 }
 
 /// Scale from the size `built` points a graphic's items were made for to `len` points; 1 when
