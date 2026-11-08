@@ -1993,6 +1993,22 @@ fn list_level_overrides_round_trip() {
     assert_eq!(c.next_label(&back.numbering, restart, 1).unwrap().0, "1.01");
 }
 
+#[test]
+fn custom_number_format_round_trips_and_pads_labels() {
+    use wordcraft_doc::numbering::{Counters, Level};
+    let mut d = Document::new();
+    let num = Arc::make_mut(&mut d.numbering).add_list(ListKind::Numbered);
+    let level = Level { custom_format: Some("0001, 0002, 0003, ...".into()), ..Level::default() };
+    if let Some(n) = Arc::make_mut(&mut d.numbering).nums.iter_mut().find(|n| n.id == num) {
+        n.level_overrides = vec![(0, level)];
+    }
+    let back = wordcraft_docx::read(&wordcraft_docx::write(&d).unwrap()).unwrap();
+    let got = &back.numbering.num(num).unwrap().level_overrides[0].1;
+    assert_eq!(got.custom_format.as_deref(), Some("0001, 0002, 0003, ..."));
+    let mut counters = Counters::default();
+    assert_eq!(counters.next_label(&back.numbering, num, 0).unwrap().0, "0001.");
+}
+
 /// Ink strokes and freeform shapes are written as DrawingML custom geometry (`a:custGeom`,
 /// `a:moveTo`/`a:lnTo`) in floating drawings and read back with their points, pen, opacity and
 /// drawing order.
