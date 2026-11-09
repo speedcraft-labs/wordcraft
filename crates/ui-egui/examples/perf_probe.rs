@@ -11,6 +11,8 @@
 use std::time::Instant;
 
 use serde_json::json;
+use sha2::{Digest, Sha256};
+use wordcraft_doc::StoryRef;
 use wordcraft_engine::Session;
 use wordcraft_ui_egui::{Services, WordApp};
 
@@ -35,14 +37,38 @@ fn stats(v: &[f64]) -> serde_json::Value {
     json!({"n": s.len(), "med": (at(0.5) * 10.0).round() / 10.0, "p95": (at(0.95) * 10.0).round() / 10.0, "max": (at(1.0) * 10.0).round() / 10.0})
 }
 
+fn task_identity(app: &WordApp) -> String {
+    format!("{}|{}", app.session.doc.paragraph_count(), app.session.doc.word_count())
+}
+
+fn open_session(path: &str) -> Session {
+    let mut session = Session::new(wordcraft_doc::Document::new());
+    session.run("file.open", &json!({"path": path})).expect("open document");
+    session
+}
+
 /// Opens the document named on the command line and prints JSON timings for start-up, typing,
 /// scrolling, zooming, ribbon tabs and window resizes.
 fn main() {
-    let path = std::env::args().nth(1).expect("usage: perf_probe doc.docx [block]");
-    let block: Option<usize> = std::env::args().nth(2).and_then(|b| b.parse().ok());
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    let path = args.first().expect("usage: perf_probe doc.docx [block] [--task open|scroll|edit|save] [--output path]");
+    let task = args.windows(2).find(|pair| pair[0] == "--task").map(|pair| pair[1].as_str());
+    let output_path = args.windows(2).find(|pair| pair[0] == "--output").map(|pair| pair[1].as_str());
+    let block: Option<usize> = args.iter().skip(1).find_map(|arg| arg.parse().ok());
+    if task == Some("verify") {
+        let output_path = output_path.expect("--task verify requires --output path");
+        let input = open_session(path);
+        let output = open_session(output_path);
+        let mut expected = input.doc.plain_text(StoryRef::Body);
+        expected.push_str(" benchmark");
+        let actual = output.doc.plain_text(StoryRef::Body);
+        assert_eq!(actual, expected, "saved DOCX did not preserve the document text and edit");
+        let digest = Sha256::digest(actual.as_bytes()).iter().map(|byte| format!("{byte:02x}")).collect::<String>();
+        println!("CRAFT_OUTPUT_SHA256={digest}");
+        return;
+    }
     let t_open = Instant::now();
-    let mut session = Session::new(wordcraft_doc::Document::new());
-    session.run("file.open", &json!({"path": path})).expect("open");
+    let session = open_session(path);
     let open_ms = t_open.elapsed().as_secs_f64() * 1000.0;
     let app = WordApp::new(session, Services::default());
     let mut h =
@@ -71,7 +97,7 @@ fn main() {
     let mut out =
         json!({"open_ms": (open_ms * 10.0).round() / 10.0, "first_frames_ms": first.iter().map(|x| (x * 10.0).round() / 10.0).collect::<Vec<_>>()});
 
-    if std::env::args().nth(2).as_deref() == Some("--first-page-only") {
+    if task == Some("open") || args.iter().any(|arg| arg == "--first-page-only") {
         out["open_to_first_page_ms"] = json!(open_to_first_page_ms.unwrap_or_default());
         out["page_count"] = json!(h.state_mut().session.layout().pages.len());
         out["body_paragraphs"] = json!(h.state().session.doc.paragraph_count());
@@ -103,6 +129,66 @@ fn main() {
         let typed = frames.chunks(2).map(|c| c[0] + c[1]).collect::<Vec<_>>();
         json!({"frame_with_key_ms": stats(&frames.iter().step_by(2).copied().collect::<Vec<_>>()), "two_frames_ms": stats(&typed), "layout_ms": stats(&lay), "render_ms": stats(&ren)})
     };
+    if task == Some("edit") {
+        let before_words = h.state().session.doc.word_count();
+        let t = Instant::now();
+        h.state_mut().session.run("caret.set", &json!({"pos": {"story": "body", "path": [0], "off": 0}})).expect("set insertion point");
+        h.state_mut().canvas.want_focus = true;
+        h.input_mut().events.push(egui::Event::Text(" benchmark".into()));
+        step(&mut h);
+        step(&mut h);
+        let elapsed = t.elapsed().as_secs_f64() * 1000.0;
+        let after_words = h.state().session.doc.word_count();
+        assert!(after_words > before_words, "edit probe did not insert a word");
+        out["task_ms"] = json!(elapsed);
+        out["task_identity"] = json!(task_identity(h.state()));
+        println!("{out}");
+        return;
+    }
+    if task == Some("scroll") {
+        h.state_mut().session.run("caret.docStart", &json!({})).expect("move caret to document start");
+        for _ in 0..3 {
+            step(&mut h);
+        }
+        let before = h.state().canvas.page_rects.first().map(|rect| rect.min.y).expect("first page is visible");
+        let t = Instant::now();
+        for _ in 0..20 {
+            h.input_mut().events.push(egui::Event::PointerMoved(egui::pos2(720.0, 500.0)));
+            h.input_mut().events.push(egui::Event::MouseWheel {
+                unit: egui::MouseWheelUnit::Point,
+                delta: egui::vec2(0.0, -120.0),
+                phase: egui::TouchPhase::Move,
+                modifiers: egui::Modifiers::NONE,
+                source: egui::MouseWheelSource::Unknown,
+            });
+            step(&mut h);
+        }
+        let elapsed = t.elapsed().as_secs_f64() * 1000.0;
+        let after = h.state().canvas.page_rects.first().map(|rect| rect.min.y).expect("first page remains laid out");
+        assert_ne!(after, before, "scroll probe did not move the document");
+        out["task_ms"] = json!(elapsed);
+        out["task_identity"] = json!(task_identity(h.state()));
+        println!("{out}");
+        return;
+    }
+    if task == Some("save") {
+        let output_path = output_path.expect("--task save requires --output path");
+        let parent = std::path::Path::new(output_path).parent().expect("output path needs a parent");
+        std::fs::create_dir_all(parent).expect("create output directory");
+        h.state_mut().session.run("caret.docEnd", &json!({})).expect("move caret to end");
+        h.state_mut().session.run("text.insert", &json!({"text": " benchmark"})).expect("prepare saved edit");
+        let expected = task_identity(h.state());
+        let t = Instant::now();
+        h.state_mut().session.run("file.saveAs", &json!({"path": output_path})).expect("save output");
+        let elapsed = t.elapsed().as_secs_f64() * 1000.0;
+        out["task_ms"] = json!(elapsed);
+        out["task_identity"] = json!(expected);
+        println!("{out}");
+        return;
+    }
+    if task.is_some() {
+        panic!("--task must be open, scroll, edit or save");
+    }
     let mid = h.state().session.doc.body.get(doc_block).and_then(|b| b.as_para()).map(|p| p.len() / 2).unwrap_or(0);
     // a char boundary at or before the middle
     let mid = {
