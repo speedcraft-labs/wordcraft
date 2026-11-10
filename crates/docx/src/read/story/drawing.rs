@@ -662,7 +662,6 @@ fn locked_canvas_shape(source: &El) -> El {
 fn renamed(element: &El, name: &str) -> El {
     El { name: name.into(), attrs: element.attrs.clone(), kids: element.kids.clone() }
 }
-}
 
 /// The alternative text of a `wp:docPr`, `pic:cNvPr` or `wps:cNvPr` (ECMA-376
 /// `CT_NonVisualDrawingProps`): the description (the title when there is none, as before), and
