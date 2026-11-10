@@ -23,6 +23,9 @@ pub enum LevelSuffix {
 pub struct Level {
     pub start: u32,
     pub format: NumFormat,
+    /// Word 2010 custom numbering sequence, such as `0001, 0002, 0003, ...`.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub custom_format: Option<String>,
     /// Label template: `%1.`, `%1.%2.`, or the bullet character.
     pub text: String,
     pub align: Align,
@@ -55,6 +58,7 @@ impl Default for Level {
         Level {
             start: 1,
             format: NumFormat::Decimal,
+            custom_format: None,
             text: "%1.".into(),
             align: Align::Left,
             indent: 36.0,
@@ -68,6 +72,32 @@ impl Default for Level {
             style: None,
         }
     }
+}
+
+impl Level {
+    /// Format a number using a simple custom decimal sequence when the format names one.
+    pub fn format_number(&self, n: u32) -> String {
+        if let Some(width) = self.custom_format.as_deref().and_then(custom_decimal_width) {
+            return format!("{n:0width$}");
+        }
+        self.format.format(n)
+    }
+}
+
+/// Width of an ascending, zero-padded decimal sequence in a Word custom number format.
+fn custom_decimal_width(pattern: &str) -> Option<usize> {
+    let mut samples = pattern.split(',').map(str::trim);
+    let first_sample = samples.next()?;
+    let second_sample = samples.next()?;
+    if first_sample.is_empty()
+        || first_sample.len() != second_sample.len()
+        || !first_sample.bytes().all(|b| b.is_ascii_digit())
+        || !second_sample.bytes().all(|b| b.is_ascii_digit())
+    {
+        return None;
+    }
+    let (first, second) = (first_sample.parse::<u32>().ok()?, second_sample.parse::<u32>().ok()?);
+    (second == first.checked_add(1)?).then_some(first_sample.len())
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize, Default)]
@@ -465,7 +495,12 @@ fn render_label(numbering: &Numbering, num: u32, def: &Level, vals: &[u32; 9], s
                 _ if def.legal => NumFormat::Decimal,
                 f => f,
             };
-            label.push_str(&fmt.format(val));
+            let level = level_def(k);
+            label.push_str(&if level.is_some_and(|l| l.custom_format.is_some()) {
+                level.map_or_else(|| fmt.format(val), |l| l.format_number(val))
+            } else {
+                fmt.format(val)
+            });
             if label.len() > MAX_LABEL_BYTES {
                 break;
             }
@@ -484,6 +519,18 @@ const MAX_LABEL_BYTES: usize = 256;
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn custom_decimal_sequences_keep_their_zero_padding() {
+        let mut n = Numbering::default();
+        let id = n.add_list(ListKind::Numbered);
+        if let Some(num) = n.nums.iter_mut().find(|x| x.id == id) {
+            num.level_overrides = vec![(0, Level { custom_format: Some("0001, 0002, 0003, ...".into()), ..Level::default() })];
+        }
+        let mut c = Counters::default();
+        assert_eq!(c.next_label(&n, id, 0).unwrap().0, "0001.");
+        assert_eq!(c.next_label(&n, id, 0).unwrap().0, "0002.");
+    }
 
     /// Read-only counter APIs retain the renderer's bounds and never advance a list.
     #[test]

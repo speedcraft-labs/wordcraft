@@ -371,9 +371,13 @@ fn place_section_blocks<'p>(
     outline: &Option<OutlinePass>,
     (mut block, last): (usize, usize),
     (balance, body_top): (bool, f32),
-) -> (usize, usize) {
+    first_page_only: bool,
+) -> (usize, usize, bool) {
     let mut from = balance.then(|| (block, Snap::take(pb, ctx)));
     while block <= last && ctx.doc.body.get(block).is_some() {
+        if first_page_only && pb.pages.len() > 1 {
+            return (block, from.map_or(0, |(_, snap)| snap.boxes), true);
+        }
         let before = balance.then(|| (pb.pages.len(), Snap::take(pb, ctx)));
         pb.mark_block();
         place_block(ctx, pb, outline, block, body_top);
@@ -385,7 +389,7 @@ fn place_section_blocks<'p>(
         block += 1;
     }
     let discarded = from.map_or(0, |(first, snap)| balance_columns(ctx, pb, (first, block), &snap, body_top));
-    (block, discarded)
+    (block, discarded, false)
 }
 
 /// Endnotes at the end of the section: those referenced so far.
@@ -501,10 +505,17 @@ fn index_lines(pages: &[Page]) -> HashMap<(StoryRef, Path), Vec<(usize, usize)>>
     index
 }
 
+/// Controls how much work one layout pass may perform.
+pub(crate) struct PassOptions<'a> {
+    pub(crate) early: &'a EarlyFloats,
+    pub(crate) may_rewrap: bool,
+    pub(crate) first_page_only: bool,
+}
+
 /// One layout pass, numbering footnotes restarted on each page by `note_pages` ([`note_info`]),
 /// with `totals` assumed for the page totals in the body. With `may_repeat`, a pass whose body
 /// shows totals that turn out different asks to be done again. Pages start with the wrap areas
-/// of the `early` floats; with `may_rewrap`, a pass that finds others asks to be done again.
+/// of the `early` floats; `may_rewrap` allows a pass that finds others to be repeated.
 pub(crate) fn layout_pass(
     doc: &Document,
     cache: &mut LayoutCache,
@@ -512,7 +523,7 @@ pub(crate) fn layout_pass(
     note_pages: &HashMap<u32, usize>,
     totals: &Totals,
     may_repeat: bool,
-    (early, may_rewrap): (&EarlyFloats, bool),
+    options: PassOptions<'_>,
 ) -> Pass {
     reset_cache(doc, cache, opts);
     let mut ctx = new_ctx(doc, cache, opts, (note_pages, totals));
@@ -526,7 +537,7 @@ pub(crate) fn layout_pass(
     let first_sect = sections.first().map_or(&default_sect, |(_, s)| *s);
     let web_sect = mode.reflow.then(|| reflow_sect(first_sect, opts));
     let sect_ref = web_sect.as_ref().unwrap_or(first_sect);
-    let mut pb = new_page_builder(sect_ref, first_sect.page_num_format, early, mode.web, !may_rewrap && !mode.reflow);
+    let mut pb = new_page_builder(sect_ref, first_sect.page_num_format, options.early, mode.web, !options.may_rewrap && !mode.reflow);
     let mut endnotes = endnote_queue(&ctx);
     // Text boxes laid out in balancing attempts that were thrown away.
     let mut boxes_discarded = 0usize;
@@ -563,8 +574,16 @@ pub(crate) fn layout_pass(
         pb.foot_top = sec.tops.foot;
         let last = (*end).min(doc.body.len().saturating_sub(1));
         let balance = prepare_section_end(&mut pb, sections, (si, mode.web));
-        let (next, discarded) = place_section_blocks(&mut ctx, &mut pb, &outline, (block, last), (balance, sec.tops.body));
+        let (next, discarded, stopped) =
+            place_section_blocks(&mut ctx, &mut pb, &outline, (block, last), (balance, sec.tops.body), options.first_page_only);
         (block, boxes_discarded) = (next, boxes_discarded + discarded);
+        if stopped {
+            let mut pages = pb.pages;
+            pages.truncate(1);
+            let first = DocLayout { index: index_lines(&pages), pages, pages_complete: false, ms: 0.0, text_boxes: 0 };
+            evict_unused(ctx.cache);
+            return Pass::FirstPage(first);
+        }
         section_endnotes(&mut ctx, &mut pb, &mut endnotes, (sect, si, block));
     }
     if pb.pages.is_empty() {
@@ -579,8 +598,8 @@ pub(crate) fn layout_pass(
     }
     ctx.grid = para::Grid::default();
     if !mode.reflow
-        && may_rewrap
-        && let Some(found) = uncovered_floats(&mut ctx, early)
+        && options.may_rewrap
+        && let Some(found) = uncovered_floats(&mut ctx, options.early)
     {
         return Pass::Rewrap(found);
     }
@@ -590,7 +609,7 @@ pub(crate) fn layout_pass(
         return Pass::Again(found);
     }
     evict_unused(ctx.cache);
-    let mut lay = DocLayout { index: index_lines(&pages), pages, ms: 0.0, text_boxes: 0 };
+    let mut lay = DocLayout { index: index_lines(&pages), pages, pages_complete: true, ms: 0.0, text_boxes: 0 };
     if opts.comment_balloons && !mode.web {
         balloons::add(&mut ctx, &mut lay);
     }
