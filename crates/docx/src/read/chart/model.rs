@@ -71,6 +71,9 @@ pub(super) struct Axis {
 
 pub(super) struct Series {
     pub(super) name: String,
+    /// The series' `c:idx` (an `xsd:unsignedInt`), which picks its automatic colour; `None`
+    /// when missing or not a valid number.
+    pub(super) idx: Option<usize>,
     /// The chart type group this series belongs to (combo charts can mix types).
     pub(super) kind: Kind,
     /// Whether the chart group links this series to a right-side value axis.

@@ -130,24 +130,17 @@ pub(super) const MISSING_ROMAN_FONT: &str = "Cambria";
 /// and where it isn't installed Liberation Serif has its metrics; Word never meets it missing.
 pub(super) fn lookup_family<'f>(doc: &Document, font: &'f str) -> &'f str {
     let db = wordcraft_fonts::FontDb::global();
-    // The LibreOffice oracle uses its document-default serif face for inherited body text when a
-    // Calibri minor-theme face is unavailable. Keep explicit Calibri documents on the normal
-    // metric-compatible fallback; use this only when Calibri is the inherited theme default.
-    if font.eq_ignore_ascii_case("Calibri")
-        && doc.settings.minor_font.eq_ignore_ascii_case("Calibri")
-        && doc.styles.default_chr.font.as_deref().is_some_and(|f| f.eq_ignore_ascii_case("Calibri"))
-        && !db.has_family("Calibri")
-        && db.has_family("DejaVu Serif")
-    {
-        return "DejaVu Serif";
-    }
-    let roman = doc.settings.roman_fonts.iter().any(|f| f.eq_ignore_ascii_case(font));
+    let roman = !doc.settings.roman_fonts.is_empty()
+        && font.split(';').map(str::trim).filter(|f| !f.is_empty()).any(|f| doc.settings.roman_fonts.iter().any(|r| r.eq_ignore_ascii_case(f)));
     if roman
         && !wordcraft_fonts::word::is_thai_family(font)
         && !wordcraft_doc::symbol_fonts::is_symbol_font(font)
         && !wordcraft_fonts::word::has_named_substitutes(font)
-        && !db.has_family(font)
-        && !db.has_family(wordcraft_fonts::word::charset_base_family(font))
+        && if font.contains(';') {
+            wordcraft_fonts::word::resolve(font, false, false).substituted
+        } else {
+            !db.has_family(font) && !db.has_family(wordcraft_fonts::word::charset_base_family(font))
+        }
     {
         MISSING_ROMAN_FONT
     } else {
