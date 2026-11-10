@@ -13,15 +13,15 @@ use super::{
 mod commands;
 mod control;
 mod files;
+#[cfg(test)]
+pub(crate) use files::suggested_stem;
 mod fonts;
 mod frame;
 mod input;
 mod pictures;
 mod prefs;
 
-const FIRST_PAGE_LAYOUT_BODY_PARAGRAPHS: usize = 1024;
-
-pub(crate) use commands::{discards_document, works_without_document};
+pub(crate) use commands::works_without_document;
 pub(crate) use input::control_click_as_secondary;
 
 impl WordApp {
@@ -56,7 +56,7 @@ impl WordApp {
             sent_full_screen,
             seen_full_screen,
             escape_free,
-            word_count,
+            status_counts,
             missing_fonts,
             last_autosave,
             equation_prev_tab,
@@ -125,7 +125,6 @@ impl WordApp {
             recover_fonts_for: None,
             recent_fonts_for: Vec::new(),
             fonts_frames: 0,
-            first_page_layout_document: None,
             applied_theme: None,
             native_scale: 1.0,
             legacy_interface_size: None,
@@ -172,7 +171,7 @@ impl WordApp {
             sent_full_screen,
             seen_full_screen,
             escape_free,
-            word_count,
+            status_counts,
             missing_fonts,
             last_autosave,
             equation_prev_tab,
@@ -232,13 +231,6 @@ impl WordApp {
 
     /// Per-frame logic before layout: control requests, screenshots, shortcuts, file drops.
     pub fn logic(&mut self, ctx: &egui::Context) {
-        let document_id = self.session.document_id();
-        if self.fonts_frames >= 2
-            && self.first_page_layout_document != Some(document_id)
-            && self.session.doc.paragraph_count() >= FIRST_PAGE_LAYOUT_BODY_PARAGRAPHS
-        {
-            self.session.use_first_page_layout(true);
-        }
         // #2726: egui's AccessKit update must carry the focused node in its node list; a frame
         // that drops it panics in `accesskit_consumer` and closes the window (see `a11y::FocusGuard`).
         ctx.add_plugin(super::a11y::FocusGuard);
@@ -385,6 +377,7 @@ impl WordApp {
     /// Read Aloud, its file dialog, AutoSave of its document. Runs in [`WordApp::logic`] for the
     /// active window and, with native windows, as each window draws.
     pub(crate) fn window_work(&mut self, ctx: &egui::Context) {
+        crate::windows::arrange::poll(self, ctx);
         if self.windows.native() {
             let doc = self.session.document_id();
             if self.print_document.is_none_or(|d| d == doc || !self.session.is_open(d)) {
@@ -420,23 +413,10 @@ impl WordApp {
     /// Lay out the windows: on the desktop each open document's in its own native window
     /// ([`windows`]), on the web the one window.
     pub fn ui(&mut self, ui: &mut egui::Ui) {
-        let document_id = self.session.document_id();
-        let first_canvas_frame = self.fonts_frames >= 2 && self.first_page_layout_document != Some(document_id);
-        let first_page_only = first_canvas_frame && self.session.doc.paragraph_count() >= FIRST_PAGE_LAYOUT_BODY_PARAGRAPHS;
-        if first_page_only {
-            self.session.use_first_page_layout(true);
-        }
         if self.windows.native() {
             self.windows_ui(ui);
         } else {
             self.window_ui(ui);
-        }
-        if first_canvas_frame {
-            self.first_page_layout_document = Some(document_id);
-            if first_page_only {
-                self.session.use_first_page_layout(false);
-                ui.ctx().request_repaint();
-            }
         }
     }
 
@@ -462,10 +442,16 @@ impl WordApp {
             return;
         }
         let t = theme::Tokens::get(&ctx);
-        self.escape_free = self.dialog.is_none() && !self.ui.backstage && self.ui.keytips == keytips::Phase::Off && !egui::Popup::is_any_open(&ctx);
+        self.escape_free = self.dialog.is_none()
+            && !self.ui.backstage
+            && self.ui.keytips == keytips::Phase::Off
+            && !egui::Popup::is_any_open(&ctx)
+            && !crate::chrome::title_search_open(self, &ctx);
         // Keytips are read before layout so the frame paints the new state; badges paint after
         // the ribbon so they sit on top of it.
         crate::keytips::logic(self, &ctx);
+        // Alt codes in a text box are read before the box is drawn, so it types the character.
+        crate::keys::field_alt_codes(self, &ctx);
         // A failed Recent open, or a failed Save As, is news only until File closes (#2938).
         if !self.ui.backstage {
             backstage::forget_open_error(&ctx);

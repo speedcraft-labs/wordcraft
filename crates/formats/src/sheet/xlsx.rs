@@ -2,10 +2,6 @@ use super::date::{DateKind, builtin_date, custom_date, iso_datetime, serial_date
 use super::{
     BTreeMap, Ev, Grid, HashMap, MAX_CELLS, MAX_COLS, MAX_ROWS, MAX_SHARED, MAX_SHEETS, MAX_XFS, Package, TextBudget, attr, push_capped, walk,
 };
-#[cfg(not(target_arch = "wasm32"))]
-use rayon::prelude::*;
-
-const ROW_CONVERSION_BATCH: usize = 1_024;
 
 // ---------------------------------------------------------------------------------------------
 // SpreadsheetML
@@ -87,14 +83,13 @@ fn workbook(pkg: &mut Package<'_>) -> Result<Workbook, String> {
             }
         }
     });
-    let sheets = listed
-        .into_iter()
-        .filter_map(|(name, id)| {
-            // Worksheets only: chart and dialog sheets hold no cells.
-            let r = rels.iter().find(|r| r.id == id && r.kind.ends_with("/worksheet"))?;
-            Some(SheetRef { name, path: r.target.clone() })
-        })
-        .collect();
+    // Worksheets only: chart and dialog sheets hold no cells. Indexed by id once (the first
+    // relationship with an id wins), not searched for every sheet.
+    let mut worksheets: HashMap<&str, &str> = HashMap::new();
+    for r in rels.iter().filter(|r| r.kind.ends_with("/worksheet")) {
+        worksheets.entry(r.id.as_str()).or_insert(r.target.as_str());
+    }
+    let sheets = listed.into_iter().filter_map(|(name, id)| Some(SheetRef { name, path: worksheets.get(id.as_str())?.to_string() })).collect();
     let part = |suffix: &str| rels.iter().find(|r| r.kind.ends_with(suffix)).map(|r| r.target.clone());
     Ok(Workbook { sheets, date1904, shared: part("/sharedStrings"), styles: part("/styles") })
 }
@@ -107,18 +102,18 @@ pub(super) fn xlsx_sheets(pkg: &mut Package<'_>) -> Result<Vec<SheetRef>, String
 /// (`rPh`) left out.
 fn shared_strings(xml: &[u8]) -> Vec<String> {
     let mut out = Vec::new();
-    let mut cur: Option<String> = None;
+    let mut cur: Option<(String, usize)> = None;
     let (mut in_t, mut phonetic) = (false, 0usize);
     walk(xml, |ev| match ev {
         Ev::Start(e) => match e.local_name().as_ref() {
-            b"si" => cur = Some(String::new()),
+            b"si" => cur = Some((String::new(), 0)),
             b"t" => in_t = true,
             b"rPh" => phonetic += 1,
             _ => {}
         },
         Ev::End(n) => match n.as_slice() {
             b"si" => {
-                if let Some(s) = cur.take()
+                if let Some((s, _)) = cur.take()
                     && out.len() < MAX_SHARED
                 {
                     out.push(s);
@@ -131,9 +126,9 @@ fn shared_strings(xml: &[u8]) -> Vec<String> {
         Ev::Text(t) => {
             if in_t
                 && phonetic == 0
-                && let Some(s) = cur.as_mut()
+                && let Some((s, n)) = cur.as_mut()
             {
-                push_capped(s, &t);
+                push_capped(s, n, &t);
             }
         }
     });
@@ -187,6 +182,9 @@ struct XCell {
     style: usize,
     value: String,
     inline: String,
+    /// Characters in `value` and `inline` (see [`push_capped`]).
+    value_chars: usize,
+    inline_chars: usize,
 }
 
 pub(super) fn xlsx_rows(pkg: &mut Package<'_>, path: &str) -> Result<Vec<Vec<String>>, String> {
@@ -205,132 +203,77 @@ pub(super) fn xlsx_rows(pkg: &mut Package<'_>, path: &str) -> Result<Vec<Vec<Str
     let mut cells = 0usize;
     let mut budget = TextBudget::default();
     let (mut in_data, mut row_no, mut next_col) = (false, 0u64, 0usize);
-    let mut row_cells: Vec<XCell> = Vec::new();
-    {
-        let mut row_writer =
-            XlsxRowWriter { shared: &shared, formats: &formats, date1904: wb.date1904, rows: &mut rows, cell_count: &mut cells, budget: &mut budget };
-        let mut cell: Option<XCell> = None;
-        let (mut in_v, mut in_is_t, mut phonetic) = (false, false, 0usize);
-        walk(&xml, |ev| match ev {
-            Ev::Start(e) => match e.local_name().as_ref() {
-                b"sheetData" => in_data = true,
-                b"row" if in_data => {
-                    row_writer.append(row_no, &mut row_cells);
-                    row_no = attr(e, b"r").and_then(|v| v.trim().parse().ok()).unwrap_or(row_no.saturating_add(1));
-                    next_col = 0;
-                }
-                b"c" if in_data => {
-                    // A reference that isn't one (or is past the last column) drops the cell.
-                    let col = match attr(e, b"r") {
-                        Some(r) => ref_col(r.trim()).unwrap_or(usize::MAX),
-                        None => next_col,
-                    };
-                    next_col = col.saturating_add(1);
-                    let style = attr(e, b"s").and_then(|v| v.trim().parse().ok()).unwrap_or(0);
-                    cell = Some(XCell { col, kind: attr(e, b"t").unwrap_or_default(), style, ..Default::default() });
-                }
-                b"v" => in_v = cell.is_some(),
-                b"t" => in_is_t = cell.is_some(),
-                b"rPh" => phonetic += 1,
-                _ => {}
-            },
-            Ev::Text(t) => {
-                if let Some(c) = cell.as_mut() {
-                    if in_v {
-                        push_capped(&mut c.value, &t);
-                    } else if in_is_t && phonetic == 0 {
-                        push_capped(&mut c.inline, &t);
-                    }
+    let mut cell: Option<XCell> = None;
+    let (mut in_v, mut in_is_t, mut phonetic) = (false, false, 0usize);
+    walk(&xml, |ev| match ev {
+        Ev::Start(e) => match e.local_name().as_ref() {
+            b"sheetData" => in_data = true,
+            b"row" if in_data => {
+                row_no = attr(e, b"r").and_then(|v| v.trim().parse().ok()).unwrap_or(row_no.saturating_add(1));
+                next_col = 0;
+            }
+            b"c" if in_data => {
+                // A reference that isn't one (or is past the last column) drops the cell.
+                let col = match attr(e, b"r") {
+                    Some(r) => ref_col(r.trim()).unwrap_or(usize::MAX),
+                    None => next_col,
+                };
+                next_col = col.saturating_add(1);
+                let style = attr(e, b"s").and_then(|v| v.trim().parse().ok()).unwrap_or(0);
+                cell = Some(XCell { col, kind: attr(e, b"t").unwrap_or_default(), style, ..Default::default() });
+            }
+            b"v" => in_v = cell.is_some(),
+            b"t" => in_is_t = cell.is_some(),
+            b"rPh" => phonetic += 1,
+            _ => {}
+        },
+        Ev::Text(t) => {
+            if let Some(c) = cell.as_mut() {
+                if in_v {
+                    push_capped(&mut c.value, &mut c.value_chars, &t);
+                } else if in_is_t && phonetic == 0 {
+                    push_capped(&mut c.inline, &mut c.inline_chars, &t);
                 }
             }
-            Ev::End(n) => match n.as_slice() {
-                b"sheetData" => in_data = false,
-                b"v" => in_v = false,
-                b"t" => in_is_t = false,
-                b"rPh" => phonetic = phonetic.saturating_sub(1),
-                b"c" => {
-                    let Some(c) = cell.take() else { return };
-                    if c.col < MAX_COLS {
-                        row_cells.push(c);
-                        if row_cells.len() >= ROW_CONVERSION_BATCH {
-                            row_writer.append(row_no, &mut row_cells);
-                        }
-                    }
+        }
+        Ev::End(n) => match n.as_slice() {
+            b"sheetData" => in_data = false,
+            b"v" => in_v = false,
+            b"t" => in_is_t = false,
+            b"rPh" => phonetic = phonetic.saturating_sub(1),
+            b"c" => {
+                let Some(c) = cell.take() else { return };
+                let text = xlsx_value(&c, &shared, &formats, wb.date1904);
+                if text.is_empty() || c.col >= MAX_COLS {
+                    return;
                 }
-                b"row" => row_writer.append(row_no, &mut row_cells),
-                _ => {}
-            },
-        });
-    }
+                if !rows.contains_key(&row_no) && rows.len() >= MAX_ROWS {
+                    return;
+                }
+                if !budget.take(text.len()) {
+                    return;
+                }
+                let row = rows.entry(row_no).or_default();
+                if row.len() <= c.col {
+                    let grow = c.col + 1 - row.len();
+                    if cells.saturating_add(grow) > MAX_CELLS {
+                        return;
+                    }
+                    cells += grow;
+                    row.resize(c.col + 1, String::new());
+                }
+                if let Some(slot) = row.get_mut(c.col) {
+                    *slot = text;
+                }
+            }
+            _ => {}
+        },
+    });
     let mut grid = Grid::default();
     for (_, r) in rows {
         grid.push(r, 1);
     }
     Ok(grid.rows)
-}
-
-/// Ordered row accumulator: conversion can run concurrently, while the established column,
-/// row-count and text-budget rules are still applied serially in source order.
-struct XlsxRowWriter<'a> {
-    shared: &'a [String],
-    formats: &'a [Option<DateKind>],
-    date1904: bool,
-    rows: &'a mut BTreeMap<u64, Vec<String>>,
-    cell_count: &'a mut usize,
-    budget: &'a mut TextBudget,
-}
-
-impl XlsxRowWriter<'_> {
-    /// Convert parsed cells in parallel when formatting work is large enough to amortize Rayon
-    /// scheduling. Keeping batches bounded also caps temporary memory for malformed long rows.
-    fn append(&mut self, row_no: u64, cells_in_row: &mut Vec<XCell>) {
-        if cells_in_row.is_empty() {
-            return;
-        }
-        #[cfg(not(target_arch = "wasm32"))]
-        if cells_in_row.len() >= ROW_CONVERSION_BATCH {
-            let converted: Vec<(usize, String)> =
-                cells_in_row.par_iter().map(|c| (c.col, xlsx_value(c, self.shared, self.formats, self.date1904))).collect();
-            cells_in_row.clear();
-            for (col, text) in converted {
-                self.write_cell(row_no, col, text);
-            }
-        } else {
-            for c in cells_in_row.drain(..) {
-                let text = xlsx_value(&c, self.shared, self.formats, self.date1904);
-                self.write_cell(row_no, c.col, text);
-            }
-        }
-        #[cfg(target_arch = "wasm32")]
-        for c in cells_in_row.drain(..) {
-            let text = xlsx_value(&c, self.shared, self.formats, self.date1904);
-            self.write_cell(row_no, c.col, text);
-        }
-    }
-
-    fn write_cell(&mut self, row_no: u64, col: usize, text: String) {
-        if text.is_empty() || col >= MAX_COLS {
-            return;
-        }
-        if !self.rows.contains_key(&row_no) && self.rows.len() >= MAX_ROWS {
-            return;
-        }
-        if !self.budget.take(text.len()) {
-            return;
-        }
-        let row = self.rows.entry(row_no).or_default();
-        if row.len() <= col {
-            let grow = col + 1 - row.len();
-            if self.cell_count.saturating_add(grow) > MAX_CELLS {
-                return;
-            }
-            *self.cell_count += grow;
-            row.resize(col + 1, String::new());
-        }
-        if let Some(slot) = row.get_mut(col) {
-            *slot = text;
-        }
-    }
 }
 
 fn xlsx_value(c: &XCell, shared: &[String], formats: &[Option<DateKind>], date1904: bool) -> String {
