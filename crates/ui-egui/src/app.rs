@@ -21,6 +21,8 @@ mod input;
 mod pictures;
 mod prefs;
 
+const FIRST_PAGE_LAYOUT_BODY_PARAGRAPHS: usize = 1024;
+
 pub(crate) use commands::works_without_document;
 pub(crate) use input::control_click_as_secondary;
 
@@ -125,6 +127,7 @@ impl WordApp {
             recover_fonts_for: None,
             recent_fonts_for: Vec::new(),
             fonts_frames: 0,
+            first_page_layout_document: None,
             applied_theme: None,
             native_scale: 1.0,
             legacy_interface_size: None,
@@ -231,6 +234,13 @@ impl WordApp {
 
     /// Per-frame logic before layout: control requests, screenshots, shortcuts, file drops.
     pub fn logic(&mut self, ctx: &egui::Context) {
+        let document_id = self.session.document_id();
+        if self.fonts_frames >= 2
+            && self.first_page_layout_document != Some(document_id)
+            && self.session.doc.paragraph_count() >= FIRST_PAGE_LAYOUT_BODY_PARAGRAPHS
+        {
+            self.session.use_first_page_layout(true);
+        }
         // #2726: egui's AccessKit update must carry the focused node in its node list; a frame
         // that drops it panics in `accesskit_consumer` and closes the window (see `a11y::FocusGuard`).
         ctx.add_plugin(super::a11y::FocusGuard);
@@ -413,10 +423,23 @@ impl WordApp {
     /// Lay out the windows: on the desktop each open document's in its own native window
     /// ([`windows`]), on the web the one window.
     pub fn ui(&mut self, ui: &mut egui::Ui) {
+        let document_id = self.session.document_id();
+        let first_canvas_frame = self.fonts_frames >= 2 && self.first_page_layout_document != Some(document_id);
+        let first_page_only = first_canvas_frame && self.session.doc.paragraph_count() >= FIRST_PAGE_LAYOUT_BODY_PARAGRAPHS;
+        if first_page_only {
+            self.session.use_first_page_layout(true);
+        }
         if self.windows.native() {
             self.windows_ui(ui);
         } else {
             self.window_ui(ui);
+        }
+        if first_canvas_frame {
+            self.first_page_layout_document = Some(document_id);
+            if first_page_only {
+                self.session.use_first_page_layout(false);
+                ui.ctx().request_repaint();
+            }
         }
     }
 

@@ -3017,9 +3017,8 @@ fn undecodable_pictures_keep_their_grey_box_bytes() {
     assert_eq!(h, 0x1edbbffab353d744, "{h:#x}");
 }
 
-/// A page with a chart label and an equation, exported without compression. Chart and equation
-/// runs carry the text each glyph shows since strict export (#6005); this pins the PDF they
-/// produce, ToUnicode maps included, to what they were before.
+/// A page with a chart label and an equation, exported without compression. Chart labels remain
+/// searchable; Office Math glyphs are drawn but have no PDF text layer, as in LibreOffice.
 #[test]
 fn chart_and_equation_text_keep_their_pdf_bytes() {
     use wordcraft_doc::graphic::{Graphic, GraphicItem, GraphicKind, TextAlign};
@@ -3047,10 +3046,9 @@ fn chart_and_equation_text_keep_their_pdf_bytes() {
     let opts = PdfOptions { compress: false, ..Default::default() };
     let a = export(&d, &opts).unwrap();
     assert_eq!(a, export(&d, &opts).unwrap(), "the export must be deterministic for the golden hash to mean anything");
-    // What the ToUnicode maps say each glyph shows, across all fonts: the text of the body, the
-    // chart label and the equation (a mathematical italic x is one character beyond the BMP).
-    // Recorded on the code before strict export: the maps are the same. (The whole file's hash
-    // is not pinned: it follows the fonts the host resolves, which differ between runs.)
+    // What the ToUnicode maps say each glyph shows, across all fonts: the body and chart label.
+    // Equation glyphs are intentionally outlined and absent from searchable text. (The whole
+    // file's hash is not pinned: it follows the fonts the host resolves, which differ between runs.)
     let text = String::from_utf8_lossy(&a).into_owned();
     let mut shown = std::collections::BTreeSet::new();
     for block in text.split("beginbfchar").skip(1) {
@@ -3062,6 +3060,6 @@ fn chart_and_equation_text_keep_their_pdf_bytes() {
         }
     }
     let expected: std::collections::BTreeSet<String> =
-        ["B", "o", "d", "y", " ", "t", "e", "x", "R", "v", "n", "u", "2", "0", "4", "+", "1", "\u{1D465}"].into_iter().map(String::from).collect();
+        ["B", "o", "d", "y", " ", "t", "e", "x", "R", "v", "n", "u", "2", "0", "4"].into_iter().map(String::from).collect();
     assert_eq!(shown, expected);
 }

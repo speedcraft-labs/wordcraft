@@ -3,13 +3,14 @@ use super::{
     left_to_right, norm, ok, paint_of, rgb, split_clusters, visual_order,
 };
 
-/// How a run of glyphs is painted: its colour, opacity and synthetic bold and italic.
+/// How a run of glyphs is painted and whether its text is searchable.
 #[derive(Clone, Copy)]
 pub(super) struct GlyphPaint {
     pub color: Rgb,
     pub alpha: f32,
     pub bold: bool,
     pub italic: bool,
+    pub searchable: bool,
 }
 
 impl Exporter<'_> {
@@ -87,7 +88,7 @@ impl Exporter<'_> {
         style: GlyphPaint,
         (text, known): (&str, &[std::ops::Range<usize>]),
     ) {
-        let GlyphPaint { color, alpha, bold, italic } = style;
+        let GlyphPaint { color, alpha, bold, italic, searchable } = style;
         if !size.is_finite() || size <= 0.0 || size > 5000.0 {
             return;
         }
@@ -95,6 +96,32 @@ impl Exporter<'_> {
             return;
         }
         if !glyphs.iter().all(|(_, x, y)| ok(*x) && ok(*y)) {
+            return;
+        }
+        if !searchable {
+            if let Some(path) = glyph_outlines(face, size, glyphs) {
+                if italic {
+                    let base = baseline(glyphs).unwrap_or(glyphs.first().map_or(0.0, |g| g.2));
+                    s.push_transform(&Transform::from_row(1.0, 0.0, -0.21, 1.0, 0.21 * base, 0.0));
+                }
+                s.set_fill(Some(fill(color, alpha)));
+                s.set_stroke(if bold {
+                    Some(Stroke {
+                        paint: rgb::Color::new(color.0, color.1, color.2).into(),
+                        width: size * 0.03,
+                        opacity: norm(alpha),
+                        ..Default::default()
+                    })
+                } else {
+                    None
+                });
+                s.draw_path(&path);
+                s.set_fill(None);
+                s.set_stroke(None);
+                if italic {
+                    s.pop();
+                }
+            }
             return;
         }
         let font = self.font(face);
@@ -180,14 +207,14 @@ impl Exporter<'_> {
         }
     }
 
-    /// Draws a metafile text run as PDF text (outlines when the font cannot be embedded). `tf` maps
-    /// the run's own space (see [`PlacedItem::Text`]) to the page.
-    pub(crate) fn vector_text(&mut self, s: &mut Surface, t: &wordcraft_metafile::Text, tf: kurbo::Affine) {
+    /// Draws a metafile text run as searchable PDF text, or as outlines when its picture is a kept
+    /// embedded-object preview. `tf` maps the run's own space (see [`PlacedItem::Text`]) to the page.
+    pub(crate) fn vector_text(&mut self, s: &mut Surface, t: &wordcraft_metafile::Text, tf: kurbo::Affine, searchable: bool) {
         let (face, shaped) = wordcraft_layout::metafile_text_run(t);
         let glyphs: Vec<_> = shaped.iter().map(|g| (g.cluster, f64::from(g.x_advance), f64::from(g.x_offset), f64::from(g.y_offset))).collect();
         let Some(lay) = t.layout(face.upem, face.ascent, face.descent, &glyphs) else { return };
-        let font = self.font(&face);
-        if font.is_none() && !self.outlined.contains(&face.id()) {
+        let font = if searchable { self.font(&face) } else { None };
+        if searchable && font.is_none() && !self.outlined.contains(&face.id()) {
             return;
         }
         let em = lay.em as f32;

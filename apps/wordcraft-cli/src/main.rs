@@ -24,6 +24,7 @@ USAGE:
                                               --format wordml2003 a Word 2003 XML Document;
                                               --markup (Print Markup): comments beside each page and
                                               tracked changes in pdf/png, a comment list in html/md/txt;
+                                              pdf/png exports of documents with tracked changes use it by default;
                                               --strict (pdf or png output only) writes nothing and exits 3
                                               if a character can't be drawn or a picture is missing or
                                               undecodable; the report is on stderr, with one JSON line
@@ -463,7 +464,7 @@ fn run_convert(rest: &[String], open: impl Fn(&str, Option<&str>) -> Result<Sess
     };
     let paths = positionals(rest, CONVERT_OPTIONS);
     let (i, o) = (paths.first().ok_or_else(missing_argument)?.to_string(), paths.get(1).ok_or_else(missing_argument)?.to_string());
-    let markup = rest.iter().any(|a| a == "--markup");
+    let explicit_markup = rest.iter().any(|a| a == "--markup");
     let strict = rest.iter().any(|a| a == "--strict");
     // Before the input is opened: a wrong output type is a usage error, not a file error.
     let to_png = o.to_ascii_lowercase().ends_with(".png");
@@ -472,6 +473,11 @@ fn run_convert(rest: &[String], open: impl Fn(&str, Option<&str>) -> Result<Sess
     }
     let password = password_from(rest)?;
     let mut s = open(&i, password.as_deref())?;
+    // LibreOffice prints tracked changes inline on PDF/PNG conversion by default. Keep the
+    // command-line oracle output in that view when the imported document has revisions, while
+    // leaving format-to-format conversions in the final view.
+    let pdf_or_png = to_png || o.to_ascii_lowercase().ends_with(".pdf");
+    let markup = explicit_markup || (pdf_or_png && !s.doc.revisions.is_empty());
     if rest.iter().any(|a| a == "--update-fields") {
         s.run("references.updateFields", &json!({})).map_err(engine_error)?;
     }
