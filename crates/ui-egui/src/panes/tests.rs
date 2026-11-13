@@ -346,7 +346,15 @@ fn navigation_tabs_fit_the_narrowest_pane_in_every_language() {
                 // Fonts take effect the frame after they are installed.
                 if !fonts {
                     crate::theme::apply(ui.ctx(), crate::theme::Appearance::Light);
-                    crate::theme::install_fonts_language(ui.ctx(), lang.prefers_hans(), lang.prefers_korean());
+                    crate::theme::install_fonts_language_arabic(
+                        ui.ctx(),
+                        lang.prefers_hans(),
+                        lang.prefers_korean(),
+                        lang.prefers_hant(),
+                        false,
+                        lang.rtl(),
+                        &[],
+                    );
                     fonts = true;
                     return;
                 }

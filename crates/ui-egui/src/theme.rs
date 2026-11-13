@@ -1170,8 +1170,8 @@ mod tests {
         ctx.run_ui(egui::RawInput::default(), |_| {}).drop_without_applying_deltas();
         let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("src");
         let mut symbols = BTreeSet::new();
-        // The i18n module's literals are catalog and pseudo-locale test text, not interface text.
-        for path in crate::rust_sources(&dir).into_iter().filter(|p| !p.starts_with(dir.join("i18n"))) {
+        // Catalog, pseudo-locale, and unit-test literals are not interface text.
+        for path in crate::rust_sources(&dir).into_iter().filter(|p| !p.starts_with(dir.join("i18n")) && !p.ends_with("tests.rs")) {
             let code = std::fs::read_to_string(&path).unwrap();
             // Characters inside string literals, line by line (good enough for this code base).
             for line in code.lines().filter(|l| !l.trim_start().starts_with("//")) {
