@@ -489,6 +489,9 @@ fn main() -> eframe::Result {
     // Intel Macs: Metal's compiler aborts on wgpu's indirect-validation shaders (#2652).
     #[cfg(target_os = "macos")]
     graphics::configure_indirect_validation(&mut options, graphics::skips_indirect_validation(true, cfg!(target_arch = "x86_64")));
+    // Catalog installed fonts while eframe prepares the window and GPU. The first font menu still
+    // waits for the catalog if the scan has not finished, but usually avoids blocking its frame.
+    wordcraft_fonts::FontDb::global().scan_in_background();
     load_user_fonts();
     // Windows opened for further documents start like the first one, before its saved place.
     let window_builder = options.viewport.clone();
