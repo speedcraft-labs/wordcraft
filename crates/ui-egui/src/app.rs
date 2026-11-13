@@ -102,6 +102,7 @@ impl WordApp {
                 ..UiState::default()
             },
             services,
+            raise_without_focus: None,
             printing: Default::default(),
             print_feedback_seen: None,
             integrated_titlebar: false,

@@ -25,6 +25,8 @@ mod print;
 mod region;
 #[cfg(target_os = "macos")]
 mod traffic_lights;
+#[cfg(target_os = "macos")]
+mod window_raise;
 
 use wordcraft_engine::Session;
 use wordcraft_ui_egui::{
@@ -539,6 +541,7 @@ fn main() -> eframe::Result {
         let _ = std::io::Write::write_fmt(&mut std::io::stderr(), format_args!("wordcraft: --control needs a port number from 1 to 65535{got}\n"));
         std::process::exit(2);
     }
+    let agent = control_port.is_some();
     // The log file lives in the settings directory, next to the preferences; opened after the
     // arguments, so `--version` leaves no file behind. Records logged until now are written to it
     // first. Runs without preferences (agents' test runs) log to standard error only, so they
@@ -562,9 +565,13 @@ fn main() -> eframe::Result {
             .with_drag_and_drop(true)
             .with_fullsize_content_view(true)
             .with_titlebar_shown(false)
-            .with_title_shown(false),
+            .with_title_shown(false)
+            // Started for an agent (`--control`): open without taking the user's keyboard focus.
+            .with_active(!agent),
+        event_loop_builder: agent_event_loop(agent),
         ..Default::default()
     };
+    // Started for an agent (`--control`): open without taking the user's keyboard focus.
     if let Some(icon) = app_icon() {
         options.viewport = options.viewport.with_icon(icon);
     }
@@ -614,6 +621,10 @@ fn main() -> eframe::Result {
             let mut session = Session::new(doc);
             session.system_region = region;
             let mut app = WordApp::new(session, services(file_dialog, &cc.egui_ctx));
+            #[cfg(target_os = "macos")]
+            if agent {
+                app.raise_without_focus = Some(window_raise::raise_without_focus);
+            }
             app.set_startup_update_check(true);
             load_prefs(&mut app);
             // After the preferences, so the reason it gives is in the interface language.
@@ -680,6 +691,20 @@ fn main() -> eframe::Result {
             )))
         }),
     )
+}
+
+/// Driven by an agent (`--control`): don't activate the app on launch, so the user's keyboard
+/// focus stays where it is (macOS; winit activates ignoring other apps by default).
+fn agent_event_loop(agent: bool) -> Option<eframe::EventLoopBuilderHook> {
+    #[cfg(target_os = "macos")]
+    if agent {
+        return Some(Box::new(|b| {
+            use winit::platform::macos::EventLoopBuilderExtMacOS;
+            b.with_activate_ignoring_other_apps(false);
+        }));
+    }
+    let _ = agent;
+    None
 }
 
 // Not on macOS: APFS refuses file names that aren't valid UTF-8, so no such file can exist there.

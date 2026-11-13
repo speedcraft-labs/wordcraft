@@ -624,6 +624,8 @@ pub struct WordApp {
     pub session: Session,
     pub ui: UiState,
     pub services: Services,
+    /// Order the window forward for agent-driven UI requests without activating the app (macOS).
+    pub raise_without_focus: Option<fn() -> bool>,
     pub printing: printing::State,
     print_feedback_seen: Option<printing::Feedback>,
     pub canvas: canvas::CanvasState,

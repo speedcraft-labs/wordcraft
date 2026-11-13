@@ -226,6 +226,13 @@ fn handle_in(app: &mut WordApp, doc: u64, method: &str, p: &Value) -> Outcome {
 /// drag, key, wheel and text input, screenshots and renders, resize, focus and quit, and unknown
 /// ids as commands. It refuses closing unsaved work and document operations without a document.
 pub fn handle(app: &mut WordApp, ctx: &egui::Context, req: &ControlRequest) -> Outcome {
+    if req.method.starts_with("ui.") && req.method != "ui.focus" {
+        // UI requests need a rendered pass, but must not activate the app for an agent.
+        if let Some(raise_without_focus) = app.raise_without_focus {
+            raise_without_focus();
+        }
+        ctx.request_repaint();
+    }
     let p = &req.params;
     if DOC_METHODS.contains(&req.method.as_str()) {
         match addressed(app, p) {
@@ -389,6 +396,7 @@ pub fn handle(app: &mut WordApp, ctx: &egui::Context, req: &ControlRequest) -> O
             ok(json!({"width": size.x, "height": size.y}))
         }
         "ui.focus" => {
+            // Explicit request: activate the app and take keyboard focus.
             ctx.send_viewport_cmd_to(app.active_viewport(), egui::ViewportCommand::Focus);
             app.canvas.want_focus = true;
             ok(json!({}))
