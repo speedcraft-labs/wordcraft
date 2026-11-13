@@ -11,6 +11,7 @@
 //! - `ui.key {key, shift?, alt?, cmd?}`, `ui.text {text}`: keyboard input through egui
 //! - `ui.screenshot {path?}`: PNG of the window; `ui.render {path?, page?, scale?}`: page PNG
 //!   (without `path`, both reply with the PNG as base64 `png`)
+//! - `ui.focus`: explicitly activate the window and take keyboard focus.
 //! - `ui.parity`: feature catalog parity
 //!
 //! `engine.execute`, `document.inspect` and `ui.render` take `doc`, the id of an open document
@@ -88,6 +89,29 @@ impl ControlRequest {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    static RAISES: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+
+    fn raise_without_focus() -> bool {
+        RAISES.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+        true
+    }
+
+    #[test]
+    fn ui_requests_raise_without_focus_but_ui_focus_stays_explicit() {
+        let mut app = WordApp::new(wordcraft_engine::Session::new(wordcraft_engine::sample::sample_document()), crate::Services::default());
+        app.raise_without_focus = Some(raise_without_focus);
+        let ctx = egui::Context::default();
+        RAISES.store(0, std::sync::atomic::Ordering::SeqCst);
+
+        let (req, _reply) = ControlRequest::new("ui.click", json!({"x": 1.0, "y": 1.0}));
+        let _ = handle(&mut app, &ctx, &req);
+        assert_eq!(RAISES.load(std::sync::atomic::Ordering::SeqCst), 1);
+
+        let (req, _reply) = ControlRequest::new("ui.focus", json!({}));
+        let _ = handle(&mut app, &ctx, &req);
+        assert_eq!(RAISES.load(std::sync::atomic::Ordering::SeqCst), 1);
+    }
 
     /// Builds a visible root-surface fixture with the given viewport, scale and texture limit for
     /// screenshot tests.

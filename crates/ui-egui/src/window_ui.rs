@@ -168,6 +168,7 @@ impl WordApp {
             integrated_titlebar: _,
             mac_titlebar: _,
             control_rx: _,
+            raise_without_focus: _,
             updates_rt: _,
             packs_rt: _,
             // The control channel's screenshots and input go to the active window, whichever it is.

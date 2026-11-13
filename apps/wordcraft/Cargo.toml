@@ -43,6 +43,7 @@ fmv-macos-events = "=0.1.0"
 # traffic lights, the window, button and view ones; and `NSPasteboard` for the clipboard's RTF.
 objc2-app-kit = { version = "0.3", default-features = false, features = ["std", "NSWorkspace", "NSAccessibility", "NSApplication", "NSWindow", "NSButton", "NSControl", "NSView", "NSResponder", "NSPasteboard"] }
 objc2 = "0.6"
+winit = { version = "0.30.13", default-features = false }
 # A copied equation's MathML goes on the pasteboard as `public.mathml.presentation` beside
 # arboard's HTML and text (#1297), through NSPasteboard's safe `setString:forType:`. Already in
 # the build through arboard, at this version; this adds only the NSString bindings, and NSData
