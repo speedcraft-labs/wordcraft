@@ -1,0 +1,19 @@
+[
+  {
+    "id": "docx-030",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf122014.docx",
+    "path": "/jobs/work/speedcraft-labs/wt/228/oracle/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf122014.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 27324,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  }
+]
