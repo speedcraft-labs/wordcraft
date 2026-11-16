@@ -1,0 +1,31 @@
+warning: patch `egui_demo_lib v0.37.0 (https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc7)` was not used in the crate graph
+warning: patch `egui_inspection v0.37.0 (https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc7)` was not used in the crate graph
+warning: patch `egui_system_font_provider v0.37.0 (https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc7)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+   Compiling wordcraft-docx v0.15.1 (/jobs/work/speedcraft-labs/wt/228-main/crates/docx)
+    Finished `test` profile [optimized + debuginfo] target(s) in 13.10s
+     Running tests/it/main.rs (/jobs/work/speedcraft-labs/targets/wordcraft-228-main/debug/deps/it-d150187822729700)
+
+running 1 test
+test toc_ranges::block_level_deletions_keep_their_text_as_tracked_content ... FAILED
+
+failures:
+
+---- toc_ranges::block_level_deletions_keep_their_text_as_tracked_content stdout ----
+
+thread 'toc_ranges::block_level_deletions_keep_their_text_as_tracked_content' (1563560) panicked at crates/docx/tests/it/toc_ranges.rs:37:5:
+assertion `left == right` failed
+  left: ""
+ right: "deleted entry"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    toc_ranges::block_level_deletions_keep_their_text_as_tracked_content
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 401 filtered out; finished in 0.31s
+
+error: test failed, to rerun pass `-p wordcraft-docx --test it`

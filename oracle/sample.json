@@ -1,0 +1,5481 @@
+[
+  {
+    "id": "docx-000",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/text/data/tdf43100_tdf120715_cursorOnSpacesOverMargin.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/text/data/tdf43100_tdf120715_cursorOnSpacesOverMargin.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 9606,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-001",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf131420.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf131420.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11981,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-002",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf159158_zOrder_behindDocA.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf159158_zOrder_behindDocA.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15303,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-003",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/endnote.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/endnote.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 69837,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "fields",
+      "footnotes",
+      "images",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-004",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlimport/data/tdf124670.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlimport/data/tdf124670.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 1434,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-005",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/lid-Merge Field Name Language ID-val-es-CR.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/lid-Merge Field Name Language ID-val-es-CR.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13726,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-006",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/layout/data/floattable-compat14.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/layout/data/floattable-compat14.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 28497,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-007",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/frmedt/data/floating-table-caption.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/frmedt/data/floating-table-caption.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 22947,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-008",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf148380_fldLocked.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf148380_fldLocked.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12547,
+    "tags": [
+      "docx",
+      "fields",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-009",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf132305.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf132305.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13398,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-010",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/uitest/data/tdf131936.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/uitest/data/tdf131936.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 4326,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-011",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/TextEffects_TextOutline.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/TextEffects_TextOutline.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11918,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-012",
+    "source": "office-poi",
+    "rel": "test-data/document/bug-paragraph-alignment.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/bug-paragraph-alignment.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11916,
+    "tags": [
+      "charts",
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-013",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf128959.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf128959.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 24490,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-014",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/writerfilter/filter/data/inline-endnote-and-footnote.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/writerfilter/filter/data/inline-endnote-and-footnote.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15863,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-015",
+    "source": "office-poi",
+    "rel": "test-data/document/ThreeColHeadFoot.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/ThreeColHeadFoot.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13123,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-016",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf88496.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf88496.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 25175,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-017",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf124600b.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf124600b.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15959,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-018",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/tdf125885_WordArt2.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/tdf125885_WordArt2.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 20175,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-019",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf137742.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf137742.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 6925,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-020",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf107969.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf107969.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 28622,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-021",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf124986.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf124986.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12108,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-022",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf143692_outlineLevelTortureTest.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf143692_outlineLevelTortureTest.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 20964,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-023",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo77759.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo77759.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 23880,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-024",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlimport/data/tdf95755.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlimport/data/tdf95755.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16864,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-025",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment044.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment044.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16233,
+    "tags": [
+      "comments",
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-026",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo81381.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo81381.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 51656,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-027",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/numFmt-Endnote Numbering Format-val-40-none.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/numFmt-Endnote Numbering Format-val-40-none.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 17620,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-028",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo76979.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo76979.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 41973,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-029",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/table_atleast.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/table_atleast.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13029,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-030",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf122014.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf122014.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 27324,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-031",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tools-line-numbering.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tools-line-numbering.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15052,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-032",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/test76734_2K7.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/test76734_2K7.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 10446,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-033",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/test76317.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/test76317.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 17705,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-034",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf109310_endnoteStyleForMSO.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf109310_endnoteStyleForMSO.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5109,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-035",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo66929.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo66929.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 21624,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-036",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf53856_conflictingStyle.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf53856_conflictingStyle.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16157,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "docx-037",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf115861.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf115861.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15035,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-038",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/math-escape.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/math-escape.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13422,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-039",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/layout/data/inline-endnote-position.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/layout/data/inline-endnote-position.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15242,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-040",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo78654.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo78654.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 40927,
+    "tags": [
+      "docx",
+      "fields",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-041",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf163894_from_top.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf163894_from_top.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12851,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-042",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf116410.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf116410.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 49192,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-043",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf153891.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf153891.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 24928,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-044",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/table-start-2-sdt.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/table-start-2-sdt.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 34077,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-045",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf166510_sectPr_bottomSpacing.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf166510_sectPr_bottomSpacing.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 33576,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-046",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf133455.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf133455.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15724,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-047",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/testChartTitlePropertiesBitmapFill.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/testChartTitlePropertiesBitmapFill.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 47851,
+    "tags": [
+      "charts",
+      "docx",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-048",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/UnknownElement.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/UnknownElement.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11590,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-049",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/mailmerge/data/tdf35798.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/mailmerge/data/tdf35798.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5446,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-050",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/header_footer/data/FirstPageHeaderShape.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/header_footer/data/FirstPageHeaderShape.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 6189,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-051",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/uiwriter/data/tdf164620.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/uiwriter/data/tdf164620.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 10635,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-052",
+    "source": "office-poi",
+    "rel": "test-data/document/57312.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/57312.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 21702,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-053",
+    "source": "office-poi",
+    "rel": "test-data/document/61470.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/61470.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12523,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-054",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf94801.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf94801.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16128,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-055",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/layout/data/floattable-vertoffset.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/layout/data/floattable-vertoffset.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12960,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-056",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/table-theme-preservation.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/table-theme-preservation.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 37575,
+    "tags": [
+      "docx",
+      "images",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-057",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf148494.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf148494.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11605,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-058",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/table-row-data-displayed-twice.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/table-row-data-displayed-twice.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 27239,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-059",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf127339.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf127339.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13057,
+    "tags": [
+      "docx",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-060",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/text_number_list.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/text_number_list.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 8966,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-061",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/page layout/pagelayout with break in the end/Themes-verve.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/page layout/pagelayout with break in the end/Themes-verve.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 20297,
+    "tags": [
+      "docx",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-062",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/uiwriter/data/tdf117923.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/uiwriter/data/tdf117923.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 21227,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-063",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment030.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment030.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15158,
+    "tags": [
+      "comments",
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-064",
+    "source": "office-poi",
+    "rel": "test-data/document/shapes-with-text.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/shapes-with-text.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 27520,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-065",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/Bug201775_testfile.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/Bug201775_testfile.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 22730,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-066",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf103573.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf103573.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16155,
+    "tags": [
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-067",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf124472.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf124472.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13354,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-068",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/layout/data/tdf128195.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/layout/data/tdf128195.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 14883,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "docx-069",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf69648.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf69648.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 26434,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-070",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf165059_broken.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf165059_broken.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5514,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-071",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf160827.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf160827.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 50276,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-072",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/layout/data/header-textbox.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/layout/data/header-textbox.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5778,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-073",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/undo/data/textbox-cut-save.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/undo/data/textbox-cut-save.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 7272,
+    "tags": [
+      "docx",
+      "fields",
+      "images",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-074",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/table/tableCell2Para.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/table/tableCell2Para.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 14371,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-075",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/testChartTitlePropertiesGradientFill.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/testChartTitlePropertiesGradientFill.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5595,
+    "tags": [
+      "charts",
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-076",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ww8export/data/tdf134264.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ww8export/data/tdf134264.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15412,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-077",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlimport/data/tdf123389.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlimport/data/tdf123389.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13649,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-078",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo61343.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo61343.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 114220,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-079",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/rtfexport/data/tdf138779.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/rtfexport/data/tdf138779.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16556,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-080",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf126533_noPageBitmap.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf126533_noPageBitmap.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 63691,
+    "tags": [
+      "docx",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-081",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf118947_tableStyle2.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf118947_tableStyle2.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 9578,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-082",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/theme-preservation.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/theme-preservation.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15173,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-083",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf125657.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf125657.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 19731,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-084",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/layout/data/tdf157096.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/layout/data/tdf157096.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 18904,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "docx-085",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo76803.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo76803.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 36516,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-086",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf79738_footerLineNumbering.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf79738_footerLineNumbering.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 8150,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-087",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf148380_modifiedField.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf148380_modifiedField.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 7267,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-088",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/math-lim.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/math-lim.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 3512,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-089",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf134235.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf134235.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 27348,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-090",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo79008.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo79008.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 53143,
+    "tags": [
+      "comments",
+      "docx",
+      "fields",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-091",
+    "source": "office-poi",
+    "rel": "test-data/document/checkboxes.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/checkboxes.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 20800,
+    "tags": [
+      "docx",
+      "fields",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-092",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlimport/data/tdf100830.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlimport/data/tdf100830.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 22171,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-093",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/date_field_at_end_of_paragraph.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/date_field_at_end_of_paragraph.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 22693,
+    "tags": [
+      "charts",
+      "docx",
+      "fields",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-094",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/tdf133632.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/tdf133632.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 26280,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-095",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/embedded-xlsx.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/embedded-xlsx.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 33370,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-096",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/uiwriter/data/tdf131963.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/uiwriter/data/tdf131963.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 26924,
+    "tags": [
+      "docx",
+      "fields",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-097",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf135774_numberingShading.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf135774_numberingShading.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5435,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-098",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf138773.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf138773.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 26209,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-099",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf102466.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf102466.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 101162,
+    "tags": [
+      "docx",
+      "fields",
+      "images",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-100",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/testSimpleCategoryAxis.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/testSimpleCategoryAxis.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 31629,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-101",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Invalid_Word15Comments.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Invalid_Word15Comments.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 81314,
+    "tags": [
+      "comments",
+      "docx",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-102",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/fld-in-tbl.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/fld-in-tbl.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12615,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-103",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/fdo77725.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/fdo77725.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 53579,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "docx-104",
+    "source": "office-libreoffice",
+    "rel": "xmloff/qa/unit/data/del-then-format.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/xmloff/qa/unit/data/del-then-format.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 14276,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-105",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/Para.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/Para.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11760,
+    "tags": [
+      "charts",
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-106",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/draw/data/as-char-textbox.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/draw/data/as-char-textbox.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 6908,
+    "tags": [
+      "docx",
+      "fields",
+      "images",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-107",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/hyperlink/hyperlink-in table.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/hyperlink/hyperlink-in table.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 10792,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-108",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/objectpositioning/data/floattable-overlap-cell.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/objectpositioning/data/floattable-overlap-cell.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 26200,
+    "tags": [
+      "charts",
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-109",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/AllShadows-O12-Word-OartTextEffects.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/AllShadows-O12-Word-OartTextEffects.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 15502,
+    "tags": [
+      "charts",
+      "docx",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-110",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf171299_tableInField.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf171299_tableInField.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12757,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "docx-111",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedTableRow.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedTableRow.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 16518,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-112",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedEmptyParagraph.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedEmptyParagraph.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12394,
+    "tags": [
+      "charts",
+      "docx",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-113",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/3d-bar-label.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/3d-bar-label.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 24163,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-114",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/AutoSpaceDE.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/AutoSpaceDE.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13005,
+    "tags": [
+      "charts",
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-115",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/TableOnPage3.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/TableOnPage3.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 35511,
+    "tags": [
+      "charts",
+      "docx",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-116",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/odfexport/data/arabic-zero4-numbering.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/odfexport/data/arabic-zero4-numbering.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5238,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-117",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/header_footer/data/DoubleFirstLeftRight.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/header_footer/data/DoubleFirstLeftRight.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11824,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-118",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/doughnutChart.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/doughnutChart.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 17486,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-119",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/revision/revision.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/revision/revision.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12192,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-120",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf134866.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf134866.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 27169,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "footnotes",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "docx-121",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/comment-annotationref.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/comment-annotationref.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 10135,
+    "tags": [
+      "comments",
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-122",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf132766.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf132766.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5241,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "docx-123",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/doc/data/ins-then-del.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/doc/data/ins-then-del.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 14268,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-124",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf170908_delText.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf170908_delText.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 41021,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-125",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/writerfilter/dmapper/data/floattable-footnote-redline.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/writerfilter/dmapper/data/floattable-footnote-redline.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 9673,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "rtl",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-126",
+    "source": "office-libreoffice",
+    "rel": "xmloff/qa/unit/data/textbox-loss.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/xmloff/qa/unit/data/textbox-loss.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 42192,
+    "tags": [
+      "docx",
+      "footnotes",
+      "images",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-127",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Complex01.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Complex01.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 847839,
+    "tags": [
+      "charts",
+      "comments",
+      "docx",
+      "embedded-objects",
+      "fields",
+      "footnotes",
+      "images",
+      "math",
+      "ooxml",
+      "smartart",
+      "tables",
+      "tracked-changes"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-128",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlimport/data/tdf170236.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlimport/data/tdf170236.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 19465,
+    "tags": [
+      "comments",
+      "docx",
+      "footnotes",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-129",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf130907.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf130907.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12201,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-130",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/uitest/data/tdf157569.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/uitest/data/tdf157569.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12536,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-131",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf123054.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf123054.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 29457,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-132",
+    "source": "office-poi",
+    "rel": "test-data/document/delins.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/delins.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 17720,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-133",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/core/data/ooxml/pass/tdf123001.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/core/data/ooxml/pass/tdf123001.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 31943,
+    "tags": [
+      "docx",
+      "footnotes",
+      "ooxml",
+      "tables",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-134",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/testchartoleobjectembeddings.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/docx/testchartoleobjectembeddings.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 2041727,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "fields",
+      "footnotes",
+      "images",
+      "large",
+      "ooxml",
+      "smartart",
+      "tables"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "docx-135",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf149708.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf149708.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 5633,
+    "tags": [
+      "docx",
+      "ooxml",
+      "rtl",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-136",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/layout/data/tdf149711.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/layout/data/tdf149711.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13619,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-137",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/uitest/data/TC-table-del-add.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/uitest/data/TC-table-del-add.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13681,
+    "tags": [
+      "docx",
+      "ooxml",
+      "tables",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-138",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf115212.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf115212.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 11275,
+    "tags": [
+      "docx",
+      "fields",
+      "ooxml",
+      "tracked-changes"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "docx-139",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/mathtype.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/mathtype.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12533,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "images",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-140",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/floatingtbl_with_formula.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/floatingtbl_with_formula.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 17046,
+    "tags": [
+      "docx",
+      "footnotes",
+      "math",
+      "ooxml",
+      "tables"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-141",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/uibase/frmdlg/data/wrapped-math-object.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/uibase/frmdlg/data/wrapped-math-object.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 23850,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "images",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-142",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/strict.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/strict.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 25636,
+    "tags": [
+      "charts",
+      "docx",
+      "footnotes",
+      "images",
+      "math",
+      "ooxml",
+      "smartart"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-143",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/odfexport/data/tdf134987.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/odfexport/data/tdf134987.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 39541,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-144",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/math-matrix.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/math-matrix.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 3507,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-145",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/uiwriter/data/tdf66405.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/uiwriter/data/tdf66405.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13857,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-146",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/math-bold-italic.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/math-bold-italic.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 13545,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-147",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/rSp-Row Spacing (Equation-Array Function)-val-1080.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/rSp-Row Spacing (Equation-Array Function)-val-1080.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 14168,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-148",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/tdf133030.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/tdf133030.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12451,
+    "tags": [
+      "docx",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "docx-149",
+    "source": "office-poi",
+    "rel": "test-data/document/saut_page.docx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/document/saut_page.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 2959626,
+    "tags": [
+      "docx",
+      "large",
+      "ooxml"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "xlsx-000",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/56557.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/56557.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10483,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-001",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/FormulaEvalTestData_Copy.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/FormulaEvalTestData_Copy.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 65011,
+    "tags": [
+      "comments",
+      "drawings",
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-002",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/ser_labels.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/ser_labels.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 18412,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-003",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/59106.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/59106.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10650,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-004",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/bug66827.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/bug66827.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9814,
+    "tags": [
+      "comments",
+      "drawings",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-005",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/49156.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/49156.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 25064,
+    "tags": [
+      "data-validation",
+      "drawings",
+      "formulas",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-006",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf112936.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf112936.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12032,
+    "tags": [
+      "ooxml",
+      "pivots",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-007",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/InlineString.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/InlineString.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 8401,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-008",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/cell-note.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/cell-note.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 7083,
+    "tags": [
+      "comments",
+      "drawings",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-009",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/bvt/PerformanceEng.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/bvt/PerformanceEng.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 310688,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-010",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/62834.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/62834.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9629,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-011",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/54399.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/54399.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 17761,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-012",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/hidden_cells.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/hidden_cells.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 11215,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-013",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/simple-table-named-range.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/simple-table-named-range.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9785,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-014",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/58106.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/58106.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9111,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-015",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/image_hyperlink.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/image_hyperlink.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 17868,
+    "tags": [
+      "drawings",
+      "fields",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-016",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/headerFooterTest.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/headerFooterTest.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 27484,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-017",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/uitest/data/autofilter/tdf116818.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/uitest/data/autofilter/tdf116818.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 17310,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "xlsx-018",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/smallset/SST.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/smallset/SST.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 8219,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-019",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf123026_optimalRowHeight.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf123026_optimalRowHeight.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 6128,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-020",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf113271.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf113271.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 22831,
+    "tags": [
+      "conditional-formatting",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-021",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/minorTickMark.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/minorTickMark.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 11256,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-022",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/uitest/data/tdf141547.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/uitest/data/tdf141547.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 19869,
+    "tags": [
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-023",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/GroupTest.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/GroupTest.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 8149,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-024",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf128621.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf128621.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 15011,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-025",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/SampleSS.strict.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/SampleSS.strict.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10006,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-026",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/data_validation_test.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/data_validation_test.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10165,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-027",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/GeneralFormatTests.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/GeneralFormatTests.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 36134,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-028",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/45544.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/45544.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 43042,
+    "tags": [
+      "charts",
+      "comments",
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-029",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/totalsRowFunction.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/totalsRowFunction.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 18719,
+    "tags": [
+      "data-validation",
+      "drawings",
+      "formulas",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-030",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/uicalc/data/tdf152037.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/uicalc/data/tdf152037.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 20754,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-031",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/dateAutofilter.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/dateAutofilter.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 8435,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-032",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/FillWithoutColor.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/FillWithoutColor.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 18806,
+    "tags": [
+      "conditional-formatting",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-033",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf130986.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf130986.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 15393,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-034",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/forum-mso-en4-134670.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/forum-mso-en4-134670.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 108049,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-035",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/CalcChain.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/CalcChain.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 8485,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-036",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf133376.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf133376.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12736,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-037",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/Connection.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/Connection.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 66427,
+    "tags": [
+      "conditional-formatting",
+      "formulas",
+      "ooxml",
+      "pivots",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-038",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/empty-noconf.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/empty-noconf.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 4152,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-039",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/RelationalPivotA4.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/RelationalPivotA4.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 38177,
+    "tags": [
+      "ooxml",
+      "pivots",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-040",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/colorscale_num_with_ref.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/colorscale_num_with_ref.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 7939,
+    "tags": [
+      "conditional-formatting",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-041",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/PivotTable_CachedDefinitionAndDataInSync.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/PivotTable_CachedDefinitionAndDataInSync.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13237,
+    "tags": [
+      "ooxml",
+      "pivots",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-042",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/54524.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/54524.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13777,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-043",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/right-to-left.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/right-to-left.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 14478,
+    "tags": [
+      "comments",
+      "drawings",
+      "ooxml",
+      "rtl",
+      "xlsx"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "xlsx-044",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/data_label.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/data_label.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13057,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-045",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/clusteredColumn.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/clusteredColumn.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 11508,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-046",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/MatrixFormulaEvalTestData.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/MatrixFormulaEvalTestData.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 14875,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-047",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/63934.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/63934.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13740,
+    "tags": [
+      "data-validation",
+      "formulas",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-048",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf134392.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf134392.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 11961,
+    "tags": [
+      "conditional-formatting",
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-049",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/uitest/data/autofilter/tdf140469.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/uitest/data/autofilter/tdf140469.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9297,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-050",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/open-as-read-only.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/open-as-read-only.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 5211,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-051",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/53568.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/53568.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 125896,
+    "tags": [
+      "drawings",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-052",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/xshape/data/xlsx/tdf90839-2.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/xshape/data/xlsx/tdf90839-2.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12498,
+    "tags": [
+      "charts",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-053",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/56514.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/56514.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10525,
+    "tags": [
+      "drawings",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-054",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/59775.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/59775.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 5977,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-055",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/autofilter-colors.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/autofilter-colors.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10708,
+    "tags": [
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-056",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_3_DataFieldInColumn_ColumnLabelColor.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_3_DataFieldInColumn_ColumnLabelColor.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12219,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-057",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/customxml.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/customxml.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13282,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-058",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/treemap.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/treemap.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13631,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-059",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/57482-OnlyNumeric.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/57482-OnlyNumeric.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10474,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-060",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/waterfall2.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/waterfall2.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13666,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "xlsx-061",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/smallset/SharedWorkbook.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/smallset/SharedWorkbook.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12633,
+    "tags": [
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-062",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/testTdf90749.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/testTdf90749.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 14505,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-063",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/smoothed_series2007.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/smoothed_series2007.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12351,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-064",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf167689_xmlMaps_and_xmlColumnPr.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf167689_xmlMaps_and_xmlColumnPr.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 6042,
+    "tags": [
+      "comments",
+      "drawings",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-065",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot/Pivot1_Row_Grand.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot/Pivot1_Row_Grand.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12709,
+    "tags": [
+      "ooxml",
+      "pivots",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-066",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf159450.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf159450.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13857,
+    "tags": [
+      "charts",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-067",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf152581_bordercolorNotExportedToXLSX.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf152581_bordercolorNotExportedToXLSX.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9984,
+    "tags": [
+      "conditional-formatting",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "xlsx-068",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/evaluate_formula_with_structured_table_references.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/evaluate_formula_with_structured_table_references.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9198,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-069",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/50867_with_table.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/50867_with_table.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9458,
+    "tags": [
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-070",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf100084.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf100084.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10070,
+    "tags": [
+      "charts",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-071",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/XL/WebExtension/Youtube.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/XL/WebExtension/Youtube.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 10332,
+    "tags": [
+      "drawings",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-072",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf66377.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf66377.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 17056,
+    "tags": [
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-073",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/55924.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/55924.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9741,
+    "tags": [
+      "ooxml",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "xlsx-074",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/hyperlink_formula.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/hyperlink_formula.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 9472,
+    "tags": [
+      "fields",
+      "formulas",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-075",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Excel/Photo Formats - CGM-O12-XL-Pictures.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Excel/Photo Formats - CGM-O12-XL-Pictures.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 151686,
+    "tags": [
+      "charts",
+      "images",
+      "ooxml",
+      "smartart",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-076",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Spreadsheet.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Spreadsheet.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 51328,
+    "tags": [
+      "charts",
+      "comments",
+      "images",
+      "ooxml",
+      "smartart",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-077",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/tdf111980_radioButtons.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/tdf111980_radioButtons.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 20005,
+    "tags": [
+      "drawings",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-078",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf143127.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf143127.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 18486,
+    "tags": [
+      "charts",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-079",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/47668.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/47668.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 118687,
+    "tags": [
+      "drawings",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-080",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/groupwithcalcfields.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/groupwithcalcfields.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12264,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-081",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/56644.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/56644.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 34412,
+    "tags": [
+      "comments",
+      "drawings",
+      "formulas",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-082",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/62629_toMerge.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/62629_toMerge.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 21827,
+    "tags": [
+      "drawings",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-083",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/pivot_calcfield_nameerror.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/pivot_calcfield_nameerror.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 17329,
+    "tags": [
+      "comments",
+      "drawings",
+      "fields",
+      "formulas",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-084",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Excel/Contrast-O12-XL-PictureProperties.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Excel/Contrast-O12-XL-PictureProperties.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 82476,
+    "tags": [
+      "drawings",
+      "images",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "xlsx-085",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_5_DataFieldInColumnAndTwoRowFields_DataColor.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_5_DataFieldInColumnAndTwoRowFields_DataColor.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12514,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-086",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/PerformanceArabic.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/spreadsheet/PerformanceArabic.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 315773,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "rtl",
+      "xlsx"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "xlsx-087",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_8_DataFieldInRow_DataColor.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_8_DataFieldInRow_DataColor.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12172,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-088",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/shared-group-field.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/shared-group-field.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 20180,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-089",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/chart_hyperlink.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/chart_hyperlink.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 21564,
+    "tags": [
+      "charts",
+      "fields",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-090",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_6_SingleDataFieldInColumn_DataColor.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_6_SingleDataFieldInColumn_DataColor.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12668,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-091",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_15_TwoDataFieldColumns_WholeDataColumnSelected.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_15_TwoDataFieldColumns_WholeDataColumnSelected.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 12400,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-092",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_7_TwoRowTwoColumnFields_DataColor.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/pivot-table/PivotTableCellFormatsTest_7_TwoRowTwoColumnFields_DataColor.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 13047,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "xlsx-093",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/LIBRE_OFFICE-128382-0.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/LIBRE_OFFICE-128382-0.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 1839194,
+    "tags": [
+      "charts",
+      "comments",
+      "conditional-formatting",
+      "formulas",
+      "images",
+      "large",
+      "ooxml",
+      "pivots",
+      "tables",
+      "xlsx"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "xlsx-094",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Revision_NameCommentChange.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Revision_NameCommentChange.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 8276,
+    "tags": [
+      "comments",
+      "ooxml",
+      "tracked-changes",
+      "xlsx"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "xlsx-095",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/58325_db.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/58325_db.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 2698159,
+    "tags": [
+      "drawings",
+      "embedded-objects",
+      "images",
+      "large",
+      "ooxml",
+      "xlsx"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "xlsx-096",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/track-changes/simple-cell-changes.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/track-changes/simple-cell-changes.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 15414,
+    "tags": [
+      "formulas",
+      "ooxml",
+      "tracked-changes",
+      "xlsx"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "xlsx-097",
+    "source": "office-libreoffice",
+    "rel": "sc/qa/unit/data/xlsx/change-tracking.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sc/qa/unit/data/xlsx/change-tracking.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 7159,
+    "tags": [
+      "ooxml",
+      "tracked-changes",
+      "xlsx"
+    ],
+    "stratum": "tracked-changes"
+  },
+  {
+    "id": "xlsx-098",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/xlsx/tdf161607PieChartLeaderLinesColorWidth.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/xlsx/tdf161607PieChartLeaderLinesColorWidth.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 14707,
+    "tags": [
+      "charts",
+      "ooxml",
+      "rtl",
+      "xlsx"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "xlsx-099",
+    "source": "office-poi",
+    "rel": "test-data/spreadsheet/LIBRE_OFFICE-116306-0.xlsx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/spreadsheet/LIBRE_OFFICE-116306-0.xlsx",
+    "ext": "xlsx",
+    "app": "gridcraft",
+    "size": 2859963,
+    "tags": [
+      "large",
+      "ooxml",
+      "pivots",
+      "xlsx"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "pptx-000",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf157793.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf157793.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 42199,
+    "tags": [
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-001",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/layout-own-background.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/layout-own-background.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33226,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-002",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withShadow_100chars.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withShadow_100chars.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 54806,
+    "tags": [
+      "animations",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-003",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/pptx/tdf122765.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/pptx/tdf122765.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 47625,
+    "tags": [
+      "charts",
+      "embedded-objects",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-004",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf165341.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf165341.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 29943,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-005",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/algnThaiDist_mainLvl5ppr_AlignmentLevel5ThaiDistributed.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/algnThaiDist_mainLvl5ppr_AlignmentLevel5ThaiDistributed.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 47722,
+    "tags": [
+      "charts",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-006",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/group.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/group.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 50247,
+    "tags": [
+      "animations",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-007",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/pptx/chart.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/pptx/chart.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33393,
+    "tags": [
+      "animations",
+      "charts",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-008",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf165321.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf165321.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 23264,
+    "tags": [
+      "animations",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-009",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Image_Small.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Image_Small.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 49924,
+    "tags": [
+      "animations",
+      "images",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-010",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf143624.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf143624.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33909,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-011",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Chart_2D+Animation (Box In, by element in category).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Chart_2D+Animation (Box In, by element in category).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 74479,
+    "tags": [
+      "animations",
+      "charts",
+      "embedded-objects",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-012",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/numfmt.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/numfmt.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 44390,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-013",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf160490.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf160490.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 17490,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-014",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/tika-2605.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/tika-2605.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 625680,
+    "tags": [
+      "embedded-objects",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-015",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/smartart-interopgrabbag.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/smartart-interopgrabbag.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 39440,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-016",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf127964.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf127964.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34018,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-017",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/smartart-org-chart2.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/smartart-org-chart2.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 64524,
+    "tags": [
+      "charts",
+      "ooxml",
+      "pptx",
+      "smartart"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-018",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/TextDistancesInsets1.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/TextDistancesInsets1.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 60484,
+    "tags": [
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-019",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/connectorConnection.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/connectorConnection.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33296,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-020",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/algnDist_mainLvl5ppr_AlignmentLevel5Distributed.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/algnDist_mainLvl5ppr_AlignmentLevel5Distributed.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 47719,
+    "tags": [
+      "charts",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-021",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/tdf151008_eaVertAnchor.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/tdf151008_eaVertAnchor.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 19773,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-022",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/AutoShapes_3D_Bevel (Circle)+Shadow (Offset, Diagonal).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/AutoShapes_3D_Bevel (Circle)+Shadow (Offset, Diagonal).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 66459,
+    "tags": [
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "none"
+  },
+  {
+    "id": "pptx-023",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/activex_fontproperties.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/activex_fontproperties.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 48562,
+    "tags": [
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-024",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/smartart-hierarchy3-two-parents.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/smartart-hierarchy3-two-parents.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 15597,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart",
+      "transitions"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-025",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/bulletMarginAndIndent.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/bulletMarginAndIndent.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 32905,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-026",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf105150.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf105150.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 31961,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-027",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/highlight-test-case.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/highlight-test-case.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 36284,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-028",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/vertical-bracket-list.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/vertical-bracket-list.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 42124,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-029",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/OverlappingRelations.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/OverlappingRelations.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 38135,
+    "tags": [
+      "animations",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-030",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/main_ppr_algn_dist.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/main_ppr_algn_dist.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 38292,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-031",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/uDbl_rprU_UnderlineDouble.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/uDbl_rprU_UnderlineDouble.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34167,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-032",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/MetroCodeFree.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/MetroCodeFree.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 28860,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-033",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/mirrored-graphic.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/mirrored-graphic.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 173805,
+    "tags": [
+      "charts",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-034",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/Scene3d_pureImage.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/Scene3d_pureImage.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 26703,
+    "tags": [
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-035",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/fontAlgnT_mainLvl1ppr_FontAlignementLevel1Top.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/fontAlgnT_mainLvl1ppr_FontAlignementLevel1Top.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 47719,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-036",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf109187.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf109187.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34647,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-037",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/hidden_group_shape.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/hidden_group_shape.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 7256,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-038",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/xshape/data/pptx/tdf149204.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/xshape/data/pptx/tdf149204.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33324,
+    "tags": [
+      "charts",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-039",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/xshape/data/pptx/tdf88154_LabelRotatedLayout.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/xshape/data/pptx/tdf88154_LabelRotatedLayout.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34771,
+    "tags": [
+      "animations",
+      "charts",
+      "embedded-objects",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-040",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/smartart-composite-infer-right.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/smartart-composite-infer-right.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 23250,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-041",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withShadow_100chars+Animation (Fly In, all at once).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withShadow_100chars+Animation (Fly In, all at once).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 55469,
+    "tags": [
+      "animations",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-042",
+    "source": "office-libreoffice",
+    "rel": "svx/qa/unit/data/auto-height-multi-col-shape.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/svx/qa/unit/data/auto-height-multi-col-shape.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 16350,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-043",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/[HC]animclr-Direction-cw.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/[HC]animclr-Direction-cw.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34232,
+    "tags": [
+      "animations",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-044",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/smartart-vertical-block-list.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/smartart-vertical-block-list.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 47533,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-045",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/Scene3d_lightRig_legacyCamera.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/Scene3d_lightRig_legacyCamera.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 14354,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-046",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/pptx/tdf146487.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/pptx/tdf146487.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33891,
+    "tags": [
+      "charts",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-047",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf114845_rotateShape.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf114845_rotateShape.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 45018,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-048",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf156856.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf156856.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 59374,
+    "tags": [
+      "animations",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-049",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withExtrusion_100chars+Animation (Fly In, all at once).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withExtrusion_100chars+Animation (Fly In, all at once).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 50381,
+    "tags": [
+      "animations",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-050",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/n83889.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/n83889.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33401,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-051",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf152606.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf152606.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 32273,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart",
+      "transitions"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-052",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf50499.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf50499.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 40344,
+    "tags": [
+      "animations",
+      "notes",
+      "ooxml",
+      "pptx",
+      "transitions"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-053",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/ppt/placeholder-priority.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/ppt/placeholder-priority.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 26091,
+    "tags": [
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-054",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf149551_SmartArt_Venn.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf149551_SmartArt_Venn.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 26146,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-055",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/bug65523.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/bug65523.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 50285,
+    "tags": [
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-056",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/LIBRE_OFFICE-100610-0.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/LIBRE_OFFICE-100610-0.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 743904,
+    "tags": [
+      "animations",
+      "charts",
+      "images",
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-057",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_100chars+Animation (Fly In, by letter).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_100chars+Animation (Fly In, by letter).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 50062,
+    "tags": [
+      "animations",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-058",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withExtrusion_200chars+Animation (Fly In, all at once).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Text_withExtrusion_200chars+Animation (Fly In, all at once).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 66930,
+    "tags": [
+      "animations",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-059",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/table-with-no-theme.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/table-with-no-theme.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34362,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-060",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/pptx/tdf48041.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/pptx/tdf48041.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 23937,
+    "tags": [
+      "charts",
+      "ooxml",
+      "pptx",
+      "transitions"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-061",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/refer-to-theme.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/refer-to-theme.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33853,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-062",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/arc-validiert.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/arc-validiert.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 14393,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-063",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/EmbeddedAudio.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/EmbeddedAudio.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 90047,
+    "tags": [
+      "animations",
+      "embedded-objects",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-064",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/smartart-snake-rows.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/smartart-snake-rows.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 52893,
+    "tags": [
+      "notes",
+      "ooxml",
+      "pptx",
+      "smartart",
+      "transitions"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-065",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf111863.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf111863.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 30755,
+    "tags": [
+      "animations",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-066",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/paraMarginAndIndentation.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/paraMarginAndIndentation.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 32854,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-067",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf128212.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf128212.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 16921,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-068",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/TextFittingComparisonWithMSO_TopBottomMiddleAlignment.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/TextFittingComparisonWithMSO_TopBottomMiddleAlignment.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 53632,
+    "tags": [
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-069",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/text-highlight.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/text-highlight.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 31851,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-070",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/copy-slide-demo.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/copy-slide-demo.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 31301,
+    "tags": [
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-071",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/pptx/bnc889755.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/chart2/qa/extras/data/pptx/bnc889755.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34771,
+    "tags": [
+      "animations",
+      "charts",
+      "embedded-objects",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "charts"
+  },
+  {
+    "id": "pptx-072",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf112334.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf112334.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 30041,
+    "tags": [
+      "animations",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fill"
+  },
+  {
+    "id": "pptx-073",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/bnc480256.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/bnc480256.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 35990,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-074",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Image_Small+3D Rotation+Animatioin (Fly In).pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/presentation/Image_Small+3D Rotation+Animatioin (Fly In).pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 61787,
+    "tags": [
+      "animations",
+      "images",
+      "notes",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "images"
+  },
+  {
+    "id": "pptx-075",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/bug60993.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/bug60993.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 21942,
+    "tags": [
+      "animations",
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-076",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/bug68703.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/bug68703.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 60711,
+    "tags": [
+      "animations",
+      "images",
+      "ooxml",
+      "pptx",
+      "tables",
+      "transitions"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-077",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf131905.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf131905.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 35474,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-078",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf156718.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf156718.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 14422,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-079",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf144092-tableHeight.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf144092-tableHeight.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33114,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-080",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/table-list.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/table-list.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 52249,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "smartart",
+      "tables"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-081",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/aascu.org_hbcu_leadershipsummit_cooper_.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/aascu.org_hbcu_leadershipsummit_cooper_.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 612132,
+    "tags": [
+      "animations",
+      "charts",
+      "comments",
+      "embedded-objects",
+      "images",
+      "notes",
+      "ooxml",
+      "pptx",
+      "tables",
+      "transitions"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-082",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/n90223.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/n90223.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 83910,
+    "tags": [
+      "animations",
+      "images",
+      "notes",
+      "ooxml",
+      "pptx",
+      "tables",
+      "transitions"
+    ],
+    "stratum": "tables"
+  },
+  {
+    "id": "pptx-083",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/main_bodyPr_rtlCol.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/main_bodyPr_rtlCol.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 43607,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-084",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/slidenum_field.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/slidenum_field.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 32715,
+    "tags": [
+      "fields",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "pptx-085",
+    "source": "office-libreoffice",
+    "rel": "vcl/qa/cppunit/pdfexport/data/tdf160401.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/vcl/qa/cppunit/pdfexport/data/tdf160401.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 49737,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl",
+      "transitions"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-086",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/hyperlinktest.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/hyperlinktest.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 33633,
+    "tags": [
+      "animations",
+      "fields",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "pptx-087",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf62255.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf62255.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 31427,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl",
+      "tables"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-088",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/o09_Performance_typical.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/o09_Performance_typical.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 1517471,
+    "tags": [
+      "animations",
+      "embedded-objects",
+      "images",
+      "large",
+      "notes",
+      "ooxml",
+      "pptx",
+      "tables",
+      "transitions"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "pptx-089",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/rightToLeftParagraph.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/rightToLeftParagraph.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 31841,
+    "tags": [
+      "charts",
+      "ooxml",
+      "pptx",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-090",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/hyperlinkOnImage.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/hyperlinkOnImage.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 17576,
+    "tags": [
+      "fields",
+      "images",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "fields"
+  },
+  {
+    "id": "pptx-091",
+    "source": "office-openxml-sdk",
+    "rel": "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/main_buautonum_type_arabicPeriod.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-openxml-sdk/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/PowerPoint/main_buautonum_type_arabicPeriod.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 34255,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-092",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/at.ecodesign.www_downloads_Vertiefungsvortrag_elektronik.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/at.ecodesign.www_downloads_Vertiefungsvortrag_elektronik.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 1949517,
+    "tags": [
+      "animations",
+      "embedded-objects",
+      "images",
+      "large",
+      "notes",
+      "ooxml",
+      "pptx",
+      "transitions"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "pptx-093",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/accent-color.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/accent-color.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 1079347,
+    "tags": [
+      "images",
+      "large",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "pptx-094",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/ca.ubc.cs.people_~emhill_presentations_HowWeRefactor.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/ca.ubc.cs.people_~emhill_presentations_HowWeRefactor.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 2059644,
+    "tags": [
+      "animations",
+      "images",
+      "large",
+      "notes",
+      "ooxml",
+      "pptx",
+      "tables",
+      "transitions"
+    ],
+    "stratum": "large"
+  },
+  {
+    "id": "pptx-095",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/tdf125085_WordArtFontTheme.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/tdf125085_WordArtFontTheme.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 15548,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-096",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/tdf125085_WordArtFontText.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/tdf125085_WordArtFontText.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 16891,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-097",
+    "source": "office-libreoffice",
+    "rel": "sd/qa/unit/data/pptx/tdf134862.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/sd/qa/unit/data/pptx/tdf134862.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 32601,
+    "tags": [
+      "ooxml",
+      "pptx",
+      "rtl"
+    ],
+    "stratum": "rtl"
+  },
+  {
+    "id": "pptx-098",
+    "source": "office-libreoffice",
+    "rel": "oox/qa/unit/data/tdf144742_mathEqual_mathNotEqual.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-libreoffice/oox/qa/unit/data/tdf144742_mathEqual_mathNotEqual.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 12351,
+    "tags": [
+      "math",
+      "ooxml",
+      "pptx"
+    ],
+    "stratum": "math"
+  },
+  {
+    "id": "pptx-099",
+    "source": "office-poi",
+    "rel": "test-data/slideshow/KEY02.pptx",
+    "path": "/jobs/work/speedcraft-labs/hyper/corpus/office-poi/test-data/slideshow/KEY02.pptx",
+    "ext": "pptx",
+    "app": "deckcraft",
+    "size": 2282394,
+    "tags": [
+      "animations",
+      "comments",
+      "images",
+      "large",
+      "notes",
+      "ooxml",
+      "pptx",
+      "transitions"
+    ],
+    "stratum": "large"
+  }
+]

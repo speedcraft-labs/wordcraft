@@ -1,0 +1,93 @@
+warning: patch `egui_demo_lib v0.37.0 (https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc7)` was not used in the crate graph
+warning: patch `egui_inspection v0.37.0 (https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc7)` was not used in the crate graph
+warning: patch `egui_system_font_provider v0.37.0 (https://github.com/storytold/egui.git?rev=6d518fc799681571963842f95b55a6b68431b15a#6d518fc7)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+   Compiling syn v3.0.6
+   Compiling libm v0.2.16
+   Compiling num-traits v0.2.19
+   Compiling log v0.4.34
+   Compiling hashbrown v0.17.1
+   Compiling syn v2.0.119
+   Compiling indexmap v2.14.2
+   Compiling winnow v1.0.4
+   Compiling moxcms v0.8.1
+   Compiling synstructure v0.14.0
+   Compiling toml_parser v1.1.3+spec-1.1.0
+   Compiling zerocopy-derive v0.8.61
+   Compiling toml v1.1.6+spec-1.1.0
+   Compiling bytemuck_derive v1.12.1
+   Compiling bytemuck v1.25.2
+   Compiling serde_derive v1.0.229
+   Compiling font-types v0.12.6
+   Compiling thiserror-impl v2.0.21
+   Compiling zerocopy v0.8.61
+   Compiling thiserror v2.0.21
+   Compiling read-fonts v0.44.0
+   Compiling serde v1.0.229
+   Compiling smallvec v1.16.2
+   Compiling kurbo v0.13.1
+   Compiling half v2.7.1
+   Compiling tiff v0.11.3
+   Compiling read-fonts v0.41.0
+   Compiling image v0.25.10
+   Compiling font-types v0.11.3
+   Compiling read-fonts v0.39.2
+   Compiling wordcraft-geom v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/geom)
+   Compiling wordcraft-doc v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/doc)
+   Compiling skrifa v0.47.0
+   Compiling read-fonts v0.43.3
+   Compiling color v0.3.3
+   Compiling zerofrom-derive v0.1.8
+   Compiling euclid v0.22.14
+   Compiling chrono v0.4.45
+   Compiling guillotiere v0.7.0
+   Compiling zerofrom v0.1.8
+   Compiling peniko v0.6.1
+   Compiling skrifa v0.42.1
+   Compiling harfrust v0.13.3
+   Compiling write-fonts v0.48.1
+   Compiling wordcraft-metafile v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/metafile)
+   Compiling yoke-derive v0.8.4
+   Compiling uuid v1.27.0
+   Compiling openssl-probe v0.2.1
+   Compiling wordcraft-fonts v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/fonts)
+   Compiling cfb v0.15.0
+   Compiling rustls-native-certs v0.8.5
+   Compiling yoke v0.8.4
+   Compiling subsetter v0.2.6
+   Compiling pdf-writer v0.15.0
+   Compiling vello_common v0.2.0
+   Compiling tiny-skia-path v0.12.0
+   Compiling rustls v0.23.46
+   Compiling craft-proof v0.1.0 (https://github.com/storytold/craft-libs?rev=01315d9c92b5b0e69082d35ca56099461a1efd45#01315d9c)
+   Compiling skrifa v0.44.0
+   Compiling float-cmp v0.9.0
+   Compiling zopfli v0.8.3
+   Compiling either v1.19.0
+   Compiling krilla v0.8.2 (https://github.com/storytold/craft-libs?rev=c5a1cbfb5f9049f9270955caffb5bee5997aebf7#c5a1cbfb)
+   Compiling rayon v1.12.0
+   Compiling wordcraft-layout v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/layout)
+   Compiling fontique v0.11.1
+   Compiling ureq-proto v0.6.5
+   Compiling zip v3.0.0
+   Compiling glifo v0.3.0
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v3.5.0
+   Compiling vello_cpu v0.2.0
+   Compiling craft-font-catalog v0.1.0 (https://github.com/storytold/craft-libs?rev=762a06a4c6b48b522b7d4de84a87917ef90265e6#762a06a4)
+   Compiling craft-pdf v0.1.0 (https://github.com/storytold/craft-libs?rev=c5a1cbfb5f9049f9270955caffb5bee5997aebf7#c5a1cbfb)
+   Compiling craft-font-store v0.1.0 (https://github.com/storytold/craft-libs?rev=762a06a4c6b48b522b7d4de84a87917ef90265e6#762a06a4)
+   Compiling wordcraft-formats v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/formats)
+   Compiling wordcraft-pdf v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/pdf)
+   Compiling wordcraft-render v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/render)
+   Compiling wordcraft-docx v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/docx)
+   Compiling wordcraft-docbin v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/docbin)
+   Compiling sys-locale v0.3.2
+   Compiling wordcraft-engine v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/engine)
+   Compiling wordcraft-zotero v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/zotero)
+   Compiling wordcraft-mcp v0.15.1 (/jobs/work/speedcraft-labs/wt/228/crates/mcp)
+   Compiling wordcraft-cli v0.15.1 (/jobs/work/speedcraft-labs/wt/228/apps/wordcraft-cli)
+    Finished `release` profile [optimized] target(s) in 5m 46s

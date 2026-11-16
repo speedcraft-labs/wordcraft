@@ -1,0 +1,112 @@
+name = "oracle-wordcraft-office-openxml-sdk"
+description = "WordCraft sample inputs for oracle regression comparison."
+
+[[git]]
+repo = "dotnet/Open-XML-SDK"
+commit = "431ab05cf160248cc3885a4a766026d4f8243792"
+paths = ["**"]
+licence = "MIT"
+provenance = "https://github.com/dotnet/Open-XML-SDK/tree/431ab05cf160248cc3885a4a766026d4f8243792"
+redistributable = true
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/endnote.docx"
+sha256 = "156def282ed862727d0e3b45a6ed3e8a5390d63ca43e298d14bfb55d08119271"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/endnote.docx"
+tags = ["docx", "embedded-objects", "fields", "footnotes", "images", "ooxml", "tables"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/lid-Merge Field Name Language ID-val-es-CR.docx"
+sha256 = "f295222a90a22ba59b2b0ca94251fc24d561013cc93d7de63b5062d740e5bc76"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/lid-Merge Field Name Language ID-val-es-CR.docx"
+tags = ["docx", "fields", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment044.docx"
+sha256 = "25c3f68e74e1a6397c911eef81a6e9b7a244abcba9887e70f41cb54d6358c66e"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment044.docx"
+tags = ["comments", "docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/numFmt-Endnote Numbering Format-val-40-none.docx"
+sha256 = "cf997dfc7f029ef67bf540302d05173ca6beeec2bc9189ebc3abd06562363434"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/numFmt-Endnote Numbering Format-val-40-none.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/UnknownElement.docx"
+sha256 = "06e5a8a2f0945c12a879d96449c90e4a14efc94b9c8885deeb1b249fa2ae4122"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/UnknownElement.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/page layout/pagelayout with break in the end/Themes-verve.docx"
+sha256 = "66eac1ac218ddbe3f314131f262fb3ac13eceb3f8c01399051803416f9351118"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/page layout/pagelayout with break in the end/Themes-verve.docx"
+tags = ["docx", "images", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment030.docx"
+sha256 = "324a1f7ca1b746c8de043005b11a697cf14091e81a0fee068d9bf7607a0ee741"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Comments-Sample-15-12-01/Comment030.docx"
+tags = ["comments", "docx", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/Bug201775_testfile.docx"
+sha256 = "b4d4c9da84645518b150b6e8c6296bda7ad57cc24d5cd53ad41ac6ab9566c198"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/ForTestCase/Bug201775_testfile.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/table/tableCell2Para.docx"
+sha256 = "c925a3de2a2f0ac880b65e459320d493e79b460a03b0f8c7e214f3b05e538a02"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/table/tableCell2Para.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Invalid_Word15Comments.docx"
+sha256 = "805e18445073b0b61679bc8764a5a5bd793b6e2eb2adbf5e92c7b17833e30dc8"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O15Conformance/WD/CommentExTest/Invalid_Word15Comments.docx"
+tags = ["comments", "docx", "images", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/Para.docx"
+sha256 = "cd040b158be395f318564f6bb5b539db7d566f93df46bbf52dda1de34e9da70f"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/Para.docx"
+tags = ["charts", "docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/hyperlink/hyperlink-in table.docx"
+sha256 = "8e95c65c0b654aaf3f86242d765eb0f2af98121f9d70e656a68e3775885f81c0"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/hyperlink/hyperlink-in table.docx"
+tags = ["docx", "fields", "ooxml", "tables"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/AllShadows-O12-Word-OartTextEffects.docx"
+sha256 = "84ad9a51f1c32ac8eda33bbab1d1ff76cb25fb24cb9a0238f271d9cde37e4f98"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Graphics/AllShadows-O12-Word-OartTextEffects.docx"
+tags = ["charts", "docx", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/AutoSpaceDE.docx"
+sha256 = "540eb4f46026e2a918e2b840bbc45525473a693206579e065733a37fd44cf972"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/paragraph/AutoSpaceDE.docx"
+tags = ["charts", "docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/revision/revision.docx"
+sha256 = "398008916cad49d89759960da31703cdc504bb4c38003a4e9834d39e197d9532"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/revision/revision.docx"
+tags = ["docx", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Complex01.docx"
+sha256 = "d75bb3978e5cbbbd251c2cd1f4c4f123e7c3253292757f203418b8bfdf79ee2c"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Complex01.docx"
+tags = ["charts", "comments", "docx", "embedded-objects", "fields", "footnotes", "images", "math", "ooxml", "smartart", "tables", "tracked-changes"]
+
+[[git.file]]
+path = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/rSp-Row Spacing (Equation-Array Function)-val-1080.docx"
+sha256 = "407ef3a7e784427fb2ad375e894a17fe7c62b1ea5fafc76137925522e813306c"
+dest = "test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/O14ISOStrict/Word/rSp-Row Spacing (Equation-Array Function)-val-1080.docx"
+tags = ["docx", "math", "ooxml"]

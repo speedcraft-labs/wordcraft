@@ -1,0 +1,27 @@
+6
+
+
+                                               5
+5
+
+
+
+4
+
+
+                                  3
+3
+
+
+        2            2
+2
+
+
+
+1
+
+
+
+0
+    Category 1   Category 2   Category 3   Category 4
+

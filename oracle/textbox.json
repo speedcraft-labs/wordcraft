@@ -1,0 +1,184 @@
+{
+  "blocks": [
+    {
+      "index": 0,
+      "len": 0,
+      "props": {
+        "align": "left",
+        "bidi": false,
+        "style": "Normal"
+      },
+      "style": "Normal",
+      "text": "",
+      "type": "paragraph"
+    },
+    {
+      "index": 1,
+      "len": 6,
+      "objects": [
+        {
+          "fill": null,
+          "float": {
+            "dist": 0.0,
+            "distBottom": 0.0,
+            "distTop": 0.0,
+            "effect": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "hRel": "column",
+            "outsideCell": true,
+            "vRel": "paragraph",
+            "wrap": "square",
+            "wrapText": "largest",
+            "x": 54.70000076293945,
+            "y": 41.45000076293945,
+            "z": 2
+          },
+          "h": 102.0999984741211,
+          "kind": "textBox",
+          "story": 1,
+          "stroke": null,
+          "stroke_width": 0.0,
+          "type": "shape",
+          "w": 153.0500030517578
+        },
+        {
+          "fill": null,
+          "float": {
+            "dist": 0.0,
+            "distBottom": 0.0,
+            "distTop": 0.0,
+            "effect": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "hRel": "column",
+            "outsideCell": true,
+            "vRel": "paragraph",
+            "wrap": "square",
+            "wrapText": "largest",
+            "x": 228.14999389648438,
+            "y": 44.599998474121094,
+            "z": 4
+          },
+          "h": 102.0999984741211,
+          "kind": "textBox",
+          "story": 2,
+          "stroke": null,
+          "stroke_width": 0.0,
+          "type": "shape",
+          "w": 153.0500030517578
+        }
+      ],
+      "props": {
+        "align": "left",
+        "bidi": false,
+        "style": "Normal"
+      },
+      "style": "Normal",
+      "text": "",
+      "type": "paragraph"
+    }
+  ],
+  "canRedo": false,
+  "canUndo": false,
+  "comments": 0,
+  "pages": 1,
+  "parts": [
+    {
+      "id": 1,
+      "kind": "textBox",
+      "text": "Figure 1"
+    },
+    {
+      "id": 2,
+      "kind": "textBox",
+      "text": "Figure 2"
+    }
+  ],
+  "properties": {
+    "category": "",
+    "created": "2020-04-20T17:25:14Z",
+    "creator": "",
+    "description": "",
+    "keywords": "",
+    "lastModifiedBy": "",
+    "modified": "2020-08-08T16:07:01Z",
+    "revision": 15,
+    "subject": "",
+    "title": ""
+  },
+  "sections": [
+    {
+      "endBlock": 1,
+      "props": {
+        "columns": {
+          "count": 1,
+          "separator": false,
+          "space": 36.0,
+          "widths": []
+        },
+        "docGrid": {
+          "charSpace": 32768,
+          "linePitch": 30.0,
+          "type": "default"
+        },
+        "footer": 0.0,
+        "footers": {
+          "default": null,
+          "even": null,
+          "first": null
+        },
+        "formProt": false,
+        "gutter": 0.0,
+        "header": 0.0,
+        "headers": {
+          "default": null,
+          "even": null,
+          "first": null
+        },
+        "landscape": false,
+        "lineNumbers": null,
+        "marginBottom": 56.70000076293945,
+        "marginLeft": 56.70000076293945,
+        "marginRight": 56.70000076293945,
+        "marginTop": 56.70000076293945,
+        "pageBorders": null,
+        "pageH": 841.9000244140625,
+        "pageNumFormat": "decimal",
+        "pageNumSet": true,
+        "pageNumStart": null,
+        "pageW": 595.2999877929688,
+        "rtl": false,
+        "start": "nextPage",
+        "textDirectionSet": true,
+        "titlePage": false,
+        "valign": "top"
+      }
+    }
+  ],
+  "selection": {
+    "anchor": {
+      "off": 0,
+      "path": [
+        0
+      ],
+      "story": "body"
+    },
+    "focus": {
+      "off": 0,
+      "path": [
+        0
+      ],
+      "story": "body"
+    },
+    "text": ""
+  },
+  "trackChanges": false,
+  "words": 0
+}

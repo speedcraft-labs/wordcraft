@@ -1,0 +1,760 @@
+name = "oracle-wordcraft-office-libreoffice"
+description = "WordCraft sample inputs for oracle regression comparison."
+
+[[git]]
+repo = "LibreOffice/core"
+commit = "695017480642732e582a811886569d7c6362c056"
+paths = ["**"]
+licence = "MPL-2.0"
+provenance = "https://github.com/LibreOffice/core/tree/695017480642732e582a811886569d7c6362c056"
+redistributable = true
+
+[[git.file]]
+path = "sw/qa/core/text/data/tdf43100_tdf120715_cursorOnSpacesOverMargin.docx"
+sha256 = "9cce40f917a7cae122db340c83f01dcf3fbae781385fb299586645d844afc575"
+dest = "sw/qa/core/text/data/tdf43100_tdf120715_cursorOnSpacesOverMargin.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf131420.docx"
+sha256 = "dd3d953e1503526506c788ec86075123dc2a24f426ce42abee24cbd0cf85f4b0"
+dest = "sw/qa/extras/ooxmlexport/data/tdf131420.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf159158_zOrder_behindDocA.docx"
+sha256 = "a6d9baebb0f22695375fc16d316802ec39bbdf32862548a8d1bd8c10c871c1bd"
+dest = "sw/qa/extras/ooxmlexport/data/tdf159158_zOrder_behindDocA.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlimport/data/tdf124670.docx"
+sha256 = "7e277da186a9d9933b9807bf51cfc32cc7ac29bd501331df265685d9d7d4010a"
+dest = "sw/qa/extras/ooxmlimport/data/tdf124670.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/core/layout/data/floattable-compat14.docx"
+sha256 = "00253c627e5adbdfce0bc2e8afcbc00cd3addc0763b01c3f5d0a2f1362a4810b"
+dest = "sw/qa/core/layout/data/floattable-compat14.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/core/frmedt/data/floating-table-caption.docx"
+sha256 = "9803e8f6c062175a8390f3a32c68b37cf754572e0d5964351bc9bcfc5bf4f406"
+dest = "sw/qa/core/frmedt/data/floating-table-caption.docx"
+tags = ["docx", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf148380_fldLocked.docx"
+sha256 = "dc87bd9281d03e1e8a40cc94de86cb1de4420caef6ed463a32e5c6b1f6074396"
+dest = "sw/qa/extras/ooxmlexport/data/tdf148380_fldLocked.docx"
+tags = ["docx", "fields", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf132305.docx"
+sha256 = "2ee7b7501511b0664994029f6430f3fdeaf2d25d3047ea4598a6963408bcc2f4"
+dest = "sw/qa/extras/ooxmlexport/data/tdf132305.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/uitest/data/tdf131936.docx"
+sha256 = "36d89556bfdba0cca474b1aaa0f5408e708a2983f2805a25eabcd033610dcd9c"
+dest = "sw/qa/uitest/data/tdf131936.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/TextEffects_TextOutline.docx"
+sha256 = "a17d97e9f2ae1b1396a1bb1b463613be9b6429e353f390c32e15c2d386b2f9e2"
+dest = "sw/qa/extras/ooxmlexport/data/TextEffects_TextOutline.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf128959.docx"
+sha256 = "8ab44df57b3960fe451fe4d6cca86e04bc36b4c370765ccf761f54db556195e0"
+dest = "sw/qa/extras/layout/data/tdf128959.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/writerfilter/filter/data/inline-endnote-and-footnote.docx"
+sha256 = "26f55b5074df513c6525cda3f6b4107cedcd4d2d4553e958f908f9508f4fa189"
+dest = "sw/qa/writerfilter/filter/data/inline-endnote-and-footnote.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf88496.docx"
+sha256 = "28f9b88606c18b2490fd88763b85b03de3133e1fb6b11ccd65cffdef03bd60ae"
+dest = "sw/qa/extras/ooxmlexport/data/tdf88496.docx"
+tags = ["docx", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf124600b.docx"
+sha256 = "4d644c8bbc71bef3b1a961852872b60fe3c0e8f36e5e0af3e4438f8a955569ac"
+dest = "sw/qa/extras/ooxmlexport/data/tdf124600b.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "oox/qa/unit/data/tdf125885_WordArt2.docx"
+sha256 = "b87038b7c440f668ece79845dc6562a82f06328c22302c7bfaa75349b1eb97a1"
+dest = "oox/qa/unit/data/tdf125885_WordArt2.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf137742.docx"
+sha256 = "61816a15a7388797227b9a6f5bdfe2749b41b2b7c102a30f33ce7f160db19e52"
+dest = "sw/qa/extras/ooxmlexport/data/tdf137742.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf107969.docx"
+sha256 = "1f6644d630ba5f28b0805dd019fd8a01109c4bf679adddbcc84921233408856b"
+dest = "sw/qa/extras/ooxmlexport/data/tdf107969.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf124986.docx"
+sha256 = "73e2acb84017eed14a722946f775ddd6ab8b314e6b40a42c4b04c775351dde03"
+dest = "sw/qa/extras/ooxmlexport/data/tdf124986.docx"
+tags = ["docx", "fields", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf143692_outlineLevelTortureTest.docx"
+sha256 = "2c2ec58d2a5a2de9da080ca0406d037e9d4907f8d89a64f07f3a1a51c2be21ff"
+dest = "sw/qa/extras/ooxmlexport/data/tdf143692_outlineLevelTortureTest.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo77759.docx"
+sha256 = "7af11c6f17bad0b055532eb8367e691fb5d40fed512ad6c5cc9e07563048ca23"
+dest = "sw/qa/extras/ooxmlexport/data/fdo77759.docx"
+tags = ["docx", "embedded-objects", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlimport/data/tdf95755.docx"
+sha256 = "896eea1d8f4d6bd1c00e2bfea91adaa42d54d74eb7ee1bd0f80b71f919469faa"
+dest = "sw/qa/extras/ooxmlimport/data/tdf95755.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo81381.docx"
+sha256 = "9926189bc191132fe0368a652df3bf816df12fa202260afa81d33b2827a35268"
+dest = "sw/qa/extras/ooxmlexport/data/fdo81381.docx"
+tags = ["docx", "embedded-objects", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo76979.docx"
+sha256 = "f5bb3b119fbdf89aac2f436a862ed8f547bd4229b5bea907a3e8f8412ed4ca7c"
+dest = "sw/qa/extras/ooxmlexport/data/fdo76979.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/table_atleast.docx"
+sha256 = "2f322cb7cb34fa574205dc244b42f1e274f3718b0c8e02075f6603e44e4b49cf"
+dest = "sw/qa/extras/ooxmlexport/data/table_atleast.docx"
+tags = ["docx", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf122014.docx"
+sha256 = "0df0276da963593ea44788373c8a317362b1d45be261383400545519d9ca9390"
+dest = "sw/qa/extras/layout/data/tdf122014.docx"
+tags = ["charts", "docx", "embedded-objects", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tools-line-numbering.docx"
+sha256 = "a3d57d9d6387e9900f235c1f3527f4b3b36d2ea475d6be9304acb0803a2e6a5e"
+dest = "sw/qa/extras/ooxmlexport/data/tools-line-numbering.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/test76734_2K7.docx"
+sha256 = "49e5765c9b42ed8b57000a63f8740412c74f6e6ba098a3a1d63b5f3f5d62f66d"
+dest = "sw/qa/extras/ooxmlexport/data/test76734_2K7.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/test76317.docx"
+sha256 = "fcc91c86544f539942115e63c01da1fca10c8bdd007e6886540c75f2bb41d812"
+dest = "sw/qa/extras/ooxmlexport/data/test76317.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf109310_endnoteStyleForMSO.docx"
+sha256 = "80583679cb92b7fe41bafbc0a56d2bd307f041c5d2caf608163cfb4640064ad5"
+dest = "sw/qa/extras/ooxmlexport/data/tdf109310_endnoteStyleForMSO.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo66929.docx"
+sha256 = "29d898314f3718485ed544e16211f9a4e11326dd0124248502d9bc3b1e95ad51"
+dest = "sw/qa/extras/ooxmlexport/data/fdo66929.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf53856_conflictingStyle.docx"
+sha256 = "2be56458868675deb2b362e96d31b697b19e16ce9afba2112918358dbf17dd0f"
+dest = "sw/qa/extras/ooxmlexport/data/tdf53856_conflictingStyle.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf115861.docx"
+sha256 = "5d11d4a3aadae60f9ba62fe7dbc8966621ef5d934cb13fa291368b7f89b2ee00"
+dest = "sw/qa/extras/ooxmlexport/data/tdf115861.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/math-escape.docx"
+sha256 = "4e85548db9ff177e627527cde528555fec3bc2f432652bde1a116e4da80ed1a7"
+dest = "sw/qa/extras/ooxmlexport/data/math-escape.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/core/layout/data/inline-endnote-position.docx"
+sha256 = "c19911f0fb916daa58595106ffe80a84fb7fddb5019f1bb4c5243e65a48a40b1"
+dest = "sw/qa/core/layout/data/inline-endnote-position.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo78654.docx"
+sha256 = "ff6e26d6eae987ac7e083fce675cd77dd0ab363a8e0990b2718d26e58dcf4476"
+dest = "sw/qa/extras/ooxmlexport/data/fdo78654.docx"
+tags = ["docx", "fields", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf163894_from_top.docx"
+sha256 = "770184c8ebe08dfe6ed34d1bd3dacc5a12d36082c9897baa45acdb4f40233146"
+dest = "sw/qa/extras/ooxmlexport/data/tdf163894_from_top.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf116410.docx"
+sha256 = "d8c308dbf33d765f66d46fc6617a378187075d2878623fa882a7c467fd4cb3d0"
+dest = "sw/qa/extras/ooxmlexport/data/tdf116410.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf153891.docx"
+sha256 = "4b1a56d54f2d28761fcacc033a6c828408931385685dd7b803be5b63bfdeee9b"
+dest = "sw/qa/extras/ooxmlexport/data/tdf153891.docx"
+tags = ["docx", "footnotes", "images", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/table-start-2-sdt.docx"
+sha256 = "470119fc5c4b26a610ed5f8a44dff158276a97e34457897c6b8af7bccba51828"
+dest = "sw/qa/extras/ooxmlexport/data/table-start-2-sdt.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf166510_sectPr_bottomSpacing.docx"
+sha256 = "ad468a7bb1056539b4d7f7958772e2947ae2c7e4ccd537cacd4977dd3303472f"
+dest = "sw/qa/extras/ooxmlexport/data/tdf166510_sectPr_bottomSpacing.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf133455.docx"
+sha256 = "89cdcef3d1ca0b668c0931e3bb1afa5a69e0a4e2cbe29f8fab984c603935c9d4"
+dest = "sw/qa/extras/ooxmlexport/data/tdf133455.docx"
+tags = ["docx", "ooxml", "tables"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/testChartTitlePropertiesBitmapFill.docx"
+sha256 = "96b3d772b0a8a25d2d28c59b1c0bdae47cd75c7c30fcc2786966155b3ea245c1"
+dest = "chart2/qa/extras/data/docx/testChartTitlePropertiesBitmapFill.docx"
+tags = ["charts", "docx", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/mailmerge/data/tdf35798.docx"
+sha256 = "b459b01aafcf4a04073bab226101ff4146426f4283c8cc21ff77f36cfb4ed849"
+dest = "sw/qa/extras/mailmerge/data/tdf35798.docx"
+tags = ["docx", "fields", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/core/header_footer/data/FirstPageHeaderShape.docx"
+sha256 = "001df62d1b1a30a3d57f7cab961d58061f0aa27db7caff531475c3d02411af8f"
+dest = "sw/qa/core/header_footer/data/FirstPageHeaderShape.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/uiwriter/data/tdf164620.docx"
+sha256 = "7422d451086ec75b003978517451de3d88dd4f66f9c8f8ffb1d8d07591a7e874"
+dest = "sw/qa/extras/uiwriter/data/tdf164620.docx"
+tags = ["docx", "fields", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf94801.docx"
+sha256 = "235db53da9a95336d8ab73d149f3089df24450b54fdd6b0f3841f2fbe593f1db"
+dest = "sw/qa/extras/ooxmlexport/data/tdf94801.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/core/layout/data/floattable-vertoffset.docx"
+sha256 = "c32650af4f0a0a371ca769b1fb0fdc2052f2ccf6058301e256163c6310f292d1"
+dest = "sw/qa/core/layout/data/floattable-vertoffset.docx"
+tags = ["docx", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/table-theme-preservation.docx"
+sha256 = "39bb55ca638e509adc9fe7262314bb94f9d4072f8ba4185a466cc961d86647f0"
+dest = "sw/qa/extras/ooxmlexport/data/table-theme-preservation.docx"
+tags = ["docx", "images", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf148494.docx"
+sha256 = "4fc425eeab67415d77f90394d02aa612866ade3bba34f159d07c8167c30d170a"
+dest = "sw/qa/extras/ooxmlexport/data/tdf148494.docx"
+tags = ["docx", "fields", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/table-row-data-displayed-twice.docx"
+sha256 = "591512c8bde84db4e5bf447e5279d2069fb0d0db91200cd596939c05e8b09185"
+dest = "sw/qa/extras/ooxmlexport/data/table-row-data-displayed-twice.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf127339.docx"
+sha256 = "a52bc8c6e206380e2b44ea8d5feed69c99d3125c0d14fadb8dcabb2d233345ce"
+dest = "sw/qa/extras/ooxmlexport/data/tdf127339.docx"
+tags = ["docx", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/text_number_list.docx"
+sha256 = "f2b8e3d71d0d979da20b5536d95c96426380cfdc4ff85cd7d9a4f6e4247fe93c"
+dest = "sw/qa/extras/ooxmlexport/data/text_number_list.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/uiwriter/data/tdf117923.docx"
+sha256 = "112dd44acc68e5c9304edd9ec597bb72f3ce050880e5e708c93f03a15af078d6"
+dest = "sw/qa/extras/uiwriter/data/tdf117923.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf103573.docx"
+sha256 = "76dfb787831fc812690c228519d192c3e22581b6b376e5c8beda67b561f945dd"
+dest = "sw/qa/extras/ooxmlexport/data/tdf103573.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf124472.docx"
+sha256 = "46cd50a87f4f9d4853d2615077528a1f54df82f571204eb85c1adb88dc990310"
+dest = "sw/qa/extras/ooxmlexport/data/tdf124472.docx"
+tags = ["docx", "fields", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/core/layout/data/tdf128195.docx"
+sha256 = "a2845c6a21857ea94829a338aec4313b314fd03d0b21976ec2c0c308e9f5a01a"
+dest = "sw/qa/core/layout/data/tdf128195.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf69648.docx"
+sha256 = "b8d932d65599c8f4c3c202d0a78e62ad238ae86111b2c7b2afcf3823eb920006"
+dest = "sw/qa/extras/layout/data/tdf69648.docx"
+tags = ["docx", "footnotes", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf165059_broken.docx"
+sha256 = "fd35fc252d2e1ac95fc6a987f2b7f2ffa44f76ca4d1893562fd355721cc9a7d7"
+dest = "sw/qa/extras/ooxmlexport/data/tdf165059_broken.docx"
+tags = ["docx", "ooxml", "rtl", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf160827.docx"
+sha256 = "6455f7a4e469e953fca7c98ab396c6fb08fd4e9f189d774464a35495f475c6a4"
+dest = "sw/qa/extras/ooxmlexport/data/tdf160827.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/core/layout/data/header-textbox.docx"
+sha256 = "5c28b8d5b2bb5777cbca9805c57508b98b55ed5944c55d694d7061c760c8a169"
+dest = "sw/qa/core/layout/data/header-textbox.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/core/undo/data/textbox-cut-save.docx"
+sha256 = "8bd99b19c746d5e3746c0502aaa7762d6ab434532de73aceff7d3f395348d0e2"
+dest = "sw/qa/core/undo/data/textbox-cut-save.docx"
+tags = ["docx", "fields", "images", "ooxml", "rtl"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/testChartTitlePropertiesGradientFill.docx"
+sha256 = "661f3cd72751453940c830e2fa8bc516a61399868fb2a404e79b7dd518870d7f"
+dest = "chart2/qa/extras/data/docx/testChartTitlePropertiesGradientFill.docx"
+tags = ["charts", "docx", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ww8export/data/tdf134264.docx"
+sha256 = "018cf5521ee64e559a7058f8208e8ffabd60755d08e5acf1a494f25219a423ef"
+dest = "sw/qa/extras/ww8export/data/tdf134264.docx"
+tags = ["docx", "fields", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlimport/data/tdf123389.docx"
+sha256 = "7278f3002b1fdd91810054383df0246b484b26854467284863ce2cfea6b2bad8"
+dest = "sw/qa/extras/ooxmlimport/data/tdf123389.docx"
+tags = ["docx", "fields", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo61343.docx"
+sha256 = "3142d5d32a0fb5922f7ddbcbb12b1e3d8790708ad0042a978a28ecee535e757d"
+dest = "sw/qa/extras/ooxmlexport/data/fdo61343.docx"
+tags = ["docx", "embedded-objects", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/rtfexport/data/tdf138779.docx"
+sha256 = "181b561b0a6aa868ac6df461c36452b02a21a63ff59b68d5fec247cb53dc9662"
+dest = "sw/qa/extras/rtfexport/data/tdf138779.docx"
+tags = ["docx", "fields", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf126533_noPageBitmap.docx"
+sha256 = "867f382b6e746f060c4a274c60615445cd13c1befb54a2d0e78eab14fbff55d6"
+dest = "sw/qa/extras/ooxmlexport/data/tdf126533_noPageBitmap.docx"
+tags = ["docx", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf118947_tableStyle2.docx"
+sha256 = "4aafaa9a49ceda8db72841f351b9ffeb9fb2800fff1db7db1e7d95345d013854"
+dest = "sw/qa/extras/ooxmlexport/data/tdf118947_tableStyle2.docx"
+tags = ["docx", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/theme-preservation.docx"
+sha256 = "aa64b13d1e92308186e3810e5887c612b39a184877fce3de2db3b7b09e5e65c2"
+dest = "sw/qa/extras/ooxmlexport/data/theme-preservation.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf125657.docx"
+sha256 = "8cdf844dac72932e8818e74dadb4c63eee52c8a728072cccd0f7a6606fc7be44"
+dest = "sw/qa/extras/ooxmlexport/data/tdf125657.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/core/layout/data/tdf157096.docx"
+sha256 = "9eaf41a60433cdc7eeb10f3f2a6bcd013d792daecc05585e4b25b2a0e3b2746f"
+dest = "sw/qa/core/layout/data/tdf157096.docx"
+tags = ["docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo76803.docx"
+sha256 = "9314335d65598b7b52072244eb90aeb0eb9c5fa5971ce50f49f7b3fd457fbfb4"
+dest = "sw/qa/extras/ooxmlexport/data/fdo76803.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf79738_footerLineNumbering.docx"
+sha256 = "ff7512b6069a5e67029d2e35ffef61e05dc4c743c141da14ed37fbe07b11063c"
+dest = "sw/qa/extras/ooxmlexport/data/tdf79738_footerLineNumbering.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf148380_modifiedField.docx"
+sha256 = "9a272a5d08dce6e1f8fbc3d3984e6f790bf0b07e1a424b0b5128d35911a15a32"
+dest = "sw/qa/extras/ooxmlexport/data/tdf148380_modifiedField.docx"
+tags = ["docx", "fields", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/math-lim.docx"
+sha256 = "8e9f17cce185ac28b2a2fdcb9e446af6656fabe670d0adf7d2f39f9f158e5e83"
+dest = "sw/qa/extras/ooxmlexport/data/math-lim.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf134235.docx"
+sha256 = "413892fe7e9149b222b4d751cf6011e6281cd45655037797f1c16d746fed2354"
+dest = "sw/qa/extras/layout/data/tdf134235.docx"
+tags = ["charts", "docx", "embedded-objects", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo79008.docx"
+sha256 = "a5a3668a69f169d47322ef8e3ea1bead59426353b5ba4f48147d1f36e398fd2d"
+dest = "sw/qa/extras/ooxmlexport/data/fdo79008.docx"
+tags = ["comments", "docx", "fields", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlimport/data/tdf100830.docx"
+sha256 = "d604b47a5c6811c8c5e920da19420e1a8278db31072d366aac0aa9d4b597b742"
+dest = "sw/qa/extras/ooxmlimport/data/tdf100830.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/date_field_at_end_of_paragraph.docx"
+sha256 = "63a91a193d91649ddbe651067976c9617566900bd9acbb5079fefd963a6d55a1"
+dest = "sw/qa/extras/ooxmlexport/data/date_field_at_end_of_paragraph.docx"
+tags = ["charts", "docx", "fields", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/tdf133632.docx"
+sha256 = "20496935cce74b5d391105bb997679f7d91748539412fd6408eec4451dd7f890"
+dest = "chart2/qa/extras/data/docx/tdf133632.docx"
+tags = ["charts", "docx", "embedded-objects", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/embedded-xlsx.docx"
+sha256 = "37af4bb83e2ea1a980630516445a4d0877216d929f3d29ab2fdac2d385dc6dd7"
+dest = "sw/qa/extras/ooxmlexport/data/embedded-xlsx.docx"
+tags = ["docx", "embedded-objects", "images", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/uiwriter/data/tdf131963.docx"
+sha256 = "6880a1aa1b619e87ca492d70dd7f9914b808697a1a14a72dadf2baccb7eb74b9"
+dest = "sw/qa/extras/uiwriter/data/tdf131963.docx"
+tags = ["docx", "fields", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf135774_numberingShading.docx"
+sha256 = "d4bfce75ba74d1dce8180763ef3c23636046283a4f4890df57f646811947423e"
+dest = "sw/qa/extras/ooxmlexport/data/tdf135774_numberingShading.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf138773.docx"
+sha256 = "1e6077df6cdf94ee85776cc842a3678689335e28219c174ffcab3cd5e3ad0d07"
+dest = "sw/qa/extras/layout/data/tdf138773.docx"
+tags = ["charts", "docx", "embedded-objects", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf102466.docx"
+sha256 = "197f202205f18382b220670c666a8038e0513039fe3f909d5d5d2cbc152666bd"
+dest = "sw/qa/extras/ooxmlexport/data/tdf102466.docx"
+tags = ["docx", "fields", "images", "ooxml", "tables"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/testSimpleCategoryAxis.docx"
+sha256 = "4a201c79ee4ac24f0a373551046936b30b3d969802ac50f5dc7d784d62e0f235"
+dest = "chart2/qa/extras/data/docx/testSimpleCategoryAxis.docx"
+tags = ["charts", "docx", "embedded-objects", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/fld-in-tbl.docx"
+sha256 = "cf2d6d4a0d91557e46146415ebea88a5d438e651ae3bdcf70de65dc4b14ffe16"
+dest = "sw/qa/extras/layout/data/fld-in-tbl.docx"
+tags = ["docx", "fields", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/fdo77725.docx"
+sha256 = "38e0894c85041da43aeaeb7600459f2b5539c0b27c60b4bd419f76b9413b4cb9"
+dest = "sw/qa/extras/ooxmlexport/data/fdo77725.docx"
+tags = ["docx", "footnotes", "images", "ooxml"]
+
+[[git.file]]
+path = "xmloff/qa/unit/data/del-then-format.docx"
+sha256 = "427f370399acafb8d6f5978efa1d9da3ac6cddc3bf9b75df6368514aed1485b5"
+dest = "xmloff/qa/unit/data/del-then-format.docx"
+tags = ["docx", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/core/draw/data/as-char-textbox.docx"
+sha256 = "8b7f29e94ae8f9abc4dd44a892a33524780aabe06d31ebc075865441aab037f0"
+dest = "sw/qa/core/draw/data/as-char-textbox.docx"
+tags = ["docx", "fields", "images", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/core/objectpositioning/data/floattable-overlap-cell.docx"
+sha256 = "9fa3dedd1f1d716aa5a043b5bae54a2a5e696adfc94b63a3fa3c3dfd6c62c97f"
+dest = "sw/qa/core/objectpositioning/data/floattable-overlap-cell.docx"
+tags = ["charts", "docx", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf171299_tableInField.docx"
+sha256 = "9026e89222912b697821c8e2762ef33541306187ec0e92b38bdc4bf9ac1b9a31"
+dest = "sw/qa/extras/ooxmlexport/data/tdf171299_tableInField.docx"
+tags = ["docx", "fields", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedTableRow.docx"
+sha256 = "d7836464e3b6e09d13e075a9ab6f945b093e5f3b6784f7f51254db1a6c08715d"
+dest = "sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedTableRow.docx"
+tags = ["docx", "footnotes", "ooxml", "tables", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedEmptyParagraph.docx"
+sha256 = "02515a463f09fef82a47431dfcf299275caf5d1b7bdb3b18ecb9a9705b1428e9"
+dest = "sw/qa/extras/ooxmlexport/data/testTrackChangesDeletedEmptyParagraph.docx"
+tags = ["charts", "docx", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/3d-bar-label.docx"
+sha256 = "54ebfd32bf809e4370a682914428721df8cbb738c9f075c0055e743936ade62c"
+dest = "chart2/qa/extras/data/docx/3d-bar-label.docx"
+tags = ["charts", "docx", "embedded-objects", "ooxml"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/TableOnPage3.docx"
+sha256 = "0c0719841a937fdbd531d93103563b9d45fcda04da61f5a455b976d664309e53"
+dest = "chart2/qa/extras/data/docx/TableOnPage3.docx"
+tags = ["charts", "docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/odfexport/data/arabic-zero4-numbering.docx"
+sha256 = "349ce5e9ad7a7654978eee05da1b33914af2298c3bead6f0f510a140465b7e13"
+dest = "sw/qa/extras/odfexport/data/arabic-zero4-numbering.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/core/header_footer/data/DoubleFirstLeftRight.docx"
+sha256 = "a7c1767341d8c161581550f43f325fb6282f7246ed11f2285517b95fea86fa2f"
+dest = "sw/qa/core/header_footer/data/DoubleFirstLeftRight.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/doughnutChart.docx"
+sha256 = "1309cf2dbad88a3a7b35d12d62bfdaf84bb1ba9862ad6ce2fc15b50c9543155a"
+dest = "chart2/qa/extras/data/docx/doughnutChart.docx"
+tags = ["charts", "docx", "embedded-objects", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf134866.docx"
+sha256 = "73f1dccc52f265e107716760ac12864894e08034d2527e24ca0374ba157fe5ce"
+dest = "sw/qa/extras/layout/data/tdf134866.docx"
+tags = ["charts", "docx", "embedded-objects", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/comment-annotationref.docx"
+sha256 = "7c36017c47439cf2fd4adec2f34050bedefb2ea9479459be2cb6b2c6e47816dc"
+dest = "sw/qa/extras/ooxmlexport/data/comment-annotationref.docx"
+tags = ["comments", "docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf132766.docx"
+sha256 = "7d75ba197761c8f8d6f3c5a8ef431f45a4b88ad82c4640ebbdc97664e824f806"
+dest = "sw/qa/extras/ooxmlexport/data/tdf132766.docx"
+tags = ["docx", "ooxml", "rtl"]
+
+[[git.file]]
+path = "sw/qa/core/doc/data/ins-then-del.docx"
+sha256 = "c70cb2be36f6a6ad10a6df720ae508f2e0b4e3c4a5355287b2b123aa9d74812a"
+dest = "sw/qa/core/doc/data/ins-then-del.docx"
+tags = ["docx", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf170908_delText.docx"
+sha256 = "8f8d5ea99c797d40173782faf335ce7b167e3e274b4f5ce5731cbc39bbf8be64"
+dest = "sw/qa/extras/ooxmlexport/data/tdf170908_delText.docx"
+tags = ["docx", "footnotes", "images", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/writerfilter/dmapper/data/floattable-footnote-redline.docx"
+sha256 = "b47961e99eea700a619e451a967b7e715cc7aa3997dcff8e560573d95960995d"
+dest = "sw/qa/writerfilter/dmapper/data/floattable-footnote-redline.docx"
+tags = ["docx", "footnotes", "ooxml", "rtl", "tracked-changes"]
+
+[[git.file]]
+path = "xmloff/qa/unit/data/textbox-loss.docx"
+sha256 = "16bd4b3cbe37eb897e511c80685edc55ebc942fd315f4a7fbe2b2e35f108d71e"
+dest = "xmloff/qa/unit/data/textbox-loss.docx"
+tags = ["docx", "footnotes", "images", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlimport/data/tdf170236.docx"
+sha256 = "d04a7466a1145dd84101532ee98ee90cff04b47e672e7395fdb562056daac6ab"
+dest = "sw/qa/extras/ooxmlimport/data/tdf170236.docx"
+tags = ["comments", "docx", "footnotes", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf130907.docx"
+sha256 = "b84418ceff89bfa58d4faf8d385fa82e80f7a271bdd7053d31cdb84c0ca0bab0"
+dest = "sw/qa/extras/ooxmlexport/data/tdf130907.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/uitest/data/tdf157569.docx"
+sha256 = "606be981e8420b410abf3fb63a89a65dc6fb20bb8b0b79b094f6f6645cbd27fa"
+dest = "sw/qa/uitest/data/tdf157569.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf123054.docx"
+sha256 = "bf1b555eb6e28ad396547de2dd5b05ef003580a8efd8e85bc7e3a07d4b7d1622"
+dest = "sw/qa/extras/ooxmlexport/data/tdf123054.docx"
+tags = ["docx", "footnotes", "ooxml", "tables", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/core/data/ooxml/pass/tdf123001.docx"
+sha256 = "db9bda6627275d108f01acacf140587ead9f337b72aa695844cb01a7fcc6ff94"
+dest = "sw/qa/core/data/ooxml/pass/tdf123001.docx"
+tags = ["docx", "footnotes", "ooxml", "tables", "tracked-changes"]
+
+[[git.file]]
+path = "chart2/qa/extras/data/docx/testchartoleobjectembeddings.docx"
+sha256 = "446c1dde1fbd4ec0b4f5188934d62dc20200c4750ea435eb7f43bc1a40628f19"
+dest = "chart2/qa/extras/data/docx/testchartoleobjectembeddings.docx"
+tags = ["charts", "docx", "embedded-objects", "fields", "footnotes", "images", "large", "ooxml", "smartart", "tables"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf149708.docx"
+sha256 = "630f99f81d4054991c7b0fc4ccf422ead6103e650d0891e7580351d4c0c0013d"
+dest = "sw/qa/extras/ooxmlexport/data/tdf149708.docx"
+tags = ["docx", "ooxml", "rtl", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/layout/data/tdf149711.docx"
+sha256 = "be40d67a5e6f710991c17dd2bd2be784fa7bc0636e156c1177310ebc2e35edf0"
+dest = "sw/qa/extras/layout/data/tdf149711.docx"
+tags = ["docx", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/uitest/data/TC-table-del-add.docx"
+sha256 = "ccf47b9b629af155ec4d4b4437cc62124f4350ed5c2b38386126ad013ac65787"
+dest = "sw/qa/uitest/data/TC-table-del-add.docx"
+tags = ["docx", "ooxml", "tables", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf115212.docx"
+sha256 = "a19e8676f674582ab1d73a58a0a04b4351bbedae77428cc70412da69cc45068f"
+dest = "sw/qa/extras/ooxmlexport/data/tdf115212.docx"
+tags = ["docx", "fields", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/mathtype.docx"
+sha256 = "026d773a1ea94258784b3420b9e1cc263f6939baea0dddce801c47e01c3e27dd"
+dest = "sw/qa/extras/ooxmlexport/data/mathtype.docx"
+tags = ["docx", "embedded-objects", "images", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/floatingtbl_with_formula.docx"
+sha256 = "4aa628bda291091a6b19ddc1ad9239f0b9ff8a0769844363fe7a45d9867d4905"
+dest = "sw/qa/extras/ooxmlexport/data/floatingtbl_with_formula.docx"
+tags = ["docx", "footnotes", "math", "ooxml", "tables"]
+
+[[git.file]]
+path = "sw/qa/uibase/frmdlg/data/wrapped-math-object.docx"
+sha256 = "7c6c64fd9ad13b62b685ed1809505b56689d9a80615bc61d13c435cd5e9f504b"
+dest = "sw/qa/uibase/frmdlg/data/wrapped-math-object.docx"
+tags = ["docx", "embedded-objects", "images", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/strict.docx"
+sha256 = "6e71a4d554ea90df1ddcc9b6fbbcc677a94c6617cb35f9e5b7d4ccab46f1a79e"
+dest = "sw/qa/extras/ooxmlexport/data/strict.docx"
+tags = ["charts", "docx", "footnotes", "images", "math", "ooxml", "smartart"]
+
+[[git.file]]
+path = "sw/qa/extras/odfexport/data/tdf134987.docx"
+sha256 = "9265c87ef46445151b7f7526640454e12df3c86f912a8dc83c5a54801a58dee0"
+dest = "sw/qa/extras/odfexport/data/tdf134987.docx"
+tags = ["charts", "docx", "embedded-objects", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/math-matrix.docx"
+sha256 = "dd84c0d6d5d392007adab77944d3e2d0a87558b881b4b97d86682a539d781c63"
+dest = "sw/qa/extras/ooxmlexport/data/math-matrix.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/uiwriter/data/tdf66405.docx"
+sha256 = "e60063a1f9c4a55bd72a9db6b1ef2d7ab532c3e4d3b3319f6c50bd26e1cc6dba"
+dest = "sw/qa/extras/uiwriter/data/tdf66405.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/math-bold-italic.docx"
+sha256 = "13ecf025f52a58b83904b45af8bb614c5a11b0da347e701575a9729ec63b4319"
+dest = "sw/qa/extras/ooxmlexport/data/math-bold-italic.docx"
+tags = ["docx", "math", "ooxml"]
+
+[[git.file]]
+path = "sw/qa/extras/ooxmlexport/data/tdf133030.docx"
+sha256 = "d914e4d4391588944541900fd2819902e2a0dcd7927429c9c5bc758c85c00aac"
+dest = "sw/qa/extras/ooxmlexport/data/tdf133030.docx"
+tags = ["docx", "math", "ooxml"]

@@ -1,0 +1,58 @@
+name = "oracle-wordcraft-office-poi"
+description = "WordCraft sample inputs for oracle regression comparison."
+
+[[git]]
+repo = "apache/poi"
+commit = "7f4d36854109efa17152b27a5fb1b2c7d842c314"
+paths = ["**"]
+licence = "Apache-2.0"
+provenance = "https://github.com/apache/poi/tree/7f4d36854109efa17152b27a5fb1b2c7d842c314/test-data"
+redistributable = true
+
+[[git.file]]
+path = "test-data/document/bug-paragraph-alignment.docx"
+sha256 = "0a7a19175b8fb5fdce4755a51489a29109b358447dc99a2125642964be48e6ad"
+dest = "document/bug-paragraph-alignment.docx"
+tags = ["charts", "docx", "ooxml"]
+
+[[git.file]]
+path = "test-data/document/ThreeColHeadFoot.docx"
+sha256 = "c2d16e89c23a8c1f7366f3b65ab33c6e14fcf00f916dfecfd8af1a3e7797f73d"
+dest = "document/ThreeColHeadFoot.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "test-data/document/57312.docx"
+sha256 = "f80b3c4f3885e0284d8017fec93818b4ec5366f9486ad97b8ddd47ab68a330c5"
+dest = "document/57312.docx"
+tags = ["docx", "footnotes", "ooxml"]
+
+[[git.file]]
+path = "test-data/document/61470.docx"
+sha256 = "abda850b3685027eef32a4c583b2b5f7f20f243026d8c453cdb3315348ed6ff0"
+dest = "document/61470.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "test-data/document/shapes-with-text.docx"
+sha256 = "1ef4d8cbfd5e2333897ab3193b58ce445cee7e45476d39e5626a4c7097f72d95"
+dest = "document/shapes-with-text.docx"
+tags = ["docx", "ooxml"]
+
+[[git.file]]
+path = "test-data/document/checkboxes.docx"
+sha256 = "06f1dc1370c772a020c6d5183c8b7c4fe30ad7a9fff108cb2f027128ddf5e209"
+dest = "document/checkboxes.docx"
+tags = ["docx", "fields", "footnotes", "ooxml", "tables"]
+
+[[git.file]]
+path = "test-data/document/delins.docx"
+sha256 = "7ecad102602586be7f1371f117fc567ea47f3ed0ca703b353e003002f1ff8d3f"
+dest = "document/delins.docx"
+tags = ["docx", "fields", "ooxml", "tracked-changes"]
+
+[[git.file]]
+path = "test-data/document/saut_page.docx"
+sha256 = "748f34f3dc285f4d48474930758b2c37382d17965545a1729cb7400cada793da"
+dest = "document/saut_page.docx"
+tags = ["docx", "large", "ooxml"]

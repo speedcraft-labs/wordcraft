@@ -1,0 +1,8 @@
+[1/150] docx-000 ref_fail tdf43100_tdf120715_cursorOnSpacesOverMargin.docx f1=0.00 ssim=0.00
+[2/150] docx-001 ref_fail tdf131420.docx f1=0.00 ssim=0.00
+[3/150] docx-002 ref_fail tdf159158_zOrder_behindDocA.docx f1=0.00 ssim=0.00
+[4/150] docx-003 ref_fail endnote.docx f1=0.00 ssim=0.00
+[5/150] docx-004 ref_fail tdf124670.docx f1=0.00 ssim=0.00
+[6/150] docx-005 ref_fail lid-Merge Field Name Language ID-val-es-CR.docx f1=0.00 ssim=0.00
+[7/150] docx-006 ref_fail floattable-compat14.docx f1=0.00 ssim=0.00
+[8/150] docx-007 ref_fail floating-table-caption.docx f1=0.00 ssim=0.00
