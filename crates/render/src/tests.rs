@@ -362,7 +362,7 @@ fn page_picture_is_painted_behind_the_text() {
     d.media.insert("bg.png".into(), Arc::new(png));
     for kind in ["tile", "frame"] {
         d.settings.page_picture =
-            Some(wordcraft_doc::PagePicture { media: "bg.png".into(), fill_type: kind.into(), pattern_colors: None, title: String::new() });
+            Some(wordcraft_doc::PagePicture { media: "bg.png".into(), fill_type: kind.into(), title: String::new() });
         let l = layout(&d, &mut LayoutCache::new(), &LayoutOptions::default());
         let img = render_page(&d, &l.pages[0], 1.0, &RenderOptions::default());
         let i = ((300 * img.width + 300) * 4) as usize;
@@ -370,7 +370,7 @@ fn page_picture_is_painted_behind_the_text() {
     }
     // Centred once at its own size (8 px = 6 pt), the rest of the page paper.
     d.settings.page_picture =
-        Some(wordcraft_doc::PagePicture { media: "bg.png".into(), fill_type: "center".into(), pattern_colors: None, title: String::new() });
+        Some(wordcraft_doc::PagePicture { media: "bg.png".into(), fill_type: "center".into(), title: String::new() });
     let l = layout(&d, &mut LayoutCache::new(), &LayoutOptions::default());
     let img = render_page(&d, &l.pages[0], 1.0, &RenderOptions::default());
     let px = |x: u32, y: u32| {
@@ -414,7 +414,7 @@ fn read_paper_replaces_the_page_background() {
     let inverse = RenderOptions { read_paper: Some(Rgb::WHITE), dark: true, ..Default::default() };
     assert_eq!(background_at(&d, page, &inverse, 5.0, 5.0), Rgb(DARK_PAPER, DARK_PAPER, DARK_PAPER));
     d.settings.page_picture =
-        Some(wordcraft_doc::PagePicture { media: "bg.png".into(), fill_type: "tile".into(), pattern_colors: None, title: String::new() });
+        Some(wordcraft_doc::PagePicture { media: "bg.png".into(), fill_type: "tile".into(), title: String::new() });
     assert_eq!(at(&render_page(&d, page, 1.0, &RenderOptions::default()), 300, 300), [10, 200, 30], "the page picture");
     assert_eq!(at(&render_page(&d, page, 1.0, &sepia), 300, 300), [0xE2, 0xD9, 0xD0]);
     // The text is drawn in its own color on sepia paper: its darkest pixel is within 8 levels of its value on white.

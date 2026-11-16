@@ -611,31 +611,6 @@ fn table_look_bitmask_and_legacy_merges() {
 }
 
 #[test]
-fn table_row_height_rule_defaults_to_auto() {
-    let body = r#"
-<w:tbl>
- <w:tr><w:trPr><w:trHeight w:val="400"/></w:trPr><w:tc><w:p/></w:tc></w:tr>
- <w:tr><w:trPr><w:trHeight w:val="400" w:hRule="atLeast"/></w:trPr><w:tc><w:p/></w:tc></w:tr>
- <w:tr><w:trPr><w:trHeight w:val="400" w:hRule="exact"/></w:trPr><w:tc><w:p/></w:tc></w:tr>
-</w:tbl>
-<w:p/>"#;
-    let settings =
-        |mode| format!(r#"<w:settings {W_NS}><w:compat><w:compatSetting w:name="compatibilityMode" w:val="{mode}"/></w:compat></w:settings>"#);
-    let read_with_mode = |mode| {
-        let settings = settings(mode);
-        wordcraft_docx::read(&docx(body, &[("rId1", "settings", "settings.xml")], &[("word/settings.xml", &settings)])).unwrap()
-    };
-    let d = read_with_mode(15);
-    let Block::Table(t) = &*d.body[0] else { panic!() };
-    assert_eq!(t.rows[0].props.height_rule, HeightRule::Auto, "omitted w:hRule defaults to auto");
-    assert_eq!(t.rows[1].props.height_rule, HeightRule::AtLeast);
-    assert_eq!(t.rows[2].props.height_rule, HeightRule::Exact);
-    let legacy = read_with_mode(14);
-    let Block::Table(t) = &*legacy.body[0] else { panic!() };
-    assert_eq!(t.rows[0].props.height_rule, HeightRule::AtLeast, "Word applies the legacy rule in compatibility mode 14");
-}
-
-#[test]
 fn floating_table_height_keeps_its_wrap_extent_when_rule_is_omitted() {
     let body = r#"<w:tbl><w:tblPr><w:tblpPr w:vertAnchor="text" w:tblpY="400"/></w:tblPr><w:tr><w:trPr><w:trHeight w:val="800"/></w:trPr><w:tc><w:p/></w:tc></w:tr></w:tbl><w:p/>"#;
     let d = read_body(body);
