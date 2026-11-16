@@ -168,7 +168,6 @@ impl WordApp {
             integrated_titlebar: _,
             mac_titlebar: _,
             control_rx: _,
-            raise_without_focus: _,
             updates_rt: _,
             packs_rt: _,
             // The control channel's screenshots and input go to the active window, whichever it is.
@@ -239,7 +238,6 @@ impl WordApp {
             nav_search_focus,
             comment_fonts_for,
             find_fonts_for,
-            first_page_layout_document: _,
             sent_title,
             sent_full_screen,
             seen_full_screen,

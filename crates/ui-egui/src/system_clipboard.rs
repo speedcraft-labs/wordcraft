@@ -161,6 +161,7 @@ fn copied_image(app: &WordApp) -> Option<Result<CopyImage, String>> {
         Some((w, h, _)) => {
             let rect = wordcraft_geom::Rect::new(0.0, 0.0, w, h);
             let items = [wordcraft_layout::display::Draw::Image {
+                pdf_searchable: false,
                 rect,
                 media: media.clone(),
                 crop: [0.0; 4],

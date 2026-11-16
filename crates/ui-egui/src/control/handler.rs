@@ -230,9 +230,6 @@ pub fn handle(app: &mut WordApp, ctx: &egui::Context, req: &ControlRequest) -> O
         // UI requests need a rendered pass, but must not activate the app for an agent.
         #[cfg(target_os = "macos")]
         ctx.send_viewport_cmd(egui::ViewportCommand::WindowLevel(egui::viewport::WindowLevel::Normal));
-        if let Some(raise_without_focus) = app.raise_without_focus {
-            raise_without_focus();
-        }
         ctx.request_repaint();
     }
     let p = &req.params;
