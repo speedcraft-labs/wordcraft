@@ -3,7 +3,7 @@
 #[allow(unused_imports)]
 use crate::*;
 use wordcraft_doc::props::{TextVert, VAlign};
-use wordcraft_doc::{PartKind, Pos, TextBody, para_block};
+use wordcraft_doc::{Paragraph, PartKind, Pos, TextBody, para_block};
 
 fn lay(doc: &Document) -> DocLayout {
     let mut c = LayoutCache::new();
@@ -83,6 +83,51 @@ fn align_text_and_text_direction_place_the_text_in_the_box() {
     let l = lay(&d);
     let (.., l0, l1) = lines(&l, id)[0];
     assert_eq!(l1 - l0, 2, "two letters, two lines");
+}
+
+#[test]
+fn caption_line_after_a_large_inline_picture_is_drawn_when_it_overflows_the_box_bottom() {
+    let mut d = Document::from_text("anchor");
+    let mut paragraph = Paragraph::with_text("Figure 1", Default::default());
+    paragraph.props.space_before = Some(6.0);
+    paragraph.props.space_after = Some(6.0);
+    paragraph
+        .insert_object(
+            0,
+            InlineObject::Image {
+                media: "picture.png".into(),
+                w: 153.0,
+                h: 82.25,
+                alt: String::new(),
+                float: Default::default(),
+                crop: [0.0; 4],
+                fx: Default::default(),
+                ole: None,
+            },
+            &Default::default(),
+        )
+        .unwrap();
+    let id = d.add_part(PartKind::TextBox, vec![para_block(paragraph)]);
+    if let Some(part) = d.parts.get_mut(&id) {
+        part.body = TextBody { inset: Some([0; 4]), ..Default::default() };
+    }
+    let shape = InlineObject::Shape {
+        kind: wordcraft_doc::para::ShapeKind::TextBox,
+        w: 153.0,
+        h: 102.0,
+        fill: None,
+        stroke: None,
+        stroke_width: 0.0,
+        float: Default::default(),
+        story: Some(id),
+        effects: Default::default(),
+        freeform: None,
+        extra: Default::default(),
+    };
+    d.insert_object(&Pos::body(0, 0), shape, &Default::default()).unwrap();
+
+    let layout = lay(&d);
+    assert!(lines(&layout, id).iter().any(|(_, _, _, l0, l1)| l1 - l0 == 2), "the image and its caption line both draw");
 }
 
 #[test]

@@ -67,6 +67,34 @@ fn every_shape_in_a_pict_is_read() {
 }
 
 #[test]
+fn wordart_vml_shadow_is_applied_to_the_letters() {
+    let d = read_body(&pict(
+        r##"<v:shape style="width:200pt;height:40pt"><v:shadow on="t" color="#868686" opacity=".5" offset="6pt,6pt"/><v:textpath on="t" string="Your Text Here"/></v:shape>"##,
+    ));
+    let InlineObject::Shape { story: Some(id), .. } = &objects(&d)[0] else { panic!("{:?}", objects(&d)) };
+    let p = d.parts.get(id).and_then(|p| p.blocks.first()).and_then(|b| b.as_para()).unwrap();
+    let shadow = p.runs[0].props.text_effects.as_deref().and_then(|fx| fx.shadow).unwrap();
+    assert_eq!(shadow.color, wordcraft_doc::Rgb(0x86, 0x86, 0x86));
+    assert_eq!(shadow.transparency, 50.0);
+    assert!((shadow.offset().0 - 6.0).abs() < 0.01);
+    assert!((shadow.offset().1 - 6.0).abs() < 0.01);
+}
+
+#[test]
+fn wordart_vml_perspective_shadow_is_approximated_as_an_outline() {
+    let d = read_body(&pict(
+        r##"<v:shape style="width:200pt;height:40pt"><v:shadow on="t" type="perspective" color="#868686" opacity=".5" origin=".5,.5" offset="0,0" matrix=",-.9268f,,,,-.00000000000001"/><v:textpath on="t" string="Your Text Here"/></v:shape>"##,
+    ));
+    let InlineObject::Shape { story: Some(id), .. } = &objects(&d)[0] else { panic!("{:?}", objects(&d)) };
+    let p = d.parts.get(id).and_then(|p| p.blocks.first()).and_then(|b| b.as_para()).unwrap();
+    let effects = p.runs[0].props.text_effects.as_deref().unwrap();
+    let outline = effects.outline.unwrap();
+    assert_eq!(outline.color, Some(wordcraft_doc::Rgb(0x86, 0x86, 0x86)));
+    assert_eq!(outline.transparency, 50.0);
+    assert!(effects.shadow.is_none(), "zero offset is represented by the outline approximation");
+}
+
+#[test]
 fn a_vml_group_keeps_its_members() {
     // `coordsize` is the members' space, mapped onto the group's own box; `left`/`top` place a
     // member in that space.
