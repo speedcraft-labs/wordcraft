@@ -1,0 +1,18 @@
+[
+  {
+    "id": "docx-113",
+    "source": "office-libreoffice",
+    "rel": "chart2/qa/extras/data/docx/3d-bar-label.docx",
+    "path": "/jobs/work/speedcraft-labs/wt/228/oracle/corpus/office-libreoffice/chart2/qa/extras/data/docx/3d-bar-label.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 24163,
+    "tags": [
+      "charts",
+      "docx",
+      "embedded-objects",
+      "ooxml"
+    ],
+    "stratum": "charts"
+  }
+]
