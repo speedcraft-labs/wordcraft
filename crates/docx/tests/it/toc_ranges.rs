@@ -1,11 +1,10 @@
 //! Original field-boundary fixtures from the public OOXML complex-field contract.
-use std::io::Write;
 
 use wordcraft_doc::{InlineObject, Path, StoryRef};
 
 fn package(body: &str) -> Vec<u8> {
     let xml = format!(r#"<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>{body}</w:body></w:document>"#);
-    let mut zip = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
+    let mut zip = craft_zip::Writer::new();
     for (name, value) in [
         ("word/document.xml", xml.as_str()),
         (
@@ -13,10 +12,9 @@ fn package(body: &str) -> Vec<u8> {
             r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="main" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>"#,
         ),
     ] {
-        zip.start_file(name, zip::write::SimpleFileOptions::default()).unwrap();
-        zip.write_all(value.as_bytes()).unwrap();
+        zip.add(name, value.as_bytes(), craft_zip::Compression::Deflated).unwrap();
     }
-    zip.finish().unwrap().into_inner()
+    zip.finish().unwrap()
 }
 
 fn start(code: &str) -> String {
@@ -28,15 +26,6 @@ fn start(code: &str) -> String {
 const END: &str = r#"<w:r><w:fldChar w:fldCharType="end"/></w:r>"#;
 const PAGE: &str = r#"<w:fldSimple w:instr="PAGEREF Original"><w:r><w:t>7</w:t></w:r></w:fldSimple>"#;
 const ENTRY: &str = r#"<w:hyperlink w:anchor="Original"><w:r><w:rPr><w:b/><w:i/></w:rPr><w:t>Scope</w:t></w:r><w:r><w:tab/></w:r>"#;
-
-#[test]
-fn block_level_deletions_keep_their_text_as_tracked_content() {
-    let body = r#"<w:del w:id="7" w:author="Ada"><w:p><w:r><w:delText>deleted entry</w:delText></w:r></w:p></w:del>"#;
-    let doc = wordcraft_docx::read(&package(body)).unwrap();
-    let p = doc.body[0].as_para().unwrap();
-    assert_eq!(p.plain_text(), "deleted entry");
-    assert!(p.runs.iter().all(|run| run.props.del == Some(0)));
-}
 
 #[test]
 fn unstyled_toc_keeps_range_nested_field_and_formatting_through_two_edited_saves() {

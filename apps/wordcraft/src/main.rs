@@ -21,12 +21,12 @@ mod file_dialogs;
 #[cfg(any(target_os = "windows", target_os = "macos", test))]
 mod graphics;
 mod logging;
+#[cfg(all(unix, not(target_os = "macos")))]
+mod portal_save;
 mod print;
 mod region;
 #[cfg(target_os = "macos")]
 mod traffic_lights;
-#[cfg(target_os = "macos")]
-mod window_raise;
 
 use wordcraft_engine::Session;
 use wordcraft_ui_egui::{
@@ -369,9 +369,10 @@ fn write_prefs(path: &std::path::Path, bytes: &[u8]) -> std::io::Result<()> {
 /// through the system spooler (`print`), the system clipboard's text, formatted copies,
 /// pictures and format names (`clipboard`, #45, #584, #687, #833), the system's animation setting
 /// (`animations`), and making WordCraft the default app for Word documents (`default_apps`, #295).
-fn services(file_dialog: file_dialogs::Hook, ctx: &egui::Context) -> Services {
+fn services(file_dialog: file_dialogs::Hook, cancel_file_dialog: file_dialogs::CancelHandle, ctx: &egui::Context) -> Services {
     Services {
         file_dialog: Some(file_dialog),
+        cancel_file_dialog: Some(Box::new(move || cancel_file_dialog.cancel())),
         printers: Some(print::discover()),
         print_native: Some(print::submit()),
         cancel_print: Some(print::cancel()),
@@ -383,6 +384,8 @@ fn services(file_dialog: file_dialogs::Hook, ctx: &egui::Context) -> Services {
         clipboard_text: Some(Box::new(clipboard::text)),
         clipboard_html: Some(Box::new(clipboard::html)),
         set_clipboard_rich: Some(Box::new(clipboard::set_rich)),
+        set_clipboard_image: Some(Box::new(clipboard::set_image)),
+        clipboard_is_own: Some(Box::new(clipboard::is_own)),
         clipboard_rtf: Some(Box::new(clipboard::rtf)),
         clipboard_formats: Some(Box::new(clipboard::formats)),
         save_prefs: Some(Box::new(try_save_prefs)),
@@ -541,7 +544,6 @@ fn main() -> eframe::Result {
         let _ = std::io::Write::write_fmt(&mut std::io::stderr(), format_args!("wordcraft: --control needs a port number from 1 to 65535{got}\n"));
         std::process::exit(2);
     }
-    let agent = control_port.is_some();
     // The log file lives in the settings directory, next to the preferences; opened after the
     // arguments, so `--version` leaves no file behind. Records logged until now are written to it
     // first. Runs without preferences (agents' test runs) log to standard error only, so they
@@ -565,18 +567,9 @@ fn main() -> eframe::Result {
             .with_drag_and_drop(true)
             .with_fullsize_content_view(true)
             .with_titlebar_shown(false)
-            .with_title_shown(false)
-            // Started for an agent (`--control`): open without taking the user's keyboard focus.
-            .with_active(!agent),
-        event_loop_builder: agent_event_loop(agent),
+            .with_title_shown(false),
         ..Default::default()
     };
-    // Keep an agent window behind normal application windows, even when eframe first shows it.
-    #[cfg(target_os = "macos")]
-    if agent {
-        options.viewport = options.viewport.with_window_level(egui::viewport::WindowLevel::AlwaysOnBottom);
-    }
-    // Started for an agent (`--control`): open without taking the user's keyboard focus.
     if let Some(icon) = app_icon() {
         options.viewport = options.viewport.with_icon(icon);
     }
@@ -623,13 +616,10 @@ fn main() -> eframe::Result {
             let region = region::system();
             let doc = if sample { wordcraft_engine::sample::sample_document() } else { wordcraft_engine::blank_document(&region) };
             let (file_dialog, dialogs) = file_dialogs::hook(&cc.egui_ctx);
+            let cancel_file_dialog = dialogs.cancel_handle();
             let mut session = Session::new(doc);
             session.system_region = region;
-            let mut app = WordApp::new(session, services(file_dialog, &cc.egui_ctx));
-            #[cfg(target_os = "macos")]
-            if agent {
-                app.raise_without_focus = Some(window_raise::raise_without_focus);
-            }
+            let mut app = WordApp::new(session, services(file_dialog, cancel_file_dialog, &cc.egui_ctx));
             app.set_startup_update_check(true);
             load_prefs(&mut app);
             // After the preferences, so the reason it gives is in the interface language.
@@ -696,20 +686,6 @@ fn main() -> eframe::Result {
             )))
         }),
     )
-}
-
-/// Driven by an agent (`--control`): don't activate the app on launch, so the user's keyboard
-/// focus stays where it is (macOS; winit activates ignoring other apps by default).
-fn agent_event_loop(agent: bool) -> Option<eframe::EventLoopBuilderHook> {
-    #[cfg(target_os = "macos")]
-    if agent {
-        return Some(Box::new(|b| {
-            use winit::platform::macos::EventLoopBuilderExtMacOS;
-            b.with_activate_ignoring_other_apps(false);
-        }));
-    }
-    let _ = agent;
-    None
 }
 
 // Not on macOS: APFS refuses file names that aren't valid UTF-8, so no such file can exist there.

@@ -168,7 +168,6 @@ impl WordApp {
             integrated_titlebar: _,
             mac_titlebar: _,
             control_rx: _,
-            raise_without_focus: _,
             updates_rt: _,
             packs_rt: _,
             // The control channel's screenshots and input go to the active window, whichever it is.
@@ -179,6 +178,8 @@ impl WordApp {
             synthetic: _,
             synthetic_pending: _,
             synthetic_injected: _,
+            raw_scroll_events_scaled: _,
+            last_scaled_scroll_events: _,
             // The current command's origin, set and cleared around it.
             ime_origin: _,
             styled: _,
@@ -195,6 +196,8 @@ impl WordApp {
             fonts_frames: _,
             applied_theme: _,
             native_scale: _,
+            auto_scale_limit: _,
+            monitor_zoom: _,
             legacy_interface_size: _,
             desktop_theme: _,
             desktop_dark: _,
@@ -235,7 +238,6 @@ impl WordApp {
             nav_search_focus,
             comment_fonts_for,
             find_fonts_for,
-            first_page_layout_document: _,
             sent_title,
             sent_full_screen,
             seen_full_screen,
@@ -255,6 +257,7 @@ impl WordApp {
             file_browser,
             info_editing,
             shown_document,
+            clipboard_published: _,
         } = self;
         let UiState {
             // App-wide: preferences, recent lists, and the settings the session owns while
@@ -276,6 +279,8 @@ impl WordApp {
             nav_tab: _,
             display_server: _,
             status_count: _,
+            scroll_speed: _,
+            touchpad_scroll_speed: _,
             nav_pane: _,
             show_discord: _,
             author: _,

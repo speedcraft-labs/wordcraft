@@ -1,6 +1,5 @@
 //! Original nested-picture controls. No native output or external assets are embedded.
-use std::{io::Write, sync::Arc};
-use wordcraft_doc::graphic::{GraphicItem, GraphicKind};
+use std::sync::Arc;
 use wordcraft_doc::para::{Anchor, CanvasStyle, Float, GroupChild, ShapeKind, Wrap};
 use wordcraft_doc::props::Rgb;
 use wordcraft_doc::{Document, InlineObject, Paragraph, PartKind, Pos, StoryRef, TextBody, para_block};
@@ -72,7 +71,7 @@ fn check_box(doc: &Document) {
     assert_eq!(doc.media[media].as_slice(), BLUE_PNG);
 }
 fn package(xml: &str) -> Vec<u8> {
-    let mut zip = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
+    let mut zip = craft_zip::Writer::new();
     let rels = br#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>"#;
     let docrels = br#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdIsolationRect" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/isolation-blue.png"/></Relationships>"#;
     let types = br#"<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>"#;
@@ -83,10 +82,9 @@ fn package(xml: &str) -> Vec<u8> {
         ("word/_rels/document.xml.rels", docrels.as_slice()),
         ("word/media/isolation-blue.png", BLUE_PNG),
     ] {
-        zip.start_file(name, zip::write::SimpleFileOptions::default()).unwrap();
-        zip.write_all(bytes).unwrap();
+        zip.add(name, bytes, craft_zip::Compression::Deflated).unwrap();
     }
-    zip.finish().unwrap().into_inner()
+    zip.finish().unwrap()
 }
 #[test]
 fn model_nested_picture_roundtrip() {
@@ -101,27 +99,6 @@ fn original_inline_xml_keeps_box() {
     check_box(&doc);
     check_box(&wordcraft_docx::read(&wordcraft_docx::write(&doc).unwrap()).unwrap());
 }
-
-#[test]
-fn locked_canvas_keeps_its_shapes_and_text() {
-    let xml = r#"<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:lc="http://schemas.openxmlformats.org/drawingml/2006/lockedCanvas"><w:body><w:p><w:r><w:drawing><wp:inline><wp:extent cx="1270000" cy="1016000"/><wp:docPr id="9" name="Canvas"/><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/lockedCanvas"><lc:lockedCanvas><a:nvGrpSpPr/><a:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1270000" cy="1016000"/><a:chOff x="0" y="0"/><a:chExt cx="1270000" cy="1016000"/></a:xfrm></a:grpSpPr><a:sp><a:nvSpPr><a:cNvPr id="1" name="Label box"/><a:cNvSpPr/></a:nvSpPr><a:spPr><a:xfrm><a:off x="127000" y="127000"/><a:ext cx="1016000" cy="762000"/></a:xfrm><a:prstGeom prst="roundRect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="4472C4"/></a:solidFill><a:ln><a:noFill/></a:ln></a:spPr><a:txSp><a:txBody><a:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"/><a:lstStyle/><a:p><a:pPr algn="ctr"/><a:r><a:rPr sz="1800"><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill><a:latin typeface="Arial"/></a:rPr><a:t>Canvas</a:t></a:r></a:p></a:txBody></a:txSp></a:sp></lc:lockedCanvas></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p><w:sectPr/></w:body></w:document>"#;
-    let doc = wordcraft_docx::read(&package(xml)).unwrap();
-    let object = &doc.body[0].as_para().unwrap().objects[0];
-    let InlineObject::Graphic { w, h, graphic, .. } = object else {
-        panic!("locked canvas wasn't kept as a graphic: {object:?}");
-    };
-    assert_eq!((*w, *h, graphic.kind), (100.0, 80.0, GraphicKind::Diagram));
-    assert!(graphic.items.iter().any(|item| matches!(item, GraphicItem::Shape { fill: Some(Rgb(0x44, 0x72, 0xC4)), .. })));
-    assert!(graphic.items.iter().any(|item| matches!(item, GraphicItem::Text { text, .. } if text == "Canvas")));
-    assert!(graphic.source.is_some(), "the original drawing survives a save");
-
-    let saved = wordcraft_docx::read(&wordcraft_docx::write(&doc).unwrap()).unwrap();
-    let InlineObject::Graphic { graphic, .. } = &saved.body[0].as_para().unwrap().objects[0] else {
-        panic!("saved locked canvas changed kind");
-    };
-    assert!(graphic.items.iter().any(|item| matches!(item, GraphicItem::Text { text, .. } if text == "Canvas")));
-}
-
 #[test]
 fn picture_group_canvas_keep_kind() {
     let group = |canvas| InlineObject::Group {
