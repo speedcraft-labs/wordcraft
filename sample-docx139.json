@@ -1,0 +1,19 @@
+[
+  {
+    "id": "docx-139",
+    "source": "office-libreoffice",
+    "rel": "sw/qa/extras/ooxmlexport/data/mathtype.docx",
+    "path": "/jobs/work/speedcraft-labs/wt/228/oracle/corpus/office-libreoffice/sw/qa/extras/ooxmlexport/data/mathtype.docx",
+    "ext": "docx",
+    "app": "wordcraft",
+    "size": 12533,
+    "tags": [
+      "docx",
+      "embedded-objects",
+      "images",
+      "math",
+      "ooxml"
+    ],
+    "stratum": "math"
+  }
+]
